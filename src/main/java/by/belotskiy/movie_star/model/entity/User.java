@@ -12,6 +12,10 @@ public class User extends BaseEntity {
 
     private String avatar_path;
 
+    public User(int id){
+        super(id);
+    }
+
     public User(int id, String login, String email, String passwordHash, Role role, String avatar_path) {
         super(id);
         this.login = login;
