@@ -1,16 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Dmitriy
-  Date: 25.01.2021
-  Time: 12:57
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 
-</body>
-</html>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">

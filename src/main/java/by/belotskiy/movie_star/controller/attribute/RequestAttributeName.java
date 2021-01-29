@@ -9,4 +9,5 @@ public final class RequestAttributeName {
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
     public static final String PASSWORD_CONFIRM = "password_confirm";
+    public static final String LOCALE = "locale";
 }

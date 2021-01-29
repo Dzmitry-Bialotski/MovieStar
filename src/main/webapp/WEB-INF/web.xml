@@ -16,6 +16,15 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>LocaleFilter</filter-name>
+        <filter-class>by.belotskiy.movie_star.controller.filter.LocaleFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LocaleFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>Login</servlet-name>
         <jsp-file>/WEB-INF/jsp/auth/login.jsp</jsp-file>
@@ -41,5 +50,30 @@
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <!-- shared pages -->
+    <servlet>
+        <servlet-name>Header</servlet-name>
+        <jsp-file>/WEB-INF/jsp/shared/header.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Header</servlet-name>
+        <url-pattern>/navigation</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Style</servlet-name>
+        <jsp-file>/WEB-INF/jsp/shared/style_import.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Style</servlet-name>
+        <url-pattern>/import_css</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Script</servlet-name>
+        <jsp-file>/WEB-INF/jsp/shared/scripts_import.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Script</servlet-name>
+        <url-pattern>/import_js</url-pattern>
     </servlet-mapping>
 </web-app>
