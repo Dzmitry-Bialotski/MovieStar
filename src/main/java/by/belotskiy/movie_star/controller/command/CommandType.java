@@ -1,9 +1,6 @@
 package by.belotskiy.movie_star.controller.command;
 
-import by.belotskiy.movie_star.controller.command.impl.HomeCommand;
-import by.belotskiy.movie_star.controller.command.impl.LoginCommand;
-import by.belotskiy.movie_star.controller.command.impl.LogoutCommand;
-import by.belotskiy.movie_star.controller.command.impl.RegisterCommand;
+import by.belotskiy.movie_star.controller.command.impl.*;
 
 public enum CommandType {
 
@@ -13,7 +10,9 @@ public enum CommandType {
 
     LOGOUT(new LogoutCommand()),
 
-    REGISTER(new RegisterCommand());
+    REGISTER(new RegisterCommand()),
+
+    CHANGE_LOCALE_COMMAND(new ChangeLocaleCommand());
 
     private final ActionCommand command;
 

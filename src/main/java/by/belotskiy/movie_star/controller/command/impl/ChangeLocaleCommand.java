@@ -14,16 +14,14 @@ import javax.servlet.http.HttpSession;
 public class ChangeLocaleCommand implements ActionCommand {
     @Override
     public CommandResult execute(HttpServletRequest request) throws CommandException {
-        String locale = (String)request.getAttribute(RequestAttributeName.LOCALE);
+        String locale = (String)request.getAttribute(RequestAttributeName.CURRENT_LOCALE);
         HttpSession session = request.getSession();
-        if(locale == null || locale.isEmpty()){
-            session.setAttribute(SessionAttributeName.CURRENT_LOCALE, Locale.DEFAULT_LOCALE);
-        }else{
+        if(locale != null && !locale.isEmpty()){
             session.setAttribute(SessionAttributeName.CURRENT_LOCALE, locale);
         }
         /*TODO return url from session
          String return_url = (String)session.getAttribute(SessionAttributeName.RETURN_URL);
          return new CommandResult(return_url, CommandResult.Type.REDIRECT);*/
-        return new CommandResult(UrlPath.HOME);
+        return new CommandResult(UrlPath.HOME, CommandResult.Type.REDIRECT);
     }
 }

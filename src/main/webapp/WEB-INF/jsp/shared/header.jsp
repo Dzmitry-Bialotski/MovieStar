@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="${sessionScope.currentLocale}}"/>
+<fmt:setLocale value="${sessionScope.currentLocale}"/>
 <fmt:setBundle basename="language" scope="application"/>
 <nav class="navbar navbar-expand-lg navbar-dark custom-nav">
     <div class="container">
@@ -21,8 +21,8 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown07">
-                        <a class="dropdown-item" href="?currentLocale=ru"><fmt:message key="ru" /></a>
-                        <a class="dropdown-item" href="?currentLocale=en"><fmt:message key="en" /></a>
+                        <a class="dropdown-item" href="change_locale_command.do?currentLocale=ru"><fmt:message key="ru" /></a>
+                        <a class="dropdown-item" href="change_locale_command.do?currentLocale=en"><fmt:message key="en" /></a>
                     </div>
                 </li>
             </ul>

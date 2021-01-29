@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="${sessionScope.currentLocale}}"/>
-<fmt:setBundle basename="language" scope="application"/>
+<fmt:setLocale value="${sessionScope.currentLocale}"/>
+<fmt:setBundle basename="language" var="bd" scope="application"/>
 <html>
 <head>
     <title><fmt:message key="login"/> - MovieStar</title>
@@ -32,14 +32,14 @@ Password: ${password}
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="text" class="form-control" placeholder="<fmt:message key="username"/>">
+                        <input type="text" class="form-control" placeholder="<fmt:message key="username" bundle="${bd}"/>">
 
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" class="form-control" placeholder="<fmt:message key="password"/>">
+                        <input type="password" class="form-control" placeholder="<fmt:message key="password" bundle="${bd}"/>">
                     </div>
                     <div class="row align-items-center remember">
                         <input type="checkbox">Remember Me
