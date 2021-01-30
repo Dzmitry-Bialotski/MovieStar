@@ -1,5 +1,6 @@
 package by.belotskiy.movie_star.controller;
 
+import by.belotskiy.movie_star.controller.attribute.SessionAttributeName;
 import by.belotskiy.movie_star.controller.command.ActionCommand;
 import by.belotskiy.movie_star.controller.command.CommandProvider;
 import by.belotskiy.movie_star.controller.command.CommandResult;
@@ -11,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -42,11 +44,18 @@ public class FrontController extends HttpServlet {
                 commandResult =  new CommandResult(CommandResult.DEFAULT_PATH);
             }
             String urlPath = commandResult.providePathOrDefault();
-            if(commandResult.getType() == CommandResult.Type.FORWARD){
-                request.getRequestDispatcher(urlPath).forward(request, response);
-            }
-            else if(commandResult.getType() == CommandResult.Type.REDIRECT){
-                response.sendRedirect(request.getContextPath() + urlPath);
+            switch (commandResult.getType()){
+                case FORWARD:
+                    request.getRequestDispatcher(urlPath).forward(request, response);
+                    break;
+                case REDIRECT:
+                    response.sendRedirect(request.getContextPath() + urlPath);
+                    break;
+                case RETURN_URL:
+                    HttpSession session = request.getSession();
+                    String returnUrl = (String)session.getAttribute(SessionAttributeName.RETURN_URL);
+                    response.sendRedirect(returnUrl);
+                    break;
             }
         } catch (CommandException e) {
             throw new ServletException(e);

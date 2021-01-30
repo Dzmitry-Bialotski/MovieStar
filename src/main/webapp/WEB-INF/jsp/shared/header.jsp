@@ -21,8 +21,12 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown07">
-                        <a class="dropdown-item" href="change_locale_command.do?currentLocale=ru"><fmt:message key="ru" /></a>
-                        <a class="dropdown-item" href="change_locale_command.do?currentLocale=en"><fmt:message key="en" /></a>
+                        <a class="dropdown-item" href="change_locale_command.do?currentLocale=ru&returnUrl=${pageContext.request.requestURL}">
+                            <fmt:message key="ru" />
+                        </a>
+                        <a class="dropdown-item" href="change_locale_command.do?currentLocale=en&returnUrl=${pageContext.request.requestURL}">
+                            <fmt:message key="en" />
+                        </a>
                     </div>
                 </li>
             </ul>

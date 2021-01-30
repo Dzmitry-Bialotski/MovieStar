@@ -3,26 +3,26 @@ package by.belotskiy.movie_star.controller.filter;
 import by.belotskiy.movie_star.controller.attribute.RequestAttributeName;
 import by.belotskiy.movie_star.controller.attribute.SessionAttributeName;
 
-
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class LocaleFilter implements Filter {
+public class ReturnUrlFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
     }
+
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest)servletRequest;
-        String currentLocale = request.getParameter(RequestAttributeName.CURRENT_LOCALE);
         HttpSession session = request.getSession();
-        if(currentLocale != null && !currentLocale.isEmpty()) {
-            session.setAttribute(SessionAttributeName.CURRENT_LOCALE, currentLocale);
+        String returnUrl = request.getParameter(RequestAttributeName.RETURN_URL);
+        if(returnUrl != null && !returnUrl.isEmpty()){
+            session.setAttribute(SessionAttributeName.RETURN_URL, returnUrl);
         }
-        filterChain.doFilter(servletRequest, servletResponse);
+        chain.doFilter(request, response);
     }
 
     @Override

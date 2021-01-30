@@ -10,7 +10,8 @@ public class CommandResult {
     private Type type;
     public enum Type{
         FORWARD,
-        REDIRECT
+        REDIRECT,
+        RETURN_URL
     }
 
     public CommandResult(String path, Type type) {

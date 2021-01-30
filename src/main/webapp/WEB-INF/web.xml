@@ -24,6 +24,14 @@
         <filter-name>LocaleFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <filter>
+        <filter-name>ReturnUrlFilter</filter-name>
+        <filter-class>by.belotskiy.movie_star.controller.filter.ReturnUrlFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ReturnUrlFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
     <servlet>
         <servlet-name>Login</servlet-name>
