@@ -1,6 +1,6 @@
 package by.belotskiy.movie_star.controller.filter;
 
-import by.belotskiy.movie_star.controller.attribute.RequestAttributeName;
+import by.belotskiy.movie_star.controller.attribute.RequestParameterName;
 import by.belotskiy.movie_star.controller.attribute.SessionAttributeName;
 
 
@@ -17,7 +17,7 @@ public class LocaleFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest)servletRequest;
-        String currentLocale = request.getParameter(RequestAttributeName.CURRENT_LOCALE);
+        String currentLocale = request.getParameter(RequestParameterName.CURRENT_LOCALE);
         HttpSession session = request.getSession();
         if(currentLocale != null && !currentLocale.isEmpty()) {
             session.setAttribute(SessionAttributeName.CURRENT_LOCALE, currentLocale);

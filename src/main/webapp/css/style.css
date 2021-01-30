@@ -2,6 +2,11 @@
     width: 80px;
     height: auto;
 }
+.flag_img{
+    height: 30px;
+    width: 60px;
+}
+
 .login_body{
     background-size: cover;
     /*background-repeat: no-repeat;*/
@@ -92,4 +97,7 @@ input:focus{
 /** */
 .custom-nav{
     background-color: rgba(0,0,0,0.5) !important;
+}
+.nav-link{
+    font-size: 20px;
 }

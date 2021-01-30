@@ -1,26 +1,19 @@
 package by.belotskiy.movie_star.controller.command.impl;
 
 import by.belotskiy.movie_star.controller.command.ActionCommand;
-import by.belotskiy.movie_star.controller.attribute.RequestAttributeName;
+import by.belotskiy.movie_star.controller.attribute.RequestParameterName;
 import by.belotskiy.movie_star.controller.attribute.SessionAttributeName;
 import by.belotskiy.movie_star.controller.command.CommandResult;
 import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.exception.CommandException;
-import by.belotskiy.movie_star.model.entity.Role;
-import by.belotskiy.movie_star.model.entity.Status;
-import by.belotskiy.movie_star.model.entity.User;
+import by.belotskiy.movie_star.exception.ConnectionPoolException;
 import by.belotskiy.movie_star.service.UserService;
-import by.belotskiy.movie_star.exception.ServiceException;
 import by.belotskiy.movie_star.service.impl.UserServiceImpl;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
 
 public class LoginCommand implements ActionCommand {
 
@@ -82,8 +75,8 @@ public class LoginCommand implements ActionCommand {
         }
         return page;*/
         HttpSession session = request.getSession();
-        String login = request.getParameter(RequestAttributeName.LOGIN);
-        String password = request.getParameter(RequestAttributeName.PASSWORD);
+        String login = request.getParameter(RequestParameterName.LOGIN);
+        String password = request.getParameter(RequestParameterName.PASSWORD);
         session.setAttribute(SessionAttributeName.LOGIN, login);
         session.setAttribute(SessionAttributeName.PASSWORD, password);
         return new CommandResult(UrlPath.HOME, CommandResult.Type.REDIRECT);

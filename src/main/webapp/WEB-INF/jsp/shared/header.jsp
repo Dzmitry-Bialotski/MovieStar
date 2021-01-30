@@ -13,18 +13,22 @@
         <div class="collapse navbar-collapse" id="navbarsExample07">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
+                    <a class="nav-link" href="#"> <i class="fa fa-user" aria-hidden="true"></i> <fmt:message key="profile" /></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Movies</a>
+                    <a class="nav-link" href="#"> <i class="fa fa-film mr-1" aria-hidden="true"></i><fmt:message key="movies" /></a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language</a>
+                    <a class="nav-link dropdown-toggle" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-globe" aria-hidden="true"></i> <fmt:message key="language" />
+                    </a>
                     <div class="dropdown-menu" aria-labelledby="dropdown07">
                         <a class="dropdown-item" href="change_locale_command.do?currentLocale=ru&returnUrl=${pageContext.request.requestURL}">
+                            <img class="flag_img" src="${pageContext.request.contextPath}/img/flag/ru.png">
                             <fmt:message key="ru" />
                         </a>
                         <a class="dropdown-item" href="change_locale_command.do?currentLocale=en&returnUrl=${pageContext.request.requestURL}">
+                            <img class="flag_img" src="${pageContext.request.contextPath}/img/flag/en.png" >
                             <fmt:message key="en" />
                         </a>
                     </div>

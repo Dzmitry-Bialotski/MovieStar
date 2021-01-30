@@ -12,17 +12,21 @@ public class User extends BaseEntity {
 
     private String avatar_path;
 
+    private boolean emailConfirmed;
+
     public User(int id){
         super(id);
     }
 
-    public User(int id, String login, String email, String passwordHash, Role role, String avatar_path) {
+    public User(int id, String login, String email, String passwordHash, Role role,
+                String avatar_path, boolean emailConfirmed) {
         super(id);
         this.login = login;
         this.email = email;
         this.passwordHash = passwordHash;
         this.role = role;
         this.avatar_path = avatar_path;
+        this.emailConfirmed = emailConfirmed;
     }
 
     public String getLogin() {
@@ -63,5 +67,12 @@ public class User extends BaseEntity {
 
     public void setAvatar_path(String avatar_path) {
         this.avatar_path = avatar_path;
+    }
+    public boolean isEmailConfirmed() {
+        return emailConfirmed;
+    }
+
+    public void setEmailConfirmed(boolean emailConfirmed) {
+        this.emailConfirmed = emailConfirmed;
     }
 }

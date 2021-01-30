@@ -24,8 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> login(String login, String password) throws ServiceException {
-        Optional<User> optionalUser = Optional.of(new User(1, login, "mail@ru",password,
-                Role.SPECTATOR, null));
+        Optional<User> optionalUser = Optional.of(new User(1));
 
         return optionalUser;
     }

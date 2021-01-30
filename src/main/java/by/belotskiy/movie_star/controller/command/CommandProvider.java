@@ -1,6 +1,5 @@
 package by.belotskiy.movie_star.controller.command;
 
-import by.belotskiy.movie_star.controller.attribute.RequestAttributeName;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

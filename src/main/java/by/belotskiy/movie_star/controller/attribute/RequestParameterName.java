@@ -1,8 +1,8 @@
 package by.belotskiy.movie_star.controller.attribute;
 
-public final class RequestAttributeName {
+public final class RequestParameterName {
 
-    private RequestAttributeName(){}
+    private RequestParameterName(){}
 
     public static final String COMMAND = "command";
     public static final String LOGIN = "login";

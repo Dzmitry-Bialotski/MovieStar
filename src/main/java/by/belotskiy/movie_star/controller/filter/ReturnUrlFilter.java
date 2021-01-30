@@ -1,6 +1,6 @@
 package by.belotskiy.movie_star.controller.filter;
 
-import by.belotskiy.movie_star.controller.attribute.RequestAttributeName;
+import by.belotskiy.movie_star.controller.attribute.RequestParameterName;
 import by.belotskiy.movie_star.controller.attribute.SessionAttributeName;
 
 import javax.servlet.*;
@@ -18,7 +18,7 @@ public class ReturnUrlFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest)servletRequest;
         HttpSession session = request.getSession();
-        String returnUrl = request.getParameter(RequestAttributeName.RETURN_URL);
+        String returnUrl = request.getParameter(RequestParameterName.RETURN_URL);
         if(returnUrl != null && !returnUrl.isEmpty()){
             session.setAttribute(SessionAttributeName.RETURN_URL, returnUrl);
         }
