@@ -18,7 +18,8 @@
                 <h3><fmt:message key="register"/></h3>
             </div>
             <div class="card-body">
-                <form action="register.do" method="post" onsubmit="return TestLogin(this.login.value);">
+                <form action="register.do" method="post" onsubmit=
+                        "return registerValidate(this.login.value, this.password.value, this.passwordConfirm.value);">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>

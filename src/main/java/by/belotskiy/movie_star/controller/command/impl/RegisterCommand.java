@@ -31,11 +31,10 @@ public class RegisterCommand implements ActionCommand {
             throw new CommandException(e);
         }
         if(isRegisterComplete){
-            LOGGER.log(Level.INFO, "User with login " + login + " registered");
+            LOGGER.log(Level.INFO, "User with login " + login + "registered");
             return new CommandResult(UrlPath.LOGIN, CommandResult.Type.REDIRECT);
         }else{
             return new CommandResult(UrlPath.REGISTER, CommandResult.Type.REDIRECT);
         }
-
     }
 }

@@ -14,13 +14,13 @@ public class PasswordEncryptor {
     public static String encrypt(String value) {
         String salt = BCrypt.gensalt(10);
         String hashedValue = BCrypt.hashpw(value, salt);
-        LOGGER.log(Level.DEBUG, "Value has been encrypted");
+        LOGGER.log(Level.INFO, "Value has been encrypted");
         return hashedValue;
     }
 
     public static boolean check(String value, String encValue) {
         boolean result = BCrypt.checkpw(value, encValue);
-        LOGGER.log(Level.DEBUG, "Value has been checked: " + result);
+        LOGGER.log(Level.INFO, "Value has been checked: " + result);
         return result;
     }
 }

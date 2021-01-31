@@ -78,7 +78,8 @@ public class UserDaoImpl implements UserDao {
             statement.setString(4, user.getRole().toString());
             statement.setString(5, user.getAvatar_path());
             statement.setBoolean(6, user.isEmailConfirmed());
-            result = statement.execute();
+            int resultStringsNumber = statement.executeUpdate();
+            result = resultStringsNumber != 0;
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException(e);
         } finally {
@@ -190,7 +191,7 @@ public class UserDaoImpl implements UserDao {
         String login = resultSet.getString(2);
         String email = resultSet.getString(3);
         String passwordHash = resultSet.getString(4);
-        Role role = resultSet.getObject(5, Role.class);
+        Role role = Role.valueOf(resultSet.getString(5).toUpperCase());
         String avatar_path = resultSet.getString(6);
         boolean email_confirmed = resultSet.getBoolean(7);
         return UserCreator.createUser(id, login, email,

@@ -4,14 +4,11 @@ import by.belotskiy.movie_star.dao.UserDao;
 import by.belotskiy.movie_star.dao.impl.UserDaoImpl;
 import by.belotskiy.movie_star.exception.DaoException;
 import by.belotskiy.movie_star.model.creator.UserCreator;
-import by.belotskiy.movie_star.model.entity.Role;
 import by.belotskiy.movie_star.model.entity.User;
-import by.belotskiy.movie_star.model.validator.UserValidator;
 import by.belotskiy.movie_star.service.UserService;
 import by.belotskiy.movie_star.exception.ServiceException;
 import by.belotskiy.movie_star.util.PasswordEncryptor;
 
-import java.util.Map;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
@@ -49,19 +46,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean register(String login, String password, String passwordConfirmed) throws ServiceException {
+        boolean result;
         //!TODO All validation should be here
 
         try {
-            if(userDao.isLoginExists(login)){
-                return false;
+            Optional<User> optionalUser = userDao.findByLogin(login);
+            if(optionalUser.isPresent()){
+                result = false;
+            }else {
+                String passwordHash = PasswordEncryptor.encrypt(password);
+                User user = UserCreator.createUser(login, passwordHash);
+                result = userDao.save(user);
             }
-            String passwordHash = PasswordEncryptor.encrypt(password);
-            User user = UserCreator.createUser(login, passwordHash);
-            userDao.save(user);
         }
         catch (DaoException e){
             throw new ServiceException(e);
         }
-        return true;
+        return result;
     }
 }
