@@ -18,9 +18,8 @@ public class User extends BaseEntity {
         super(id);
     }
 
-    public User(int id, String login, String email, String passwordHash, Role role,
+    public User(String login, String email, String passwordHash, Role role,
                 String avatar_path, boolean emailConfirmed) {
-        super(id);
         this.login = login;
         this.email = email;
         this.passwordHash = passwordHash;

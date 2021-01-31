@@ -18,25 +18,25 @@
                 <h3><fmt:message key="register"/></h3>
             </div>
             <div class="card-body">
-                <form action="register.do" method="post">
+                <form action="register.do" method="post" onsubmit="return TestLogin(this.login.value);">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="text" class="form-control" placeholder="<fmt:message key="username"/>">
+                        <input type="text" class="form-control" name="login" placeholder="<fmt:message key="username"/>">
 
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" class="form-control" placeholder="<fmt:message key="password"/>">
+                        <input type="password" class="form-control" name="password" placeholder="<fmt:message key="password"/>">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" class="form-control" placeholder="<fmt:message key="passwordConfirm"/>">
+                        <input type="password" name="passwordConfirm" class="form-control" placeholder="<fmt:message key="passwordConfirm"/>">
                     </div>
 
                     <div class="form-group">
@@ -57,5 +57,6 @@
 </div>
 </body>
 <jsp:include page="import_js"/>
+
 </body>
 </html>

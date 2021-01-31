@@ -1,4 +1,4 @@
-package by.belotskiy.movie_star.model.pool;
+package by.belotskiy.movie_star.dao.pool;
 
 import by.belotskiy.movie_star.exception.ConnectionPoolException;
 import org.apache.logging.log4j.Level;
@@ -18,7 +18,7 @@ public class ConnectionPool {
     private static ConnectionPool instance;
     public static ConnectionPool getInstance(){
         if(instance == null){
-            instance= new ConnectionPool();
+            instance = new ConnectionPool();
         }
         return instance;
     }

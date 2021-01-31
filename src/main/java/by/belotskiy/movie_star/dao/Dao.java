@@ -1,4 +1,4 @@
-package by.belotskiy.movie_star.model.dao;
+package by.belotskiy.movie_star.dao;
 
 import by.belotskiy.movie_star.exception.DaoException;
 import by.belotskiy.movie_star.model.entity.BaseEntity;
