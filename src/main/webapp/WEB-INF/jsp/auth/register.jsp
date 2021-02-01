@@ -44,6 +44,9 @@
                         <input type="submit" value="<fmt:message key="register"/>" class="btn float-right login_btn">
                     </div>
                 </form>
+                <c:if test="${errorMessage != \"\"}">
+                    <div class="text-danger">${errorMessage}</div>
+                </c:if>
             </div>
             <div class="card-footer">
                 <div class="d-flex justify-content-center links">

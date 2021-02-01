@@ -8,12 +8,14 @@
                 aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <img class ="logo_image" src="${pageContext.request.contextPath}/img/logo/moviestar_logo.png"/>
-        <a class="navbar-brand" href="#">MovieStar</a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/home">
+            <img class ="logo_image" src="${pageContext.request.contextPath}/img/logo/moviestar_logo.png"/>
+            MovieStar
+        </a>
         <div class="collapse navbar-collapse" id="navbarsExample07">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#"> <i class="fa fa-user" aria-hidden="true"></i> <fmt:message key="profile" /></a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/home"> <i class="fa fa-user" aria-hidden="true"></i> <fmt:message key="profile" /></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"> <i class="fa fa-film mr-1" aria-hidden="true"></i><fmt:message key="movies" /></a>

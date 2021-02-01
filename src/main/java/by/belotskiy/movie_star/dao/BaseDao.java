@@ -9,10 +9,10 @@ import java.sql.SQLException;
 import java.sql.Savepoint;
 import java.sql.Statement;
 
-public interface CloseableDao {
+public interface BaseDao {
 
     default void close(Statement statement) {
-        final Logger LOGGER = LogManager.getLogger(CloseableDao.class);
+        final Logger LOGGER = LogManager.getLogger(BaseDao.class);
         if (statement != null) {
             try {
                 statement.close();

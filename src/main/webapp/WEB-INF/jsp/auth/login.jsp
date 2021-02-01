@@ -23,27 +23,30 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="login.do" method="post">
+                <form action="login.do" method="post" onsubmit=
+                        "return loginValidate(this.login.value, this.password.value);">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="text" class="form-control" placeholder="<fmt:message key="username"/>">
-
+                        <input type="text" name="login" class="form-control" placeholder="<fmt:message key="username"/>">
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" class="form-control" placeholder="<fmt:message key="password"/>">
+                        <input type="password" name="password" class="form-control" placeholder="<fmt:message key="password"/>">
                     </div>
                     <div class="row align-items-center remember">
-                        <input type="checkbox"><fmt:message key="remember_me"/>
+                        <input type="checkbox" name="rememberMe"><fmt:message key="remember_me"/>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="<fmt:message key="login"/>" class="btn float-right login_btn">
                     </div>
                 </form>
+                <c:if test="${errorMessage != \"\"}">
+                    <div class="text-danger">${errorMessage}</div>
+                </c:if>
             </div>
             <div class="card-footer">
                 <div class="d-flex justify-content-center links">

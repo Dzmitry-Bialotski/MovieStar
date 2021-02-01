@@ -46,3 +46,7 @@ function isPasswordMatches(password1, password2) {
 function registerValidate(login, password1, password2) {
     return validateLogin(login) && validatePassword(password1) && isPasswordMatches(password1, password2);
 }
+
+function loginValidate(login, password) {
+    return validateLogin(login) && validatePassword(password);
+}
