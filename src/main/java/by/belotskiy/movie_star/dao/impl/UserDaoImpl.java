@@ -20,6 +20,20 @@ public class UserDaoImpl implements UserDao {
 
     private static UserDaoImpl userDaoInstance;
 
+    private final String SELECT_USER_BY_ID_STATEMENT = "SELECT id, login, email, password_hash, role, avatar_path, email_confirmed " +
+            "FROM movie_star_db.users WHERE id = ?;";
+
+    private final String INSERT_USER_STATEMENT = "INSERT INTO movie_star_db.users(login, email, password_hash, role, avatar_path, email_confirmed) " +
+            "VALUES(?, ?, ?, ?, ?, ?);";
+
+    private final String UPDATE_USER_STATEMENT = "UPDATE movie_star_db.users SET login = ?, email = ?, " +
+            "password_hash = ?, role = ?, avatar_path = ?, email_confirmed = ? where id = ?;";
+
+    private final String DELETE_USER_STATEMENT = "DELETE FROM movie_star_db.users WHERE id = ?);";
+
+    private final  String SELECT_USER_BY_LOGIN_STATEMENT = "SELECT id, login, email, password_hash, role, avatar_path, email_confirmed " +
+        "FROM movie_star_db.users WHERE login = ?;";
+
     private UserDaoImpl(){
 
     }
@@ -28,6 +42,29 @@ public class UserDaoImpl implements UserDao {
             userDaoInstance= new UserDaoImpl();
         }
         return userDaoInstance;
+    }
+
+    @Override
+    public Optional<User> findByLogin(String login) throws DaoException{
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            connection.setAutoCommit(false);
+            statement = connection.prepareStatement(SELECT_USER_BY_LOGIN_STATEMENT);
+            statement.setString(1, login);
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()){
+                User user = parseUser(resultSet);
+                return Optional.of(user);
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException(e);
+        } finally {
+            close(statement);
+            close(connection);
+        }
+        return Optional.empty();
     }
 
     @Override
@@ -42,8 +79,6 @@ public class UserDaoImpl implements UserDao {
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
-            String SELECT_USER_BY_ID_STATEMENT = "SELECT id, login, email, password_hash, role, avatar_path, email_confirmed " +
-                    "FROM movie_star_db.users WHERE id = ?;";
             statement = connection.prepareStatement(SELECT_USER_BY_ID_STATEMENT);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -62,24 +97,25 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean save(BaseEntity entity) throws DaoException {
-        User user = (User)entity;
+        return updateOrSaveUser(entity, INSERT_USER_STATEMENT);
+    }
+
+    @Override
+    public boolean update(BaseEntity entity) throws DaoException {
+        return updateOrSaveUser(entity, UPDATE_USER_STATEMENT);
+    }
+
+    @Override
+    public boolean delete(int id) throws DaoException{
         Connection connection = null;
         PreparedStatement statement = null;
         boolean result;
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
-            String INSERT_USER_STATEMENT = "INSERT INTO movie_star_db.users(login, email, password_hash, role, avatar_path, email_confirmed) " +
-                    "VALUES(?, ?, ?, ?, ?, ?);";
-            statement = connection.prepareStatement(INSERT_USER_STATEMENT);
-            statement.setString(1, user.getLogin());
-            statement.setString(2, user.getEmail());
-            statement.setString(3, user.getPasswordHash());
-            statement.setString(4, user.getRole().toString());
-            statement.setString(5, user.getAvatar_path());
-            statement.setBoolean(6, user.isEmailConfirmed());
-            int resultStringsNumber = statement.executeUpdate();
-            result = resultStringsNumber != 0;
+            statement = connection.prepareStatement(DELETE_USER_STATEMENT);
+            statement.setInt(1, id);
+            result = statement.execute();
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException(e);
         } finally {
@@ -89,8 +125,19 @@ public class UserDaoImpl implements UserDao {
         return result;
     }
 
-    @Override
-    public boolean update(BaseEntity entity) throws DaoException {
+    private User parseUser(ResultSet resultSet) throws SQLException{
+        int id = resultSet.getInt(1);
+        String login = resultSet.getString(2);
+        String email = resultSet.getString(3);
+        String passwordHash = resultSet.getString(4);
+        Role role = Role.valueOf(resultSet.getString(5).toUpperCase());
+        String avatar_path = resultSet.getString(6);
+        boolean email_confirmed = resultSet.getBoolean(7);
+        return UserCreator.createUser(id, login, email,
+                passwordHash, role, avatar_path, email_confirmed);
+    }
+
+    private boolean updateOrSaveUser(BaseEntity entity, String sql) throws DaoException{
         User user = (User)entity;
         Connection connection = null;
         PreparedStatement statement = null;
@@ -98,9 +145,7 @@ public class UserDaoImpl implements UserDao {
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
-            String UPDATE_USER_STATEMENT = "UPDATE movie_star_db.users SET login = ?, email = ?, " +
-                    "password_hash = ?, role = ?, avatar_path = ?, email_confirmed = ? where id = ?;";
-            statement = connection.prepareStatement(UPDATE_USER_STATEMENT);
+            statement = connection.prepareStatement(sql);
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPasswordHash());
@@ -116,85 +161,5 @@ public class UserDaoImpl implements UserDao {
             close(connection);
         }
         return result;
-    }
-
-    @Override
-    public boolean delete(int id) throws DaoException{
-        Connection connection = null;
-        PreparedStatement statement = null;
-        boolean result;
-        try {
-            connection = ConnectionPool.getInstance().getConnection();
-            connection.setAutoCommit(false);
-            String DELETE_USER_STATEMENT = "DELETE FROM movie_star_db.users WHERE id = ?);";
-            statement = connection.prepareStatement(DELETE_USER_STATEMENT);
-            statement.setInt(1, id);
-            result = statement.execute();
-        } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException(e);
-        } finally {
-            close(statement);
-            close(connection);
-        }
-        return result;
-    }
-
-    @Override
-    public boolean isUserExists(String login, String passwordHash) throws DaoException{
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = ConnectionPool.getInstance().getConnection();
-            connection.setAutoCommit(false);
-            String SELECT_USER_BY_LOGIN_PASS_STATEMENT = "SELECT id, login, email, password_hash, role, avatar_path, email_confirmed " +
-                    "FROM movie_star_db.users WHERE login = ? AND password_hash = ?;";
-            statement = connection.prepareStatement(SELECT_USER_BY_LOGIN_PASS_STATEMENT);
-            statement.setString(1, login);
-            statement.setString(2, passwordHash);
-            ResultSet resultSet = statement.executeQuery();
-            return resultSet.next();
-        } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException(e);
-        } finally {
-            close(statement);
-            close(connection);
-        }
-    }
-
-    @Override
-    public Optional<User> findByLogin(String login) throws DaoException{
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = ConnectionPool.getInstance().getConnection();
-            connection.setAutoCommit(false);
-            String SELECT_USER_BY_LOGIN_STATEMENT = "SELECT id, login, email, password_hash, role, avatar_path, email_confirmed " +
-                    "FROM movie_star_db.users WHERE login = ?;";
-            statement = connection.prepareStatement(SELECT_USER_BY_LOGIN_STATEMENT);
-            statement.setString(1, login);
-            ResultSet resultSet = statement.executeQuery();
-            if(resultSet.next()){
-                User user = parseUser(resultSet);
-                return Optional.of(user);
-            }
-        } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException(e);
-        } finally {
-            close(statement);
-            close(connection);
-        }
-        return Optional.empty();
-    }
-
-    private User parseUser(ResultSet resultSet) throws SQLException{
-        int id = resultSet.getInt(1);
-        String login = resultSet.getString(2);
-        String email = resultSet.getString(3);
-        String passwordHash = resultSet.getString(4);
-        Role role = Role.valueOf(resultSet.getString(5).toUpperCase());
-        String avatar_path = resultSet.getString(6);
-        boolean email_confirmed = resultSet.getBoolean(7);
-        return UserCreator.createUser(id, login, email,
-                passwordHash, role, avatar_path, email_confirmed);
     }
 }

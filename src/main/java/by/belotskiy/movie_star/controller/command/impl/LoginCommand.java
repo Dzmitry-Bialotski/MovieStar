@@ -6,7 +6,6 @@ import by.belotskiy.movie_star.controller.attribute.SessionAttributeName;
 import by.belotskiy.movie_star.controller.command.CommandResult;
 import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.exception.CommandException;
-import by.belotskiy.movie_star.exception.ConnectionPoolException;
 import by.belotskiy.movie_star.exception.ServiceException;
 import by.belotskiy.movie_star.model.entity.User;
 import by.belotskiy.movie_star.model.validator.UserValidator;
@@ -25,7 +24,8 @@ public class LoginCommand implements ActionCommand {
 
     private final UserService userService = UserServiceImpl.getInstance();
 
-    private final String INVALID_LOGIN_OR_PASSWORD_MESSAGE = "Invalid login or password";
+    private final String INCORRECT_LOGIN_OR_PASSWORD_MESSAGE = "Incorrect login or password";
+    
     @Override
     public CommandResult execute(HttpServletRequest request) throws CommandException {
         String login = request.getParameter(RequestParameterName.LOGIN);
@@ -61,7 +61,7 @@ public class LoginCommand implements ActionCommand {
                 return new CommandResult(UrlPath.HOME, CommandResult.Type.REDIRECT);
             }
         }else {
-            session.setAttribute(SessionAttributeName.ERROR_MESSAGE, INVALID_LOGIN_OR_PASSWORD_MESSAGE);
+            session.setAttribute(SessionAttributeName.ERROR_MESSAGE, INCORRECT_LOGIN_OR_PASSWORD_MESSAGE);
             return new CommandResult(UrlPath.LOGIN, CommandResult.Type.REDIRECT);
         }
     }

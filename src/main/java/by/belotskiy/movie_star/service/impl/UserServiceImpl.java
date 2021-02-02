@@ -31,11 +31,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> login(String login, String password) throws ServiceException {
-        String passwordHash = PasswordEncryptor.encrypt(password);
         Optional<User> optionalUser = Optional.empty();
         try{
-            if(userDao.isUserExists(login, passwordHash)){
-                optionalUser = userDao.findByLogin(login);
+            optionalUser = userDao.findByLogin(login);
+            if(optionalUser.isPresent()){
+                User user = optionalUser.get();
+                boolean isPasswordRight =  PasswordEncryptor.check(password, user.getPasswordHash());
+                if(isPasswordRight){
+                    return optionalUser;
+                }else {
+                    return Optional.empty();
+                }
             }
         }catch (DaoException e){
             throw new ServiceException(e);
