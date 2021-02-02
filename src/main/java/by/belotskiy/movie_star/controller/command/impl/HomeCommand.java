@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 public class HomeCommand implements ActionCommand {
     @Override
     public CommandResult execute(HttpServletRequest request) throws CommandException {
+
         return new CommandResult(UrlPath.HOME, CommandResult.Type.FORWARD);
     }
 }

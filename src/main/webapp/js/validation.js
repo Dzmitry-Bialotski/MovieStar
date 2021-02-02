@@ -1,14 +1,24 @@
+function writeError(error_message) {
+    const errors = document.getElementsByClassName("error");
+    for(let i = 0; i < errors.length; i++){
+        errors.item(i).innerHTML = error_message;
+    }
+}
+
 function validateLogin(login){
     if(/^[a-zA-Z1-9]+$/.test(login) === false) {
-        alert('The login must contain only numbers and Latin letters');
+        writeError('The login must contain only numbers and Latin letters');
         return false;
     }
     if(login.length < 4 || login.length > 20) {
-        alert('Login must be between 4 and 20 characters');
+        const errors = document.getElementsByClassName("error");
+        for(let i = 0; i < errors.length; i++){
+            errors.item(i).innerHTML = 'Login must be between 4 and 20 characters';
+        }
         return false;
     }
     if(parseInt(login.substr(0, 1))) {
-        alert('Login must start with a letter');
+        writeError('Login must start with a letter');
         return false;
     }
     return true;
@@ -21,15 +31,15 @@ function validateEmail(email) {
 
 function validatePassword(password) {
     if(password == "") {
-        alert('Fill the password please!')
+        writeError('Fill the password please!')
         return false;
     }
     if(password.length < 6) {
-        alert('Password length must be at least 6 characters')
+        writeError('Password length must be at least 6 characters')
         return false;
     }
     if(password.length > 30) {
-        alert('Password length must not exceed 30 characters')
+        writeError('Password length must not exceed 30 characters')
         return false;
     }
     return true;
@@ -37,7 +47,7 @@ function validatePassword(password) {
 
 function isPasswordMatches(password1, password2) {
     if(password1 != password2){
-        alert('Password do not match')
+        writeError('Password do not match')
         return false;
     }
     return true;

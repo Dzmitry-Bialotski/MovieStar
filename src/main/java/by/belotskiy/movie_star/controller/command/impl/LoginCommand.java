@@ -25,7 +25,7 @@ public class LoginCommand implements ActionCommand {
     private final UserService userService = UserServiceImpl.getInstance();
 
     private final String INCORRECT_LOGIN_OR_PASSWORD_MESSAGE = "Incorrect login or password";
-    
+
     @Override
     public CommandResult execute(HttpServletRequest request) throws CommandException {
         String login = request.getParameter(RequestParameterName.LOGIN);

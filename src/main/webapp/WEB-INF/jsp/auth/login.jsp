@@ -44,9 +44,11 @@
                         <input type="submit" value="<fmt:message key="login"/>" class="btn float-right login_btn">
                     </div>
                 </form>
-                <c:if test="${errorMessage != \"\"}">
-                    <div class="text-danger">${errorMessage}</div>
-                </c:if>
+                <div class="text-danger error">
+                    <c:if test="${errorMessage != \"\"}">
+                        ${errorMessage}
+                    </c:if>
+                </div>
             </div>
             <div class="card-footer">
                 <div class="d-flex justify-content-center links">

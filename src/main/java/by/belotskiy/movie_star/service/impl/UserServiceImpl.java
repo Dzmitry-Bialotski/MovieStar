@@ -10,7 +10,6 @@ import by.belotskiy.movie_star.service.UserService;
 import by.belotskiy.movie_star.exception.ServiceException;
 import by.belotskiy.movie_star.util.PasswordEncryptor;
 
-import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
