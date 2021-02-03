@@ -53,6 +53,7 @@ public class LoginCommand implements ActionCommand {
             session.setAttribute(SessionAttributeName.ROLE, user.getRole());
             if(rememberMe){
                 //save to cookies
+                
             }
             String returnUrl = (String)session.getAttribute(SessionAttributeName.RETURN_URL);
             if(returnUrl != null && !returnUrl.isEmpty()){

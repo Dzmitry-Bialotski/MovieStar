@@ -1,5 +1,6 @@
 package by.belotskiy.movie_star.controller.filter;
 
+import by.belotskiy.movie_star.controller.attribute.LocaleValue;
 import by.belotskiy.movie_star.controller.attribute.RequestParameterName;
 import by.belotskiy.movie_star.controller.attribute.SessionAttributeName;
 
@@ -21,6 +22,11 @@ public class LocaleFilter implements Filter {
         HttpSession session = request.getSession();
         if(currentLocale != null && !currentLocale.isEmpty()) {
             session.setAttribute(SessionAttributeName.CURRENT_LOCALE, currentLocale);
+        }else{
+            String sessionLocale = (String)session.getAttribute(SessionAttributeName.CURRENT_LOCALE);
+            if(sessionLocale == null || sessionLocale.isEmpty()){
+                session.setAttribute(SessionAttributeName.CURRENT_LOCALE, LocaleValue.EN);
+            }
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }
