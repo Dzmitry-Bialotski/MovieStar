@@ -10,4 +10,5 @@ public class SessionAttributeName {
     public static final String CURRENT_LOCALE = "currentLocale";
     public static final String ROLE = "role";
     public static final String ERROR_MESSAGE = "errorMessage";
+    public static final String USER = "user";
 }

@@ -14,7 +14,7 @@
           <element id="module-output" name="MovieStar" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/javax/servlet/jstl/1.2/jstl-1.2.jar" output-file-name="javax.servlet-jstl-1.2.jar" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.13.2" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.13.2" />
           <element id="library" level="project" name="Maven: commons-validator:commons-validator:1.3.1" />
@@ -27,6 +27,7 @@
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.22" />
           <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
           <element id="library" level="project" name="Maven: oro:oro:2.0.8" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/jstl/jstl/1.2/jstl-1.2.jar" output-file-name="jstl-jstl-1.2.jar" />
         </element>
       </element>
       <element id="directory" name="META-INF">

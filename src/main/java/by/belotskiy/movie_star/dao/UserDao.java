@@ -5,6 +5,7 @@ import by.belotskiy.movie_star.model.entity.User;
 
 import java.util.Optional;
 
-public interface UserDao extends Dao<User>{
+public interface UserDao extends Dao<User>, ClosableDao {
     Optional<User> findByLogin(String login) throws DaoException;
+    Optional<User> findByLoginAndUserHash(String login, String userHash) throws DaoException;
 }

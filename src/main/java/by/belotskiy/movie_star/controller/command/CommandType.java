@@ -12,7 +12,9 @@ public enum CommandType {
 
     REGISTER(new RegisterCommand()),
 
-    CHANGE_LOCALE_COMMAND(new ChangeLocaleCommand());
+    CHANGE_LOCALE_COMMAND(new ChangeLocaleCommand()),
+
+    PROFILE(new ProfileCommand());
 
     private final ActionCommand command;
 

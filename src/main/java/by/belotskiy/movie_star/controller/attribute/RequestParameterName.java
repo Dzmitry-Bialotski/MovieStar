@@ -9,6 +9,7 @@ public final class RequestParameterName {
     public static final String PASSWORD_CONFIRM = "passwordConfirm";
     public static final String CURRENT_LOCALE = "currentLocale";
     public static final String RETURN_URL = "returnUrl";
-    public static final String REMEMBER_NE = "rememberMe";
+    public static final String REMEMBER_ME = "rememberMe";
     public static final String ERROR_MESSAGE = "errorMessage";
+    public static final String ON = "on";
 }

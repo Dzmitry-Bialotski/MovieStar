@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface UserService {
     Optional<User> login(String login, String password) throws ServiceException;
     boolean register(String login, String password, String passwordConfirmed) throws ServiceException;
+    Optional<User> findUser(int id) throws ServiceException;
+    Optional<User> findUserWithCookies(String login, String userHash) throws ServiceException;
 }

@@ -32,7 +32,6 @@ public class CommandProvider {
                 result = Optional.empty();
             }
         } else {
-            LOGGER.log(Level.WARN, "Command is null or empty");
             result = Optional.empty();
         }
         return result;
@@ -41,8 +40,18 @@ public class CommandProvider {
     public static String parseCommandName(String url){
         String commandName;
         int doPosition = url.indexOf(DO_SUBSTRING);
+        if(doPosition == -1){
+            return null;
+        }
         int lastSlashPosition = url.lastIndexOf(SLASH);
         commandName = url.substring(lastSlashPosition + 1, doPosition);
         return commandName;
+    }
+
+    public static Optional<CommandType> defineCommandType(HttpServletRequest request){
+        String url = request.getRequestURI();
+        String stringCommand = parseCommandName(url);
+        CommandType commandType = CommandType.valueOf(stringCommand.toUpperCase());
+        return Optional.of(commandType);
     }
 }

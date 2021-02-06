@@ -1,20 +1,15 @@
 package by.belotskiy.movie_star.model.creator;
 
 import by.belotskiy.movie_star.model.entity.Role;
+import by.belotskiy.movie_star.model.entity.Status;
 import by.belotskiy.movie_star.model.entity.User;
 
 public class UserCreator {
-    public static User createUser(String login, String passwordHash){
-        User user = new User(login, null, passwordHash,
-                Role.SPECTATOR, null, false);
-        return user;
-    }
+    private UserCreator(){}
 
-    public static User createUser(int id, String login, String email, String passwordHash,
-                                  Role role, String avatar_path, boolean emailConfirmed){
-        User user = new User(login, null, passwordHash,
-                Role.SPECTATOR, null, false);
-        user.setId(id);
-        return user;
+    public static User createUserAfterRegistration(String login, String passwordHash){
+        String userHash = ((Integer)login.hashCode()).toString();
+        return new User(login, "",passwordHash, Role.SPECTATOR, "",
+                false, "", "",userHash,Status.ACTIVE);
     }
 }

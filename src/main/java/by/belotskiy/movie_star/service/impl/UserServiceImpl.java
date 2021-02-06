@@ -1,11 +1,10 @@
 package by.belotskiy.movie_star.service.impl;
 
 import by.belotskiy.movie_star.dao.UserDao;
-import by.belotskiy.movie_star.dao.impl.UserDaoImpl;
+import by.belotskiy.movie_star.dao.impl.UserDaoMySql;
 import by.belotskiy.movie_star.exception.DaoException;
 import by.belotskiy.movie_star.model.creator.UserCreator;
 import by.belotskiy.movie_star.model.entity.User;
-import by.belotskiy.movie_star.model.validator.UserValidator;
 import by.belotskiy.movie_star.service.UserService;
 import by.belotskiy.movie_star.exception.ServiceException;
 import by.belotskiy.movie_star.util.PasswordEncryptor;
@@ -26,11 +25,11 @@ public class UserServiceImpl implements UserService {
         return userServiceInstance;
     }
 
-    private final UserDao userDao = UserDaoImpl.getInstance();
+    private final UserDao userDao = UserDaoMySql.getInstance();
 
     @Override
     public Optional<User> login(String login, String password) throws ServiceException {
-        Optional<User> optionalUser = Optional.empty();
+        Optional<User> optionalUser;
         try{
             optionalUser = userDao.findByLogin(login);
             if(optionalUser.isPresent()){
@@ -58,7 +57,7 @@ public class UserServiceImpl implements UserService {
                 result = false;
             }else {
                 String passwordHash = PasswordEncryptor.encrypt(password);
-                User user = UserCreator.createUser(login, passwordHash);
+                User user = UserCreator.createUserAfterRegistration(login, passwordHash);
                 result = userDao.save(user);
             }
         }
@@ -66,5 +65,27 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(e);
         }
         return result;
+    }
+
+    @Override
+    public Optional<User> findUser(int id) throws ServiceException {
+        Optional<User> optionalUser;
+        try {
+             optionalUser = userDao.findById(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return optionalUser;
+    }
+
+    @Override
+    public Optional<User> findUserWithCookies(String login, String userHash) throws ServiceException {
+        Optional<User> optionalUser;
+        try {
+            optionalUser = userDao.findByLoginAndUserHash(login, userHash);
+        } catch(DaoException e){
+            throw new ServiceException(e);
+        }
+        return optionalUser;
     }
 }

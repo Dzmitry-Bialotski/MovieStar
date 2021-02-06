@@ -4,6 +4,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <fmt:setLocale value="${sessionScope.currentLocale}"/>
 <fmt:setBundle basename="language"/>
-<tags:general title="home">
-    <h1 class = "text-white"> Home!!</h1>
+<tags:general title="profile">
+    <h1 class = "text-white"> PROFILE!!</h1>
+    ${user.toString()}
 </tags:general>

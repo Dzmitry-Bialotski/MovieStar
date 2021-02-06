@@ -25,7 +25,7 @@ public class LocaleFilter implements Filter {
         }else{
             String sessionLocale = (String)session.getAttribute(SessionAttributeName.CURRENT_LOCALE);
             if(sessionLocale == null || sessionLocale.isEmpty()){
-                session.setAttribute(SessionAttributeName.CURRENT_LOCALE, LocaleValue.EN);
+                session.setAttribute(SessionAttributeName.CURRENT_LOCALE, LocaleValue.EN.getLocale());
             }
         }
         filterChain.doFilter(servletRequest, servletResponse);
