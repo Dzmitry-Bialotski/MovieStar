@@ -7,4 +7,6 @@ public class UrlPath {
     public static final String REGISTER = "/register";
     public static final String HOME = "/home";
     public static final String PROFILE = "/profile";
+    public static final String NO_PERMISSIONS = "/no-permissions";
+
 }

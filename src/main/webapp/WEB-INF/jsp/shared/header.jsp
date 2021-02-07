@@ -19,7 +19,7 @@
                     <a class="nav-link" href="${pageContext.request.contextPath}/profile.do"> <i class="fa fa-user" aria-hidden="true"></i> <fmt:message key="profile" /></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"> <i class="fa fa-film mr-1" aria-hidden="true"></i><fmt:message key="movies" /></a>
+                    <a class="nav-link" href="random"> <i class="fa fa-film mr-1" aria-hidden="true"></i><fmt:message key="movies" /></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

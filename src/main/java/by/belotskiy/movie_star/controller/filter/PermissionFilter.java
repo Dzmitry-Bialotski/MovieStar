@@ -5,6 +5,7 @@ import by.belotskiy.movie_star.controller.command.ActionCommand;
 import by.belotskiy.movie_star.controller.command.CommandProvider;
 import by.belotskiy.movie_star.controller.command.CommandType;
 import by.belotskiy.movie_star.controller.path.PagePath;
+import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.model.entity.Role;
 import by.belotskiy.movie_star.model.entity.User;
 
@@ -69,8 +70,8 @@ public class PermissionFilter implements Filter {
         List<CommandType> commands = permissions.get(userRole);
         CommandType commandType = CommandProvider.defineCommandType(request).get();
         if (commands == null || !commands.contains(commandType)) {
-            response.sendRedirect(request.getContextPath() + PagePath.ERROR_403);
-            //response.setStatus(403);
+            response.sendRedirect(request.getContextPath() + UrlPath.NO_PERMISSIONS);
+            //response.sendError(HttpServletResponse.SC_FORBIDDEN);
         }else{
             filterChain.doFilter(servletRequest, servletResponse);
         }
