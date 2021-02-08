@@ -12,4 +12,6 @@ public final class RequestParameterName {
     public static final String REMEMBER_ME = "rememberMe";
     public static final String ERROR_MESSAGE = "errorMessage";
     public static final String ON = "on";
+    public static final String FILE_TYPE = "file_type";
+    public static final String AVATAR = "avatar";
 }

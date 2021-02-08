@@ -56,9 +56,6 @@ public class AuthenticationFilter implements Filter {
                 Optional<User> optionalUser = userService.findUserWithCookies(userLogin, userHash);
                 if(optionalUser.isPresent()){
                     User user = optionalUser.get();
-//                    session.setAttribute(SessionAttributeName.USER_ID, user.getId());
-//                    session.setAttribute(SessionAttributeName.ROLE, user.getRole());
-//                    session.setAttribute(SessionAttributeName.LOGIN, user.getLogin());
                     session.setAttribute(SessionAttributeName.USER, user);
                 }
             }catch (ServiceException e){

@@ -8,7 +8,8 @@
 
 <c:if test="${sessionScope.user != null}">
     <a class="text-light mr-1" href="${pageContext.request.contextPath}/profile.do">
-            ${sessionScope.user.login}(${sessionScope.user.role.toString()})
+        <img class="avatar-small avatar-round" src="${pageContext.request.contextPath}${sessionScope.user.avatar_path}" >
+            ${sessionScope.user.login}
     </a>
     <a class="text-light" href="${pageContext.request.contextPath}/logout.do">
         <fmt:message key="logout" />

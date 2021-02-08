@@ -11,4 +11,5 @@ public interface UserService {
     boolean register(String login, String password, String passwordConfirmed) throws ServiceException;
     Optional<User> findUser(int id) throws ServiceException;
     Optional<User> findUserWithCookies(String login, String userHash) throws ServiceException;
+    boolean updateUser(User user) throws ServiceException;
 }

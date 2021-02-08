@@ -100,3 +100,16 @@ input:focus{
 .nav-link{
     font-size: 20px;
 }
+.avatar-big{
+    width: 200px;
+    height: auto;
+}
+.avatar-small{
+    width: 50px;
+    height: auto;
+}
+.avatar-round{
+    border-radius: 100px; /* Радиус скругления */
+    border: 1px solid black; /* Параметры рамки */
+    box-shadow: 0 0 7px #666; /* Параметры тени */
+}
