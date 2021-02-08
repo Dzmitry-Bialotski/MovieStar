@@ -9,7 +9,6 @@ import by.belotskiy.movie_star.model.entity.BaseEntity;
 import by.belotskiy.movie_star.model.entity.Role;
 import by.belotskiy.movie_star.model.entity.Status;
 import by.belotskiy.movie_star.model.entity.User;
-import by.belotskiy.movie_star.service.impl.UserServiceImpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

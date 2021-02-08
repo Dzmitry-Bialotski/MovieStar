@@ -14,9 +14,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private static UserServiceImpl userServiceInstance;
 
-    private UserServiceImpl(){
-
-    }
+    private UserServiceImpl(){ }
 
     public static UserServiceImpl getInstance(){
         if(userServiceInstance == null){
