@@ -1,5 +1,7 @@
 package by.belotskiy.movie_star.model.entity;
 
+import by.belotskiy.movie_star.util.ImagePathProvider;
+
 import java.io.Serializable;
 
 public class User extends BaseEntity implements Serializable {

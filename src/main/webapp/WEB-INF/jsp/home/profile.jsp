@@ -7,9 +7,15 @@
 <tags:general title="profile">
     <h1 class = "text-white"> PROFILE!!</h1>
     <div class="text-light">
-        <img class="avatar-big avatar-round" src="${pageContext.request.contextPath}${sessionScope.user.avatar_path}" >
+        <c:if test="${not empty sessionScope.user.avatar_path }">
+            <img class=`avatar-big avatar-round`
+                 src="${pageContext.request.contextPath}${sessionScope.user.avatar_path}" >
+        </c:if>
+        <c:if test="${empty sessionScope.user.avatar_path}">
+            <img class="avatar-big avatar-round"
+                 src="${pageContext.request.contextPath}${sessionScope.defaultAvatarPath}" >
+        </c:if>
             ${user.toString()} </br>
-                <h3> Choose File to Upload in Server </h3>
                 <form action="avatar.upload" method="post" enctype="multipart/form-data">
                     <input type="file" name="file" />
                     <input type="hidden" name="returnUrl" value="${pageContext.request.requestURL}" />

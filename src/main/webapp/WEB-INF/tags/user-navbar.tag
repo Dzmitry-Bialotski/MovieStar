@@ -8,8 +8,17 @@
 
 <c:if test="${sessionScope.user != null}">
     <a class="text-light mr-1" href="${pageContext.request.contextPath}/profile.do">
-        <img class="avatar-small avatar-round" src="${pageContext.request.contextPath}${sessionScope.user.avatar_path}" >
+        <c:if test="${not empty sessionScope.user.avatar_path }">
+            <img class=`avatar-small avatar-round`
+                 src="${pageContext.request.contextPath}${sessionScope.user.avatar_path}" >
+        </c:if>
+        <c:if test="${empty sessionScope.user.avatar_path}">
+            <img class="avatar-small avatar-round mr-1"
+                 src="${pageContext.request.contextPath}${sessionScope.defaultAvatarPath}" >
+        </c:if>
+        <div class="navbar-username">
             ${sessionScope.user.login}
+        </div>
     </a>
     <a class="text-light" href="${pageContext.request.contextPath}/logout.do">
         <fmt:message key="logout" />

@@ -7,13 +7,10 @@
 <tags:general title="edit_profile">
     <h1 class = "text-white"> PROFILE!!</h1>
     <div class="text-light">
-        <img class="avatar-big avatar-round" src="${pageContext.request.contextPath}${sessionScope.user.avatar_path}" >
-            ${user.toString()} </br>
-        <h3> Choose File to Upload in Server </h3>
-        <form action="avatar.upload" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" />
-            <input type="hidden" name="returnUrl" value="${pageContext.request.requestURL}" />
-            <input type="submit" value="upload" />
+        <form action="profile_edit.do" method="post">
+            <input type="text" hidden="First Name" name="first_name">
+            <input type="text" hidden="Second Name" name="second_name">
+            <button type="submit"> <fmt:message key="edit_profile" /></button>
         </form>
     </div>
 </tags:general>

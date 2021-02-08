@@ -89,7 +89,9 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-
+    <listener>
+        <listener-class>by.belotskiy.movie_star.controller.listener.SessionListener</listener-class>
+    </listener>
     <!--   JSP   -->
     <servlet>
         <servlet-name>Login</servlet-name>

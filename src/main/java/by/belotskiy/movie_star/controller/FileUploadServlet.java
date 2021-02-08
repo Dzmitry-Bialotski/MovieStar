@@ -4,11 +4,8 @@ import by.belotskiy.movie_star.controller.attribute.SessionAttributeName;
 import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.model.entity.User;
 import by.belotskiy.movie_star.service.impl.UserServiceImpl;
+import by.belotskiy.movie_star.util.ImageValidator;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -22,30 +19,37 @@ import java.util.UUID;
         maxRequestSize = 1024 * 1024 * 5 * 5)
 public class FileUploadServlet extends HttpServlet {
 
-    private static final Logger LOGGER = LogManager.getLogger(FileUploadServlet.class);
+    private final String AVATAR_UPLOAD_DIRECTORY = new StringBuilder("D:")
+            .append(File.separator).append("java_web_projects").append(File.separator).append("MovieStar")
+            .append(File.separator).append("src").append(File.separator).append("main").append(File.separator)
+            .append("webapp").append(File.separator).append("img").append(File.separator).append("avatar").toString();
 
-    private final String AVATAR_UPLOAD_DIRECTORY = "D:" + File.separator + "java_web_projects" + File.separator
-            + "MovieStar" + File.separator + "src" + File.separator + "main"  + File.separator + "webapp"
-            + File.separator + "img" + File.separator + "avatar";
+    private final String RELATIVE_AVATAR_PATH = File.separator + "img" + File.separator + "avatar";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if(ServletFileUpload.isMultipartContent(request)){
-            try{
-                Part part = request.getPart("file");
-                String filename = part.getSubmittedFileName();
-                String path = AVATAR_UPLOAD_DIRECTORY +  File.separator + UUID.randomUUID()+ filename;
+            Part part = request.getPart("file");
+            String filename = part.getSubmittedFileName();
+            boolean isValid = ImageValidator.validateExtension(filename);
+            if(isValid){
+                String realFilename = UUID.randomUUID()+ filename;
+                String upload_path = AVATAR_UPLOAD_DIRECTORY + File.separator + realFilename;
+                String relative_path = RELATIVE_AVATAR_PATH + File.separator + realFilename;
                 InputStream inputStream = part.getInputStream();
-                boolean isSuccess = uploadFile(inputStream, path);
+                boolean isSuccess = uploadFile(inputStream, upload_path);
                 if(isSuccess){
                     HttpSession session = request.getSession();
                     User user = (User)session.getAttribute(SessionAttributeName.USER);
-                    user.setAvatar_path(path);
-                    UserServiceImpl.getInstance().updateUser(user);
+                    user.setAvatar_path(relative_path);
+                    try{
+                        UserServiceImpl.getInstance().updateUser(user);
+                    }catch (Exception e){
+                        throw new ServletException(e);
+                    }
+
                 }
-            }catch (Exception e){
-                LOGGER.log(Level.ERROR, e);
             }
         }
         HttpSession session = request.getSession();
@@ -54,8 +58,7 @@ public class FileUploadServlet extends HttpServlet {
         return;
     }
 
-    private boolean uploadFile(InputStream inputStream, String path){
-        boolean result = false;
+    private boolean uploadFile(InputStream inputStream, String path) throws ServletException {
         try {
             byte[] bytes = new byte[inputStream.available()];
             inputStream.read(bytes);
@@ -63,10 +66,9 @@ public class FileUploadServlet extends HttpServlet {
             fops.write(bytes);
             fops.flush();
             fops.close();
-            result = true;
         }catch (IOException e) {
-            e.printStackTrace();
+            throw new ServletException(e);
         }
-        return result;
+        return true;
     }
 }
