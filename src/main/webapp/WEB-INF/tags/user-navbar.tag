@@ -7,28 +7,30 @@
 <fmt:setBundle basename="language"/>
 
 <c:if test="${sessionScope.user != null}">
-    <a class="text-light mr-1" href="${pageContext.request.contextPath}/profile.do">
-        <c:if test="${not empty sessionScope.user.avatar_path }">
-            <img class=`avatar-small avatar-round`
-                 src="${pageContext.request.contextPath}${sessionScope.user.avatar_path}" >
-        </c:if>
-        <c:if test="${empty sessionScope.user.avatar_path}">
-            <img class="avatar-small avatar-round mr-1"
-                 src="${pageContext.request.contextPath}${sessionScope.defaultAvatarPath}" >
-        </c:if>
-        <div class="navbar-username">
+    <a class="text-light mr-1 row" href="${pageContext.request.contextPath}/profile.do">
+        <div class="navbar-avatar col-sm-4">
+            <c:if test="${not empty sessionScope.user.avatar_path }">
+                <img class="avatar-small avatar-round"
+                     src="${pageContext.request.contextPath}${sessionScope.user.avatar_path}" >
+            </c:if>
+            <c:if test="${empty sessionScope.user.avatar_path}">
+                <img class="avatar-small avatar-round mr-1"
+                     src="${pageContext.request.contextPath}${sessionScope.defaultAvatarPath}" >
+            </c:if>
+        </div>
+        <div class="navbar-username col-sm">
             ${sessionScope.user.login}
         </div>
     </a>
     <a class="text-light" href="${pageContext.request.contextPath}/logout.do">
-        <fmt:message key="logout" />
+        <i class="fas fa-sign-out-alt mr-1"></i><fmt:message key="logout" />
     </a>
 </c:if>
 <c:if test="${sessionScope.user == null}">
-    <a href="${pageContext.request.contextPath}/login" class="text-light mr-1">
-        <fmt:message key="login"/>
+    <a href="${pageContext.request.contextPath}/login" class="text-light mr-3">
+        <i class="fas fa-sign-in-alt mr-1"></i><fmt:message key="login"/>
     </a>
     <a href="${pageContext.request.contextPath}/register" class="text-light mr-1">
-        <fmt:message key="register"/>
+        <i class="fas fa-user-plus mr-1"></i><fmt:message key="register"/>
     </a>
 </c:if>

@@ -57,9 +57,6 @@
                         <fmt:message key="register_task"/>
                     </a>
                 </div>
-                <div class="d-flex justify-content-center">
-                    <a href="#"> <fmt:message key="forgot_password"/></a>
-                </div>
             </div>
         </div>
     </div>

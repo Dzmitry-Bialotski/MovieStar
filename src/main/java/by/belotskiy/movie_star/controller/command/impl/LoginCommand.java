@@ -53,9 +53,6 @@ public class LoginCommand implements ActionCommand {
         if(optionalUser.isPresent()){
             LOGGER.log(Level.INFO, "user logged in");
             User user = optionalUser.get();
-//            session.setAttribute(SessionAttributeName.LOGIN, login);
-//            session.setAttribute(SessionAttributeName.USER_ID, user.getId());
-//            session.setAttribute(SessionAttributeName.ROLE, user.getRole());
             session.setAttribute(SessionAttributeName.USER, user);
             if(rememberMe){
                 Cookie hashCookie = new Cookie(CookieName.USER_HASH, user.getUserHash());

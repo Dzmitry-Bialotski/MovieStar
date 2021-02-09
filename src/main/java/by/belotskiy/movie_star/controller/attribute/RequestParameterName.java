@@ -14,4 +14,6 @@ public final class RequestParameterName {
     public static final String ON = "on";
     public static final String FILE_TYPE = "file_type";
     public static final String AVATAR = "avatar";
+    public static final String FIRST_NAME = "first_name";
+    public static final String SECOND_NAME = "second_name";
 }

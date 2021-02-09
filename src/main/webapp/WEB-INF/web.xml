@@ -119,6 +119,14 @@
         <servlet-name>Home</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ProfileEdit</servlet-name>
+        <jsp-file>/WEB-INF/jsp/home/edit_profile.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProfileEdit</servlet-name>
+        <url-pattern>/profileEdit</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>Error403</servlet-name>

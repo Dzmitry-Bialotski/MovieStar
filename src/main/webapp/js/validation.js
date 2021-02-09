@@ -26,7 +26,12 @@ function validateLogin(login){
 
 function validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
+    if(re.test(String(email).toLowerCase())){
+        return true;
+    }else{
+        alert('Incorrect email');
+        return false;
+    }
 }
 
 function validatePassword(password) {
@@ -59,4 +64,25 @@ function registerValidate(login, password1, password2) {
 
 function loginValidate(login, password) {
     return validateLogin(login) && validatePassword(password);
+}
+
+
+function validateName(firstName, secondName){
+    if(firstName.length < 2 || firstName.length > 30) {
+        alert("First Name must be between 2 and 30 character")
+        return false;
+    }
+    if(secondName.length < 2 || secondName.length > 30) {
+        alert("secondName must be between 2 and 30 character")
+        return false;
+    }
+    if(/^[a-zA-Z]+$/.test(firstName) === false) {
+        alert('First Name must contain only Latin letters');
+        return false;
+    }
+    if(/^[a-zA-Z]+$/.test(secondName) === false) {
+        alert('Second Name must contain only Latin letters');
+        return false;
+    }
+    return true;
 }

@@ -4,7 +4,9 @@ import by.belotskiy.movie_star.controller.attribute.SessionAttributeName;
 import by.belotskiy.movie_star.controller.command.ActionCommand;
 import by.belotskiy.movie_star.controller.command.CommandProvider;
 import by.belotskiy.movie_star.controller.command.CommandType;
-import by.belotskiy.movie_star.controller.path.PagePath;
+import by.belotskiy.movie_star.controller.command.impl.EmailConfirmCommand;
+import by.belotskiy.movie_star.controller.command.impl.EmailSendCommand;
+import by.belotskiy.movie_star.controller.command.impl.ProfileEditCommand;
 import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.model.entity.Role;
 import by.belotskiy.movie_star.model.entity.User;
@@ -34,7 +36,10 @@ public class PermissionFilter implements Filter {
         spectatorCommands.addAll(List.of(
                 //command types for spectator
                 CommandType.PROFILE,
-                CommandType.LOGOUT
+                CommandType.LOGOUT,
+                CommandType.PROFILE_EDIT,
+                CommandType.EMAIL_SEND,
+                CommandType.EMAIL_CONFIRM
         ));
         List<CommandType> reviewerCommands = new ArrayList<>(spectatorCommands);
         spectatorCommands.addAll(List.of(
@@ -43,6 +48,10 @@ public class PermissionFilter implements Filter {
         List<CommandType> adminCommands = new ArrayList<>(reviewerCommands);
         spectatorCommands.addAll(List.of(
                 //command types for admin
+                CommandType.MOVIE_DELETE,
+                CommandType.MOVIE_ADD,
+                CommandType.USER_BLOCK,
+                CommandType.MOVIE_EDIT
         ));
         permissions.put(Role.GUEST, guestCommands);
         permissions.put(Role.SPECTATOR, spectatorCommands);

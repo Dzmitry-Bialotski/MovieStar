@@ -113,3 +113,35 @@ input:focus{
     border: 1px solid black; /* Параметры рамки */
     box-shadow: 0 0 7px #666; /* Параметры тени */
 }
+.section{
+    background-color: rgba(0,0,0,0.5) !important;
+    border-radius: 5px; /* Радиус скругления */
+    border: 1px solid black; /* Параметры рамки */
+    box-shadow: 0 0 7px #666; /* Параметры тени */
+}
+.user-info{
+    width: 600px;
+    height: auto;
+}
+.user-info__key{
+    color: #eeff53;
+}
+.user-info__value{
+    color: #c6ccbe;
+}
+.email-form{
+    width: 450px;
+    height: auto;
+}
+.edit-href{
+    width: 250px;
+}
+.red{
+    color: #fd1e1e;
+}
+.green{
+    color: #19f125;
+}
+.navbar-username{
+    margin: auto;
+}
