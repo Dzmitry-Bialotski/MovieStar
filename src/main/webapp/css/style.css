@@ -105,8 +105,9 @@ input:focus{
     height: auto;
 }
 .avatar-small{
-    width: 50px;
+    width: 40px;
     height: auto;
+    margin: auto;
 }
 .avatar-round{
     border-radius: 100px; /* Радиус скругления */

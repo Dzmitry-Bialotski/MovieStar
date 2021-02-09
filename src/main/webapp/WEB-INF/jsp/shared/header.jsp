@@ -37,7 +37,9 @@
                     </div>
                 </li>
             </ul>
-            <tags:user-navbar/>
+            <div class="navbar-nav">
+                <tags:user-navbar/>
+            </div>
         </div>
     </div>
 </nav>

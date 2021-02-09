@@ -80,7 +80,6 @@ public class PermissionFilter implements Filter {
         CommandType commandType = CommandProvider.defineCommandType(request).get();
         if (commands == null || !commands.contains(commandType)) {
             response.sendRedirect(request.getContextPath() + UrlPath.NO_PERMISSIONS);
-            //response.sendError(HttpServletResponse.SC_FORBIDDEN);
         }else{
             filterChain.doFilter(servletRequest, servletResponse);
         }
