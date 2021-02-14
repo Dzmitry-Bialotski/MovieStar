@@ -1,5 +1,7 @@
 package by.belotskiy.movie_star.model.entity;
 
+import by.belotskiy.movie_star.model.entity.enums.Status;
+
 public abstract class BaseEntity implements Identified<Integer>{
 
     private Integer id;

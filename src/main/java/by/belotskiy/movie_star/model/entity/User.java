@@ -1,8 +1,10 @@
 package by.belotskiy.movie_star.model.entity;
 
-import by.belotskiy.movie_star.util.ImagePathProvider;
+import by.belotskiy.movie_star.model.entity.enums.Role;
+import by.belotskiy.movie_star.model.entity.enums.Status;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class User extends BaseEntity implements Serializable {
 
@@ -141,10 +143,10 @@ public class User extends BaseEntity implements Serializable {
         if (login != null ? !login.equals(user.getLogin()) : user.getLogin() != null) return false;
         if (firstName != null ? !firstName.equals(user.getFirstName()) : user.getFirstName() != null) return false;
         if (secondName != null ? !secondName.equals(user.getSecondName()) : user.getSecondName() != null) return false;
-        if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        if (passwordHash != null ? !passwordHash.equals(user.passwordHash) : user.passwordHash != null) return false;
-        if (userHash != null ? !userHash.equals(user.userHash) : user.userHash != null) return false;
-        if (role != null ? !role.equals(user.role) : user.role != null) return false;
+        if (!Objects.equals(email, user.email)) return false;
+        if (!Objects.equals(passwordHash, user.passwordHash)) return false;
+        if (!Objects.equals(userHash, user.userHash)) return false;
+        if (!Objects.equals(role, user.role)) return false;
         return getStatus() != null ? getStatus().equals(user.getStatus()) : user.getStatus() == null;
     }
 

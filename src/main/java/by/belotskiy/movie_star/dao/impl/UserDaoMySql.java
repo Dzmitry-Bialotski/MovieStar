@@ -2,12 +2,12 @@ package by.belotskiy.movie_star.dao.impl;
 
 import by.belotskiy.movie_star.dao.UserDao;
 import by.belotskiy.movie_star.dao.pool.ConnectionPool;
-import by.belotskiy.movie_star.dao.query.MySqlQuery;
+import by.belotskiy.movie_star.dao.query.MySqlUserQuery;
 import by.belotskiy.movie_star.exception.ConnectionPoolException;
 import by.belotskiy.movie_star.exception.DaoException;
 import by.belotskiy.movie_star.model.entity.BaseEntity;
-import by.belotskiy.movie_star.model.entity.Role;
-import by.belotskiy.movie_star.model.entity.Status;
+import by.belotskiy.movie_star.model.entity.enums.Role;
+import by.belotskiy.movie_star.model.entity.enums.Status;
 import by.belotskiy.movie_star.model.entity.User;
 
 import java.sql.Connection;
@@ -60,7 +60,7 @@ public class UserDaoMySql implements UserDao {
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
-            query = createQueryWithCriteria(MySqlQuery.FIND_ALL_USER_QUERY, criteria);
+            query = createQueryWithCriteria(MySqlUserQuery.FIND_ALL_USER_QUERY, criteria);
             statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
@@ -97,7 +97,7 @@ public class UserDaoMySql implements UserDao {
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
-            query = MySqlQuery.FIND_USER_WITH_LIMITS_QUERY;
+            query = MySqlUserQuery.FIND_USER_WITH_LIMITS_QUERY;
             statement.setInt(1, limit);
             statement.setInt(2, offset);
             statement = connection.prepareStatement(query);
@@ -136,7 +136,7 @@ public class UserDaoMySql implements UserDao {
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
-            statement = connection.prepareStatement(MySqlQuery.INSERT_USER_QUERY);
+            statement = connection.prepareStatement(MySqlUserQuery.INSERT_USER_QUERY);
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPasswordHash());
@@ -166,7 +166,7 @@ public class UserDaoMySql implements UserDao {
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
-            statement = connection.prepareStatement(MySqlQuery.UPDATE_USER_QUERY);
+            statement = connection.prepareStatement(MySqlUserQuery.UPDATE_USER_QUERY);
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPasswordHash());
@@ -195,7 +195,7 @@ public class UserDaoMySql implements UserDao {
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
-            statement = connection.prepareStatement(MySqlQuery.DELETE_USER_QUERY);
+            statement = connection.prepareStatement(MySqlUserQuery.DELETE_USER_QUERY);
             statement.setInt(1, id);
             statement.execute();
         } catch (SQLException | ConnectionPoolException e) {
@@ -215,7 +215,7 @@ public class UserDaoMySql implements UserDao {
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
-            statement = connection.prepareStatement(MySqlQuery.FIND_COUNT_OF_USERS_QUERY);
+            statement = connection.prepareStatement(MySqlUserQuery.FIND_COUNT_OF_USERS_QUERY);
             ResultSet result = statement.executeQuery();
             result.next();
             return result.getInt(1);

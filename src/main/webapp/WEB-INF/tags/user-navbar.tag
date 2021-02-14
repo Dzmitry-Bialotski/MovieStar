@@ -7,21 +7,40 @@
 <fmt:setBundle basename="language"/>
 
 <c:if test="${sessionScope.user != null}">
-    <a class="text-light row" href="${pageContext.request.contextPath}/profile.do">
-        <div class="navbar-avatar col-sm-4">
-            <c:if test="${not empty sessionScope.user.avatar_path }">
-                <img class="avatar-small avatar-round mr-1"
-                     src="${pageContext.request.contextPath}${sessionScope.user.avatar_path}" >
-            </c:if>
-            <c:if test="${empty sessionScope.user.avatar_path}">
-                <img class="avatar-small avatar-round mr-1"
-                     src="${pageContext.request.contextPath}${sessionScope.defaultAvatarPath}" >
-            </c:if>
-        </div>
-        <div class="navbar-username col-sm nav-link mr-1">
-            ${sessionScope.user.login}
-        </div>
-    </a>
+    <c:if test="${sessionScope.user.role.toString() == 'ADMIN'}">
+        <a class="text-light row" href="${pageContext.request.contextPath}/admin.do">
+            <div class="navbar-avatar col-sm-4">
+                <c:if test="${not empty sessionScope.user.avatar_path }">
+                    <img class="avatar-small avatar-round mr-1"
+                         src="${pageContext.request.contextPath}${sessionScope.user.avatar_path}" >
+                </c:if>
+                <c:if test="${empty sessionScope.user.avatar_path}">
+                    <img class="avatar-small avatar-round mr-1"
+                         src="${pageContext.request.contextPath}${sessionScope.defaultAvatarPath}" >
+                </c:if>
+            </div>
+            <div class="navbar-username col-sm nav-link mr-1">
+                    ${sessionScope.user.login}
+            </div>
+        </a>
+    </c:if>
+    <c:if test="${sessionScope.user.role.toString() != 'ADMIN'}">
+        <a class="text-light row" href="${pageContext.request.contextPath}/profile.do">
+            <div class="navbar-avatar col-sm-4">
+                <c:if test="${not empty sessionScope.user.avatar_path }">
+                    <img class="avatar-small avatar-round mr-1"
+                         src="${pageContext.request.contextPath}${sessionScope.user.avatar_path}" >
+                </c:if>
+                <c:if test="${empty sessionScope.user.avatar_path}">
+                    <img class="avatar-small avatar-round mr-1"
+                         src="${pageContext.request.contextPath}${sessionScope.defaultAvatarPath}" >
+                </c:if>
+            </div>
+            <div class="navbar-username col-sm nav-link mr-1">
+                    ${sessionScope.user.login}
+            </div>
+        </a>
+    </c:if>
     <a class="nav-link" href="${pageContext.request.contextPath}/logout.do">
         <i class="fas fa-sign-out-alt mr-1"></i><fmt:message key="logout" />
     </a>

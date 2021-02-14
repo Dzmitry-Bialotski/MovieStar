@@ -143,6 +143,9 @@ input:focus{
 .green{
     color: #19f125;
 }
+.yellow{
+    color: #eeff53;
+}
 .navbar-username{
     margin: auto;
 }

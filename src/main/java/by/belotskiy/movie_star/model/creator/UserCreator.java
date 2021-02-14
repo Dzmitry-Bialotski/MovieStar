@@ -1,7 +1,7 @@
 package by.belotskiy.movie_star.model.creator;
 
-import by.belotskiy.movie_star.model.entity.Role;
-import by.belotskiy.movie_star.model.entity.Status;
+import by.belotskiy.movie_star.model.entity.enums.Role;
+import by.belotskiy.movie_star.model.entity.enums.Status;
 import by.belotskiy.movie_star.model.entity.User;
 
 public class UserCreator {

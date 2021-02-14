@@ -29,6 +29,24 @@ public enum CommandType {
     MOVIE_ADD(new MovieAddCommand()),
 
     MOVIE_EDIT(new MovieEditCommand()),
+
+    MOVIES(new MoviesCommand()),
+
+    MOVIE(new MovieCommand()),
+
+    ADMIN(new AdminCommand()),
+
+    ADMIN_MOVIES(new AdminMoviesCommand()),
+
+    ADMIN_REVIEWS(new AdminReviewsCommand()),
+
+    ADMIN_USERS(new AdminUsersCommand()),
+
+    RATING(new RatingCommand()),
+
+    REVIEW_ADD(new ReviewAddCommand()),
+
+    REVIEW_DELETE(new ReviewDeleteCommand())
     ;
 
     private final ActionCommand command;

@@ -170,6 +170,78 @@
         <servlet-name>Profile</servlet-name>
         <url-pattern>/profile</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Movies</servlet-name>
+        <jsp-file>/WEB-INF/jsp/home/movies.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Movies</servlet-name>
+        <url-pattern>/movies</url-pattern>
+    </servlet-mapping>
+
+    <!-- admin pages -->
+    <servlet>
+        <servlet-name>AdminReviews</servlet-name>
+        <jsp-file>/WEB-INF/jsp/admin/reviews.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminReviews</servlet-name>
+        <url-pattern>/admin/reviews</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminUsers</servlet-name>
+        <jsp-file>/WEB-INF/jsp/admin/users.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminUsers</servlet-name>
+        <url-pattern>/admin/users</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminMovies</servlet-name>
+        <jsp-file>/WEB-INF/jsp/admin/movies.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminMovies</servlet-name>
+        <url-pattern>/admin/movies</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MovieAdd</servlet-name>
+        <jsp-file>/WEB-INF/jsp/admin/movie_add.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MovieAdd</servlet-name>
+        <url-pattern>/admin/movie/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MovieEdit</servlet-name>
+        <jsp-file>/WEB-INF/jsp/admin/movie_edit.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MovieEdit</servlet-name>
+        <url-pattern>/admin/movie/edit</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Movie</servlet-name>
+        <jsp-file>/WEB-INF/jsp/home/movie.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Movie</servlet-name>
+        <url-pattern>/movie</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Admin</servlet-name>
+        <jsp-file>/WEB-INF/jsp/admin/index.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Admin</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
 
     <session-config>
         <session-timeout>180</session-timeout>

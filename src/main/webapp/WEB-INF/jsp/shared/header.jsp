@@ -19,9 +19,9 @@
                     <a class="nav-link" href="${pageContext.request.contextPath}/profile.do"> <i class="fa fa-user" aria-hidden="true"></i> <fmt:message key="profile" /></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="random"> <i class="fa fa-film mr-1" aria-hidden="true"></i><fmt:message key="movies" /></a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/movies.do"> <i class="fa fa-film mr-1" aria-hidden="true"></i><fmt:message key="movies" /></a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown mr-2">
                     <a class="nav-link dropdown-toggle" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-globe" aria-hidden="true"></i> <fmt:message key="language" />
                     </a>
@@ -35,6 +35,12 @@
                             <fmt:message key="en" />
                         </a>
                     </div>
+                </li>
+                <li>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
                 </li>
             </ul>
             <div class="navbar-nav">

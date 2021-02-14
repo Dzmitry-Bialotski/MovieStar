@@ -1,4 +1,4 @@
-package by.belotskiy.movie_star.model.entity;
+package by.belotskiy.movie_star.model.entity.enums;
 
 public enum Role {
     GUEST,

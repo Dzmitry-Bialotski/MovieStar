@@ -36,11 +36,6 @@ public class LogoutCommand implements ActionCommand {
         cookie = new Cookie(CookieName.USER_LOGIN, "");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
-
-//        String returnUrl = request.getParameter(RequestParameterName.RETURN_URL);
-//        if(returnUrl != null && !returnUrl.isEmpty()){
-//            return new CommandResult(returnUrl, CommandResult.Type.RETURN_URL);
-//        }
-        return new CommandResult(UrlPath.HOME, CommandResult.Type.REDIRECT);
+        return new CommandResult(UrlPath.LOGIN, CommandResult.Type.REDIRECT);
     }
 }

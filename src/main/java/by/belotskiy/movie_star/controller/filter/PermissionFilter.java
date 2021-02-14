@@ -4,11 +4,8 @@ import by.belotskiy.movie_star.controller.attribute.SessionAttributeName;
 import by.belotskiy.movie_star.controller.command.ActionCommand;
 import by.belotskiy.movie_star.controller.command.CommandProvider;
 import by.belotskiy.movie_star.controller.command.CommandType;
-import by.belotskiy.movie_star.controller.command.impl.EmailConfirmCommand;
-import by.belotskiy.movie_star.controller.command.impl.EmailSendCommand;
-import by.belotskiy.movie_star.controller.command.impl.ProfileEditCommand;
 import by.belotskiy.movie_star.controller.path.UrlPath;
-import by.belotskiy.movie_star.model.entity.Role;
+import by.belotskiy.movie_star.model.entity.enums.Role;
 import by.belotskiy.movie_star.model.entity.User;
 
 import javax.servlet.*;
@@ -29,7 +26,9 @@ public class PermissionFilter implements Filter {
                 CommandType.LOGIN,
                 CommandType.REGISTER,
                 CommandType.HOME,
-                CommandType.CHANGE_LOCALE_COMMAND
+                CommandType.CHANGE_LOCALE_COMMAND,
+                CommandType.MOVIES,
+                CommandType.MOVIE
         );
 
         List<CommandType> spectatorCommands = new ArrayList<>(guestCommands);
@@ -39,19 +38,27 @@ public class PermissionFilter implements Filter {
                 CommandType.LOGOUT,
                 CommandType.PROFILE_EDIT,
                 CommandType.EMAIL_SEND,
-                CommandType.EMAIL_CONFIRM
+                CommandType.EMAIL_CONFIRM,
+                CommandType.RATING
         ));
         List<CommandType> reviewerCommands = new ArrayList<>(spectatorCommands);
-        spectatorCommands.addAll(List.of(
+        reviewerCommands.addAll(List.of(
                 //command types for reviewer
+                CommandType.REVIEW_ADD,
+                CommandType.REVIEW_DELETE
         ));
         List<CommandType> adminCommands = new ArrayList<>(reviewerCommands);
-        spectatorCommands.addAll(List.of(
+        adminCommands.addAll(List.of(
                 //command types for admin
                 CommandType.MOVIE_DELETE,
                 CommandType.MOVIE_ADD,
+                CommandType.MOVIE_EDIT,
                 CommandType.USER_BLOCK,
-                CommandType.MOVIE_EDIT
+                CommandType.ADMIN,
+                CommandType.ADMIN_MOVIES,
+                CommandType.ADMIN_REVIEWS,
+                CommandType.ADMIN_USERS
+
         ));
         permissions.put(Role.GUEST, guestCommands);
         permissions.put(Role.SPECTATOR, spectatorCommands);
