@@ -3,7 +3,7 @@ package by.belotskiy.movie_star.model.dao.impl;
 
 
 import by.belotskiy.movie_star.exception.DaoException;
-import by.belotskiy.movie_star.model.dao.pool.ConnectionPool;
+import by.belotskiy.movie_star.model.dao.pool.DynamicConnectionPool;
 import by.belotskiy.movie_star.model.dao.UserDao;
 import by.belotskiy.movie_star.model.dao.util.DaoUtil;
 import by.belotskiy.movie_star.model.dao.query.UserQuery;
@@ -49,7 +49,7 @@ public class UserDaoImpl implements UserDao {
         ResultSet resultSet = null;
         String query = "";
         try {
-            connection = ConnectionPool.getInstance().getConnection();
+            connection = DynamicConnectionPool.getInstance().provideConnection();
             connection.setAutoCommit(false);
             query = DaoUtil.createQueryWithCriteria(UserQuery.FIND_ALL_USER_QUERY, criteria);
             statement = connection.prepareStatement(query);
@@ -86,7 +86,7 @@ public class UserDaoImpl implements UserDao {
         ResultSet resultSet = null;
         String query = "";
         try {
-            connection = ConnectionPool.getInstance().getConnection();
+            connection = DynamicConnectionPool.getInstance().provideConnection();
             connection.setAutoCommit(false);
             query = UserQuery.FIND_USER_WITH_LIMITS_QUERY;
             statement.setInt(1, limit);
@@ -124,7 +124,7 @@ public class UserDaoImpl implements UserDao {
         PreparedStatement statement = null;
         String query = "";
         try {
-            connection = ConnectionPool.getInstance().getConnection();
+            connection = DynamicConnectionPool.getInstance().provideConnection();
             connection.setAutoCommit(false);
             statement = connection.prepareStatement(UserQuery.INSERT_USER_QUERY);
             statement.setString(1, user.getLogin());
@@ -153,7 +153,7 @@ public class UserDaoImpl implements UserDao {
         PreparedStatement statement = null;
         String query = "";
         try {
-            connection = ConnectionPool.getInstance().getConnection();
+            connection = DynamicConnectionPool.getInstance().provideConnection();
             connection.setAutoCommit(false);
             statement = connection.prepareStatement(UserQuery.UPDATE_USER_QUERY);
             statement.setString(1, user.getLogin());
@@ -181,7 +181,7 @@ public class UserDaoImpl implements UserDao {
         Connection connection = null;
         PreparedStatement statement = null;
         try {
-            connection = ConnectionPool.getInstance().getConnection();
+            connection = DynamicConnectionPool.getInstance().provideConnection();
             connection.setAutoCommit(false);
             statement = connection.prepareStatement(UserQuery.DELETE_USER_QUERY);
             statement.setInt(1, id);
@@ -201,7 +201,7 @@ public class UserDaoImpl implements UserDao {
         ResultSet resultSet = null;
         String query = "";
         try {
-            connection = ConnectionPool.getInstance().getConnection();
+            connection = DynamicConnectionPool.getInstance().provideConnection();
             connection.setAutoCommit(false);
             statement = connection.prepareStatement(UserQuery.FIND_COUNT_OF_USERS_QUERY);
             resultSet = statement.executeQuery();

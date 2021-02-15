@@ -1,0 +1,118 @@
+package by.belotskiy.movie_star.model.dao.pool;
+
+import com.mysql.jdbc.Driver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.ArrayDeque;
+import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
+
+public class DynamicConnectionPool {
+    private static final Logger LOGGER = LogManager.getLogger(DynamicConnectionPool.class);
+    private static final int MIN_POOL_SIZE = 8;
+    private static final int MAX_POOL_SIZE = 32;
+    private static int currentPoolSize = 8;
+    private static final DynamicConnectionPool instance = new DynamicConnectionPool();
+    private final BlockingQueue<ProxyConnection> freeConnections;
+    private final Queue<ProxyConnection> givenAwayConnections;
+
+    private DynamicConnectionPool() {
+        try {
+            DriverManager.registerDriver(new Driver());
+        } catch (SQLException e) {
+            LOGGER.warn("Error while registering driver", e);
+        }
+        freeConnections = new LinkedBlockingDeque<>(MIN_POOL_SIZE);
+        for (int i = 0; i < MIN_POOL_SIZE; i++) {
+            Connection connection;
+            try {
+                connection = ConnectionCreator.createConnection();
+            } catch (SQLException e) {
+                LOGGER.fatal("Error while getting connection from driver manager", e);
+                throw new RuntimeException("Error while getting connection from driver manager", e);
+            }
+            ProxyConnection proxyConnection = new ProxyConnection(connection);
+            freeConnections.offer(proxyConnection);
+        }
+        givenAwayConnections = new ArrayDeque<>();
+    }
+
+    public static DynamicConnectionPool getInstance() {
+        return instance;
+    }
+
+    public Connection provideConnection() {
+        ProxyConnection connection;
+        try {
+            connection = freeConnections.take();
+            givenAwayConnections.offer(connection);
+            if(givenAwayConnections.size() == currentPoolSize){
+                if(currentPoolSize < MAX_POOL_SIZE){
+                    for(int i = 0; i < currentPoolSize; i++){
+                        Connection newConnection;
+                        try {
+                            newConnection = ConnectionCreator.createConnection();
+                        } catch (SQLException e) {
+                            LOGGER.fatal("Error while getting connection from driver manager", e);
+                            throw new RuntimeException("Error while getting connection from driver manager", e);
+                        }
+                        ProxyConnection proxyConnection = new ProxyConnection(newConnection);
+                        freeConnections.offer(proxyConnection);
+                    }
+                    currentPoolSize *= 2;
+                }
+            }
+        } catch (InterruptedException e) {
+            LOGGER.fatal("Can't get connection form connection queue", e);
+            throw new RuntimeException("Error while getting connection from queue", e);
+        }
+        return connection;
+    }
+
+    public void releaseConnection(Connection connection) {
+        if (connection instanceof ProxyConnection) {
+            givenAwayConnections.remove(connection);
+            freeConnections.offer((ProxyConnection) connection);
+            if(givenAwayConnections.size() < currentPoolSize / 4){
+                if(currentPoolSize > MIN_POOL_SIZE){
+                    currentPoolSize /= 2;
+                    for(int i = 0; i < currentPoolSize; i++){
+                        try {
+                            freeConnections.take().close();
+                        } catch (InterruptedException e) {
+                            LOGGER.warn("Can't take connection from queue", e);
+                        }
+                    }
+                }
+            }
+        } else {
+            LOGGER.warn("Invalid connection object provided");
+        }
+    }
+
+    public void destroyPool() {
+        for (int i = 0; i < currentPoolSize; i++) {
+            try {
+                freeConnections.take().close();
+            } catch (InterruptedException e) {
+                LOGGER.warn("Can't take connection from queue", e);
+            }
+        }
+        deregisterDriver();
+    }
+
+    private void deregisterDriver() {
+        DriverManager.getDrivers().asIterator().forEachRemaining(driver -> {
+            try {
+                DriverManager.deregisterDriver(driver);
+            } catch (SQLException e) {
+                LOGGER.warn("Can't access database to deregister driver", e);
+            }
+        });
+    }
+}

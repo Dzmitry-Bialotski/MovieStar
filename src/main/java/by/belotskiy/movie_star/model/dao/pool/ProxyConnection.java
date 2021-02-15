@@ -54,7 +54,7 @@ public class ProxyConnection implements Connection {
 
     @Override
     public void close() {
-        ConnectionPool.getInstance().releaseConnection(this);
+        DynamicConnectionPool.getInstance().releaseConnection(this);
     }
 
     void reallyClose() throws SQLException {

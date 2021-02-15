@@ -1,6 +1,6 @@
 package by.belotskiy.movie_star.model.dao.util;
 
-import by.belotskiy.movie_star.model.dao.pool.ConnectionPool;
+import by.belotskiy.movie_star.model.dao.pool.DynamicConnectionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -32,7 +32,7 @@ public class DaoUtil {
     }
 
     public static void releaseResources(Connection connection, PreparedStatement preparedStatement) {
-        ConnectionPool.getInstance().releaseConnection(connection);
+        DynamicConnectionPool.getInstance().releaseConnection(connection);
         if (preparedStatement != null) {
             try {
                 preparedStatement.close();

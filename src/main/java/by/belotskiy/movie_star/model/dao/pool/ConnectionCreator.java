@@ -13,7 +13,7 @@ import java.util.Properties;
 
 public class ConnectionCreator {
 
-    private static final Logger LOGGER = LogManager.getLogger(by.belotskiy.movie_star.dao.pool.ConnectionCreator.class);
+    private static final Logger LOGGER = LogManager.getLogger(ConnectionCreator.class);
     private static final Properties PROPERTIES = new Properties();
     private static final String PROPERTIES_PATH = "database.properties";
     private static final String DRIVER_PROPERTY = "db.driver";
