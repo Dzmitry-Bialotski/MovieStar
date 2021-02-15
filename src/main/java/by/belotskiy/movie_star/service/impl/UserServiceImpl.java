@@ -1,9 +1,9 @@
 package by.belotskiy.movie_star.service.impl;
 
-import by.belotskiy.movie_star.dao.UserDao;
-import by.belotskiy.movie_star.dao.impl.UserDaoMySql;
 import by.belotskiy.movie_star.exception.DaoException;
 import by.belotskiy.movie_star.model.creator.UserCreator;
+import by.belotskiy.movie_star.model.dao.UserDao;
+import by.belotskiy.movie_star.model.dao.factory.DaoFactory;
 import by.belotskiy.movie_star.model.entity.User;
 import by.belotskiy.movie_star.model.entity.enums.Role;
 import by.belotskiy.movie_star.service.UserService;
@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
         return userServiceInstance;
     }
 
-    private final UserDao userDao = UserDaoMySql.getInstance();
+    private final UserDao userDao = DaoFactory.getInstance().getUserDao();
 
     @Override
     public Optional<User> login(String login, String password) throws ServiceException {

@@ -1,14 +1,16 @@
-package by.belotskiy.movie_star.dao.impl;
+package by.belotskiy.movie_star.model.dao.impl;
 
-import by.belotskiy.movie_star.dao.UserDao;
-import by.belotskiy.movie_star.dao.pool.ConnectionPool;
-import by.belotskiy.movie_star.dao.query.MySqlUserQuery;
-import by.belotskiy.movie_star.exception.ConnectionPoolException;
+
+
 import by.belotskiy.movie_star.exception.DaoException;
+import by.belotskiy.movie_star.model.dao.pool.ConnectionPool;
+import by.belotskiy.movie_star.model.dao.UserDao;
+import by.belotskiy.movie_star.model.dao.util.DaoUtil;
+import by.belotskiy.movie_star.model.dao.query.UserQuery;
 import by.belotskiy.movie_star.model.entity.BaseEntity;
+import by.belotskiy.movie_star.model.entity.User;
 import by.belotskiy.movie_star.model.entity.enums.Role;
 import by.belotskiy.movie_star.model.entity.enums.Status;
-import by.belotskiy.movie_star.model.entity.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,24 +18,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-public class UserDaoMySql implements UserDao {
+public class UserDaoImpl implements UserDao {
 
     public static final String USER_ID = "user_id";
     public static final String USER_HASH = "user_hash";
     public static final String LOGIN = "login";
-    private static final String EQUALS = " = ";
-    private static final String AND = " AND ";
-    private static final char QUOTE = '\'';
-    private static final String WHERE = " WHERE ";
-    private static UserDaoMySql INSTANCE;
 
-    private UserDaoMySql(){ }
-    public static UserDaoMySql getInstance(){
-        if(INSTANCE == null){
-            INSTANCE = new UserDaoMySql();
-        }
-        return INSTANCE;
-    }
     @Override
     public Optional<User> findById(int id) throws DaoException {
         Optional<User> optionalUser = Optional.empty();
@@ -56,13 +46,14 @@ public class UserDaoMySql implements UserDao {
         List<User> users = new ArrayList<>();
         Connection connection = null;
         PreparedStatement statement = null;
+        ResultSet resultSet = null;
         String query = "";
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
-            query = createQueryWithCriteria(MySqlUserQuery.FIND_ALL_USER_QUERY, criteria);
+            query = DaoUtil.createQueryWithCriteria(UserQuery.FIND_ALL_USER_QUERY, criteria);
             statement = connection.prepareStatement(query);
-            ResultSet resultSet = statement.executeQuery();
+            resultSet = statement.executeQuery();
             while (resultSet.next()){
                 int userId = resultSet.getInt(1);
                 String login = resultSet.getString(2);
@@ -79,11 +70,10 @@ public class UserDaoMySql implements UserDao {
                         email_confirmed, first_name, second_name, user_hash, status);
                 users.add(user);
             }
-        } catch (SQLException | ConnectionPoolException e) {
+        } catch (SQLException e) {
             throw new DaoException("Error executing query " + query, e);
         } finally {
-            close(statement);
-            close(connection);
+            DaoUtil.releaseResources(connection, statement, resultSet);
         }
         return users;
     }
@@ -93,15 +83,16 @@ public class UserDaoMySql implements UserDao {
         List<User> users = new ArrayList<>();
         Connection connection = null;
         PreparedStatement statement = null;
+        ResultSet resultSet = null;
         String query = "";
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
-            query = MySqlUserQuery.FIND_USER_WITH_LIMITS_QUERY;
+            query = UserQuery.FIND_USER_WITH_LIMITS_QUERY;
             statement.setInt(1, limit);
             statement.setInt(2, offset);
             statement = connection.prepareStatement(query);
-            ResultSet resultSet = statement.executeQuery();
+            resultSet = statement.executeQuery();
             while (resultSet.next()){
                 int userId = resultSet.getInt(1);
                 String login = resultSet.getString(2);
@@ -118,11 +109,10 @@ public class UserDaoMySql implements UserDao {
                         email_confirmed, user_hash, first_name, second_name, status);
                 users.add(user);
             }
-        } catch (SQLException | ConnectionPoolException e) {
+        } catch (SQLException e) {
             throw new DaoException("Error executing query " + query, e);
         } finally {
-            close(statement);
-            close(connection);
+            DaoUtil.releaseResources(connection, statement, resultSet);
         }
         return users;
     }
@@ -136,7 +126,7 @@ public class UserDaoMySql implements UserDao {
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
-            statement = connection.prepareStatement(MySqlUserQuery.INSERT_USER_QUERY);
+            statement = connection.prepareStatement(UserQuery.INSERT_USER_QUERY);
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPasswordHash());
@@ -148,11 +138,10 @@ public class UserDaoMySql implements UserDao {
             statement.setString(9, user.getSecondName());
             statement.setString(10, user.getStatus().toString());
             statement.executeUpdate();
-        } catch (SQLException | ConnectionPoolException e) {
+        } catch (SQLException  e) {
             throw new DaoException("Error executing query " + query, e);
         } finally {
-            close(statement);
-            close(connection);
+            DaoUtil.releaseResources(connection, statement);
         }
         return true;
     }
@@ -166,7 +155,7 @@ public class UserDaoMySql implements UserDao {
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
-            statement = connection.prepareStatement(MySqlUserQuery.UPDATE_USER_QUERY);
+            statement = connection.prepareStatement(UserQuery.UPDATE_USER_QUERY);
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPasswordHash());
@@ -179,11 +168,10 @@ public class UserDaoMySql implements UserDao {
             statement.setString(10, user.getStatus().toString());
             statement.setInt(11, user.getId());
             statement.executeUpdate();
-        } catch (SQLException | ConnectionPoolException e) {
+        } catch (SQLException  e) {
             throw new DaoException("Error executing query " + query, e);
         } finally {
-            close(statement);
-            close(connection);
+            DaoUtil.releaseResources(connection, statement);
         }
         return true;
     }
@@ -195,14 +183,13 @@ public class UserDaoMySql implements UserDao {
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
-            statement = connection.prepareStatement(MySqlUserQuery.DELETE_USER_QUERY);
+            statement = connection.prepareStatement(UserQuery.DELETE_USER_QUERY);
             statement.setInt(1, id);
             statement.execute();
-        } catch (SQLException | ConnectionPoolException e) {
+        } catch (SQLException e) {
             throw new DaoException(e);
         } finally {
-            close(statement);
-            close(connection);
+            DaoUtil.releaseResources(connection, statement);
         }
         return true;
     }
@@ -211,19 +198,19 @@ public class UserDaoMySql implements UserDao {
     public int findCount() throws DaoException {
         Connection connection = null;
         PreparedStatement statement = null;
+        ResultSet resultSet = null;
         String query = "";
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
-            statement = connection.prepareStatement(MySqlUserQuery.FIND_COUNT_OF_USERS_QUERY);
-            ResultSet result = statement.executeQuery();
-            result.next();
-            return result.getInt(1);
-        } catch (SQLException | ConnectionPoolException e) {
+            statement = connection.prepareStatement(UserQuery.FIND_COUNT_OF_USERS_QUERY);
+            resultSet = statement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt(1);
+        } catch (SQLException e) {
             throw new DaoException("Error executing query " + query, e);
         } finally {
-            close(statement);
-            close(connection);
+            DaoUtil.releaseResources(connection, statement, resultSet);
         }
     }
 
@@ -250,23 +237,5 @@ public class UserDaoMySql implements UserDao {
             optionalUser = Optional.of(users.get(0));
         }
         return optionalUser;
-    }
-
-    private String createQueryWithCriteria(String queryStart, Map<String, String> criteria) {
-        List<String> conditions = new ArrayList<>();
-        Set<String> keys = criteria.keySet();
-        for (String key : keys) {
-            StringBuilder sb = new StringBuilder();
-            String condition = sb.append(key).append(EQUALS).append(QUOTE).append(criteria.get(key)).append(QUOTE).toString();
-            conditions.add(condition);
-        }
-        StringJoiner query = new StringJoiner(AND);
-        for (String condition : conditions) {
-            query.add(condition);
-        }
-        if (query.toString().isEmpty()) {
-            return queryStart;
-        }
-        return queryStart + WHERE + query.toString();
     }
 }

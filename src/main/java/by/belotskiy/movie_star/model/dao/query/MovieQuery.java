@@ -1,8 +1,11 @@
-package by.belotskiy.movie_star.dao.query;
+package by.belotskiy.movie_star.model.dao.query;
 
-public class MySqlMovieQuery {
-    private MySqlMovieQuery() {}
+public class MovieQuery {
+
+    private MovieQuery() {}
+
     public static final String MOVIES_TABLE = "movie_star_db.movies";
+
     public static final String FIND_ALL_MOVIE =
             "SELECT movie_id, title, country, year, genre, movie_type, " +
                     "age_category, short_description, description, youtubeTrailer, " +
@@ -14,7 +17,6 @@ public class MySqlMovieQuery {
                     "age_category, short_description, description, youtubeTrailer, " +
                     "image_path, status FROM " + MOVIES_TABLE +
                     " ORDER BY movie_id DESC LIMIT ? OFFSET ?";
-
     //! TODO join Reviews
     public static final String FIND_MOVIE_WITH_REVIEWS_BY_ID =
             "SELECT movie_id, title, country, year, genre, movie_type, " +

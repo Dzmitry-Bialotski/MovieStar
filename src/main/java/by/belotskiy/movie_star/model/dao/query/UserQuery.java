@@ -1,9 +1,11 @@
-package by.belotskiy.movie_star.dao.query;
+package by.belotskiy.movie_star.model.dao.query;
 
+public class UserQuery {
 
-public class MySqlUserQuery {
-    private MySqlUserQuery(){}
+    private UserQuery(){}
+
     public static final String USERS_TABLE = "movie_star_db.users";
+
     public static final String FIND_ALL_USER_QUERY =
             "SELECT user_id, login, email, password_hash, role, avatar_path, email_confirmed," +
                     " user_hash, first_name, second_name, status  FROM " + USERS_TABLE;
@@ -22,8 +24,8 @@ public class MySqlUserQuery {
 
     public static final String FIND_USER_WITH_LIMITS_QUERY =
             "SELECT user_id, login, email, password_hash, role, avatar_path, email_confirmed," +
-            " user_hash, first_name, second_name, status  FROM " + USERS_TABLE +
-            " ORDER BY user_id DESC LIMIT ? OFFSET ?";
+                    " user_hash, first_name, second_name, status  FROM " + USERS_TABLE +
+                    " ORDER BY user_id DESC LIMIT ? OFFSET ?";
 
     public static final String FIND_COUNT_OF_USERS_QUERY = "SELECT count(*) FROM "+ USERS_TABLE;
 }
