@@ -9,7 +9,7 @@
 <c:if test="${sessionScope.user != null}">
     <c:if test="${sessionScope.user.role.toString() == 'ADMIN'}">
         <a class="text-light row" href="${pageContext.request.contextPath}/admin.do">
-            <div class="navbar-avatar col-sm-4">
+            <div class="navbar-avatar">
                 <c:if test="${not empty sessionScope.user.avatar_path }">
                     <img class="avatar-small avatar-round mr-1"
                          src="${pageContext.request.contextPath}${sessionScope.user.avatar_path}" >
@@ -26,7 +26,7 @@
     </c:if>
     <c:if test="${sessionScope.user.role.toString() != 'ADMIN'}">
         <a class="text-light row" href="${pageContext.request.contextPath}/profile.do">
-            <div class="navbar-avatar col-sm-4">
+            <div class="navbar-avatar">
                 <c:if test="${not empty sessionScope.user.avatar_path }">
                     <img class="avatar-small avatar-round mr-1"
                          src="${pageContext.request.contextPath}${sessionScope.user.avatar_path}" >

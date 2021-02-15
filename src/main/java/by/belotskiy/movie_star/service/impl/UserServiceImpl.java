@@ -5,10 +5,14 @@ import by.belotskiy.movie_star.dao.impl.UserDaoMySql;
 import by.belotskiy.movie_star.exception.DaoException;
 import by.belotskiy.movie_star.model.creator.UserCreator;
 import by.belotskiy.movie_star.model.entity.User;
+import by.belotskiy.movie_star.model.entity.enums.Role;
 import by.belotskiy.movie_star.service.UserService;
 import by.belotskiy.movie_star.exception.ServiceException;
+import by.belotskiy.movie_star.util.MailSender;
 import by.belotskiy.movie_star.util.PasswordEncryptor;
+import by.belotskiy.movie_star.util.impl.GmailSender;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
@@ -96,5 +100,37 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(e);
         }
         return result;
+    }
+
+    @Override
+    public Optional<User> confirmEmail(int userId, String token) throws ServiceException {
+        Optional<User> optionalUser;
+        try {
+            optionalUser = userDao.findById(userId);
+        } catch (DaoException e) {
+            throw new ServiceException("Error while finding user by id", e);
+        }
+        if(optionalUser.isPresent()){
+            User user = optionalUser.get();
+            String generatedToken;
+            try {
+                MailSender mailSender = GmailSender.getInstance();
+                generatedToken = mailSender.calculateMdHash(user.getPasswordHash() + GmailSender.SALT);
+            } catch (NoSuchAlgorithmException e) {
+                throw new ServiceException("Error while calculating md hash", e);
+            }
+            if (!token.equals(generatedToken)) {
+                return Optional.empty();
+            }
+            user.setEmailConfirmed(true);
+            user.setRole(Role.REVIEWER);
+            try {
+                userDao.update(user);
+            } catch (DaoException e) {
+                throw new ServiceException("Error while updating user", e);
+            }
+            return Optional.of(user);
+        }
+        return Optional.empty();
     }
 }

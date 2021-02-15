@@ -19,6 +19,7 @@ public final class RequestParameterName {
     public static final String PAGE = "page";
     public static final String MOVIES = "movies";
     public static final String TOKEN = "token";
+    public static final String USER_ID = "userId";
     public static final String TITLE = "title";
     public static final String COUNTRY = "country";
     public static final String YEAR = "year";

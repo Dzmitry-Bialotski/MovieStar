@@ -38,7 +38,9 @@
 
                     <c:if test="${sessionScope.user.emailConfirmed}">
                         <h3 class="user-info__key"><fmt:message key="email"/></h3>
-                        <h3 class="user-info__key">${sessionScope.user.email}</h3>
+                    </c:if>
+                    <c:if test="${!sessionScope.user.emailConfirmed}">
+                        <h3 class="user-info__key"><fmt:message key="email"/></h3>
                     </c:if>
                 </div>
                 <div class="col-sm">
@@ -55,6 +57,12 @@
                     </c:if>
                     <c:if test="${sessionScope.user.status.toString() != \"ACTIVE\"}">
                         <h3 class="user-info__value red">${sessionScope.user.status.toString()}</h3>
+                    </c:if>
+                    <c:if test="${sessionScope.user.emailConfirmed}">
+                        <h3 class="user-info__value green">${sessionScope.user.email}</h3>
+                    </c:if>
+                    <c:if test="${!sessionScope.user.emailConfirmed}">
+                        <h3 class="user-info__value red"><fmt:message key="email.notConfirmed"/></h3>
                     </c:if>
                 </div>
             </div>
