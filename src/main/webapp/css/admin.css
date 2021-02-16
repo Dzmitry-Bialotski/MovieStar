@@ -225,3 +225,9 @@ table.table .avatar {
 .nav-link{
     font-size: 20px;
 }
+.movie-form{
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}

@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+    <title>Admin</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -16,35 +16,10 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            // Activate tooltip
-            $('[data-toggle="tooltip"]').tooltip();
-
-            // Select/Deselect checkboxes
-            var checkbox = $('table tbody input[type="checkbox"]');
-            $("#selectAll").click(function(){
-                if(this.checked){
-                    checkbox.each(function(){
-                        this.checked = true;
-                    });
-                } else{
-                    checkbox.each(function(){
-                        this.checked = false;
-                    });
-                }
-            });
-            checkbox.click(function(){
-                if(!this.checked){
-                    $("#selectAll").prop("checked", false);
-                }
-            });
-        });
-    </script>
 </head>
 <body>
-<div class="container-xl">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
         <span class="navbar-brand">MovieStar</span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -71,7 +46,9 @@
             </ul>
             <a class="nav-link text-light" href="${pageContext.request.contextPath}/home.do">Back to MovieStar</a>
         </div>
-    </nav>
+    </div>
+</nav>
+<div class="container">
     <div align="center" style="font-size: 30px;" class="m-4">
         That is Admin panel. Choose what entity you would like to change in navbar "Manage" </div>
 </div>

@@ -33,4 +33,5 @@ public final class RequestParameterName {
     public static final String IMAGE_PATH = "image_path";
     public static final String MOVIE_ID = "movieId";
     public static final String REVIEW_ID = "reviewId";
+    public static final String MOVIE = "movie";
 }

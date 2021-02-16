@@ -3,3 +3,4 @@
 
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico"/>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/movie.css">

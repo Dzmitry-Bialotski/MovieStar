@@ -1,0 +1,36 @@
+.movie-item{
+    max-width: 250px;
+}
+
+.movie-list{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1050px;
+}
+.movie-item a {
+    color: #FFF !important;
+    text-decoration: none
+}
+
+.youtube-trailer{
+    width: 560px;
+    height: 315px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.movie-overview{
+    max-width: 800px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.movie-description{
+    max-width: 800px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.movie-section{
+    width: 850px;
+    margin-right: auto;
+    margin-left: auto;
+}

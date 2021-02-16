@@ -5,24 +5,25 @@
 <fmt:setLocale value="${sessionScope.currentLocale}"/>
 <fmt:setBundle basename="language"/>
 <tags:general title="movie">
-    <div class="section text-light m-1 p-2">
-        imagePath;
-        title;
-        country;
-        year;
-        genre;
-        movieType;
-        ageCategory;
-        shortDescription;
-        description;
-        youtubeTrailer;
-
-            Trailer
-        <iframe align="center" class="m-2" width="560" height="315" frameborder="0"
-                src="https://www.youtube.com/embed/-El5Sb_EaIc"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-        </iframe>
+    <div class="section">
+        <div class="movie-list text-light p-2 row">
+            <c:forEach var="movie" items="${requestScope.movies}">
+                <div class="movie-item m-1 p-1 col-sm">
+                    <div class="movie-item__image-container">
+                        <a href="${pageContext.request.contextPath}/movie.do?movieId=${movie.id}">
+                            <img class="movie-item__image" src="${movie.imagePath}">
+                        </a>
+                    </div>
+                    <div class="movie-item__info">
+                        <a href="${pageContext.request.contextPath}/movie.do?movieId=${movie.id}">
+                            <h2>${movie.title}</h2>
+                            <h6>${movie.country}, ${movie.year}, ${movie.ageCategory}+</h6>
+                            <h6>${movie.movieType.toString()}, ${movie.genre.toString()}</h6>
+                        </a>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
     </div>
 
 </tags:general>

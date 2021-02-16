@@ -18,8 +18,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="container-xl">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
         <span class="navbar-brand">MovieStar</span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -46,7 +46,9 @@
             </ul>
             <a class="nav-link text-light" href="${pageContext.request.contextPath}/home.do">Back to MovieStar</a>
         </div>
-    </nav>
+    </div>
+</nav>
+<div class="container">
     <div class="table-responsive">
         <div class="table-wrapper">
             <div class="table-title">

@@ -38,8 +38,10 @@ public class FileUploadServlet extends HttpServlet {
                 String realFilename = UUID.randomUUID()+ filename;
                 String upload_path = AVATAR_UPLOAD_DIRECTORY + File.separator + realFilename;
                 String relative_path = RELATIVE_AVATAR_PATH + File.separator + realFilename;
-                InputStream inputStream = part.getInputStream();
-                boolean isSuccess = uploadFile(inputStream, upload_path);
+                boolean isSuccess;
+                try(InputStream inputStream = part.getInputStream()){
+                    isSuccess = uploadFile(inputStream, upload_path);
+                }
                 if(isSuccess){
                     HttpSession session = request.getSession();
                     User user = (User)session.getAttribute(SessionAttributeName.USER);
@@ -49,7 +51,6 @@ public class FileUploadServlet extends HttpServlet {
                     }catch (Exception e){
                         throw new ServletException(e);
                     }
-
                 }
             }
         }
@@ -63,10 +64,9 @@ public class FileUploadServlet extends HttpServlet {
         try {
             byte[] bytes = new byte[inputStream.available()];
             inputStream.read(bytes);
-            FileOutputStream fops = new FileOutputStream(path);
-            fops.write(bytes);
-            fops.flush();
-            fops.close();
+            try(FileOutputStream fops = new FileOutputStream(path)){
+                fops.write(bytes);
+            }
         }catch (IOException e) {
             throw new ServletException(e);
         }

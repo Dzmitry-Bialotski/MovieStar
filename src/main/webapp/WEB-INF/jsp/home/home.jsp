@@ -14,7 +14,7 @@
             Once you registered and logged in, you are <span class="yellow">SPECTATOR</span>, and you can edit your profile,
             place avatar, place your own rating to movie, or confirm email to become <span class="yellow">REVIEWER</span> .
             Once you did it, you gain the ability to review movies!! To become the <span class="yellow">ADMINISTRATOR</span>
-            you have to write one your own to owner of that web site. Keep in mind
+            you have to write on your own to the owner of that web site. Keep in mind
             that <span class="yellow">ADMINISTRATOR</span> can block any user or any review, if the last is not appropriate.
             Be polite and respect the rules of propriety!</p>
         </h3>
