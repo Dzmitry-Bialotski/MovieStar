@@ -18,6 +18,8 @@ public final class RequestParameterName {
     public static final String SECOND_NAME = "second_name";
     public static final String PAGE = "page";
     public static final String MOVIES = "movies";
+    public static final String USERS = "users";
+    public static final String REVIEWS = "reviews";
     public static final String TOKEN = "token";
     public static final String USER_ID = "userId";
     public static final String TITLE = "title";
@@ -26,9 +28,9 @@ public final class RequestParameterName {
     public static final String GENRE = "genre";
     public static final String MOVIE_TYPE = "movie_type";
     public static final String AGE_CATEGORY = "age_category";
-    public static final String SHORT_DESCRIPTION = "short_description";
     public static final String DESCRIPTION = "description";
     public static final String YOUTUBE_TRAILER = "youtube_trailer";
     public static final String IMAGE_PATH = "image_path";
-    public static final String MOVIE_ID = "movie_id";
+    public static final String MOVIE_ID = "movieId";
+    public static final String REVIEW_ID = "reviewId";
 }

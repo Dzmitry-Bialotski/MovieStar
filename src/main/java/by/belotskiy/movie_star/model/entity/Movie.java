@@ -14,20 +14,18 @@ public class Movie extends BaseEntity implements Serializable {
     private Genre genre;
     private MovieType movieType;
     private int ageCategory;
-    private String shortDescription;
     private String description;
     private String youtubeTrailer;
     private String imagePath;
 
     public Movie(String title, String country, int year, Genre genre, MovieType movieType, int ageCategory,
-                 String shortDescription, String description, String youtubeTrailer, Status status, String imagePath) {
+                 String description, String youtubeTrailer, Status status, String imagePath) {
         this.title = title;
         this.country = country;
         this.year = year;
         this.genre = genre;
         this.movieType = movieType;
         this.ageCategory = ageCategory;
-        this.shortDescription = shortDescription;
         this.description = description;
         this.youtubeTrailer = youtubeTrailer;
         this.imagePath = imagePath;
@@ -35,7 +33,7 @@ public class Movie extends BaseEntity implements Serializable {
     }
 
     public Movie(int id, String title, String country, int year, Genre genre, MovieType movieType, int ageCategory,
-                 String shortDescription, String description, String youtubeTrailer, Status status, String imagePath) {
+                 String description, String youtubeTrailer, Status status, String imagePath) {
         super(id);
         this.title = title;
         this.country = country;
@@ -43,7 +41,6 @@ public class Movie extends BaseEntity implements Serializable {
         this.genre = genre;
         this.movieType = movieType;
         this.ageCategory = ageCategory;
-        this.shortDescription = shortDescription;
         this.description = description;
         this.youtubeTrailer = youtubeTrailer;
         this.imagePath = imagePath;
@@ -90,14 +87,6 @@ public class Movie extends BaseEntity implements Serializable {
         this.ageCategory = ageCategory;
     }
 
-    public String getShortDescription() {
-        return shortDescription;
-    }
-
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -137,7 +126,6 @@ public class Movie extends BaseEntity implements Serializable {
                 && Objects.equals(getTitle(), movie.getTitle())
                 && Objects.equals(getCountry(), movie.getCountry())
                 && getGenre() == movie.getGenre()
-                && Objects.equals(getShortDescription(), movie.getShortDescription())
                 && Objects.equals(getDescription(), movie.getDescription())
                 && Objects.equals(getYoutubeTrailer(), movie.getYoutubeTrailer());
     }
@@ -149,7 +137,6 @@ public class Movie extends BaseEntity implements Serializable {
         result = 31 * result + getYear() ^ (getYear() >>> 32);
         result = 31 * result + (getGenre() != null ? getGenre().hashCode() : 0);
         result = 31 * result  + getAgeCategory() ^ (getAgeCategory() >>> 32);
-        result = 31 * result + (getShortDescription() != null ? getShortDescription().hashCode() : 0);
         result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
         result = 31 * result + (getYoutubeTrailer() != null ? getYoutubeTrailer().hashCode() : 0);
         result = 31 * result + (getStatus() != null ? getStatus().hashCode() : 0);
@@ -165,8 +152,6 @@ public class Movie extends BaseEntity implements Serializable {
                 .append(", genre=").append(genre)
                 .append(", movieType=").append(movieType)
                 .append(", ageCategory=").append(ageCategory)
-                .append(", shortDescription='").append(shortDescription).append('\'')
-                .append(", description='").append(description).append('\'')
                 .append(", youtubeTrailer='").append(youtubeTrailer).append('\'')
                 .append(", imagePath='").append(imagePath).append('\'')
                 .append('}').toString();

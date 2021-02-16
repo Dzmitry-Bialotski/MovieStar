@@ -24,6 +24,16 @@ public enum CommandType {
 
     USER_BLOCK(new UserBlockCommand()),
 
+    USER_UNBLOCK(new UserUnblockCommand()),
+
+    MOVIE_BLOCK(new MovieBlockCommand()),
+
+    MOVIE_UNBLOCK(new MovieUnblockCommand()),
+
+    REVIEW_BLOCK(new ReviewBlockCommand()),
+
+    REVIEW_UNBLOCK(new ReviewUnblockCommand()),
+
     MOVIE_DELETE(new MovieDeleteCommand()),
 
     MOVIE_ADD(new MovieAddCommand()),

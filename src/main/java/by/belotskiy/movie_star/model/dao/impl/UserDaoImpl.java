@@ -50,7 +50,6 @@ public class UserDaoImpl implements UserDao {
         String query = "";
         try {
             connection = DynamicConnectionPool.getInstance().provideConnection();
-            connection.setAutoCommit(false);
             query = DaoUtil.createQueryWithCriteria(UserQuery.FIND_ALL_USER_QUERY, criteria);
             statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
@@ -87,11 +86,10 @@ public class UserDaoImpl implements UserDao {
         String query = "";
         try {
             connection = DynamicConnectionPool.getInstance().provideConnection();
-            connection.setAutoCommit(false);
             query = UserQuery.FIND_USER_WITH_LIMITS_QUERY;
+            statement = connection.prepareStatement(query);
             statement.setInt(1, limit);
             statement.setInt(2, offset);
-            statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
             while (resultSet.next()){
                 int userId = resultSet.getInt(1);
@@ -122,10 +120,8 @@ public class UserDaoImpl implements UserDao {
         User user = (User)entity;
         Connection connection = null;
         PreparedStatement statement = null;
-        String query = "";
         try {
             connection = DynamicConnectionPool.getInstance().provideConnection();
-            connection.setAutoCommit(false);
             statement = connection.prepareStatement(UserQuery.INSERT_USER_QUERY);
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getEmail());
@@ -139,7 +135,7 @@ public class UserDaoImpl implements UserDao {
             statement.setString(10, user.getStatus().toString());
             statement.executeUpdate();
         } catch (SQLException  e) {
-            throw new DaoException("Error executing query " + query, e);
+            throw new DaoException("Error executing query ", e);
         } finally {
             DaoUtil.releaseResources(connection, statement);
         }
@@ -149,12 +145,9 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean update(BaseEntity entity) throws DaoException {
         User user = (User)entity;
-        Connection connection = null;
         PreparedStatement statement = null;
-        String query = "";
+        Connection connection = DynamicConnectionPool.getInstance().provideConnection();
         try {
-            connection = DynamicConnectionPool.getInstance().provideConnection();
-            connection.setAutoCommit(false);
             statement = connection.prepareStatement(UserQuery.UPDATE_USER_QUERY);
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getEmail());
@@ -169,7 +162,7 @@ public class UserDaoImpl implements UserDao {
             statement.setInt(11, user.getId());
             statement.executeUpdate();
         } catch (SQLException  e) {
-            throw new DaoException("Error executing query " + query, e);
+            throw new DaoException("Error executing query ", e);
         } finally {
             DaoUtil.releaseResources(connection, statement);
         }
@@ -202,7 +195,6 @@ public class UserDaoImpl implements UserDao {
         String query = "";
         try {
             connection = DynamicConnectionPool.getInstance().provideConnection();
-            connection.setAutoCommit(false);
             statement = connection.prepareStatement(UserQuery.FIND_COUNT_OF_USERS_QUERY);
             resultSet = statement.executeQuery();
             resultSet.next();

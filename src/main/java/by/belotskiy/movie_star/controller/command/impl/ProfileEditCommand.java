@@ -8,15 +8,16 @@ import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.exception.CommandException;
 import by.belotskiy.movie_star.exception.ServiceException;
 import by.belotskiy.movie_star.model.entity.User;
-import by.belotskiy.movie_star.service.UserService;
-import by.belotskiy.movie_star.service.impl.UserServiceImpl;
+import by.belotskiy.movie_star.model.service.UserService;
+import by.belotskiy.movie_star.model.service.factory.ServiceFactory;
+import by.belotskiy.movie_star.model.service.impl.UserServiceImpl;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class ProfileEditCommand implements ActionCommand {
 
-    private final UserService userService = UserServiceImpl.getInstance();
+    private final UserService userService = ServiceFactory.getInstance().getUserService();
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {

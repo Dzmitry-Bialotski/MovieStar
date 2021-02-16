@@ -3,7 +3,8 @@ package by.belotskiy.movie_star.controller;
 import by.belotskiy.movie_star.controller.attribute.SessionAttributeName;
 import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.model.entity.User;
-import by.belotskiy.movie_star.service.impl.UserServiceImpl;
+import by.belotskiy.movie_star.model.service.factory.ServiceFactory;
+import by.belotskiy.movie_star.model.service.impl.UserServiceImpl;
 import by.belotskiy.movie_star.util.ImageValidator;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import javax.servlet.ServletException;
@@ -44,7 +45,7 @@ public class FileUploadServlet extends HttpServlet {
                     User user = (User)session.getAttribute(SessionAttributeName.USER);
                     user.setAvatar_path(relative_path);
                     try{
-                        UserServiceImpl.getInstance().updateUser(user);
+                        ServiceFactory.getInstance().getUserService().updateUser(user);
                     }catch (Exception e){
                         throw new ServletException(e);
                     }

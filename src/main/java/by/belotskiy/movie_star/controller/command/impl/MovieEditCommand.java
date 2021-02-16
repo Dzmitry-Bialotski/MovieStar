@@ -5,14 +5,16 @@ import by.belotskiy.movie_star.controller.command.ActionCommand;
 import by.belotskiy.movie_star.controller.command.CommandResult;
 import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.exception.CommandException;
-import by.belotskiy.movie_star.service.MovieService;
-import by.belotskiy.movie_star.service.impl.MovieServiceImpl;
+import by.belotskiy.movie_star.model.service.MovieService;
+import by.belotskiy.movie_star.model.service.factory.ServiceFactory;
+import by.belotskiy.movie_star.model.service.impl.MovieServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class MovieEditCommand implements ActionCommand {
-    private MovieService movieService = MovieServiceImpl.getInstance();
+    private final MovieService movieService = ServiceFactory.getInstance().getMovieService();
+
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {

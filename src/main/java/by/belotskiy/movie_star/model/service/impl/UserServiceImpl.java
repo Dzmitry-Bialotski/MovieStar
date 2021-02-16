@@ -1,4 +1,4 @@
-package by.belotskiy.movie_star.service.impl;
+package by.belotskiy.movie_star.model.service.impl;
 
 import by.belotskiy.movie_star.exception.DaoException;
 import by.belotskiy.movie_star.model.creator.UserCreator;
@@ -6,26 +6,17 @@ import by.belotskiy.movie_star.model.dao.UserDao;
 import by.belotskiy.movie_star.model.dao.factory.DaoFactory;
 import by.belotskiy.movie_star.model.entity.User;
 import by.belotskiy.movie_star.model.entity.enums.Role;
-import by.belotskiy.movie_star.service.UserService;
+import by.belotskiy.movie_star.model.service.UserService;
 import by.belotskiy.movie_star.exception.ServiceException;
 import by.belotskiy.movie_star.util.MailSender;
 import by.belotskiy.movie_star.util.PasswordEncryptor;
 import by.belotskiy.movie_star.util.impl.GmailSender;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
-    private static UserServiceImpl userServiceInstance;
-
-    private UserServiceImpl(){ }
-
-    public static UserServiceImpl getInstance(){
-        if(userServiceInstance == null){
-            userServiceInstance = new UserServiceImpl();
-        }
-        return userServiceInstance;
-    }
 
     private final UserDao userDao = DaoFactory.getInstance().getUserDao();
 
@@ -132,5 +123,16 @@ public class UserServiceImpl implements UserService {
             return Optional.of(user);
         }
         return Optional.empty();
+    }
+
+    @Override
+    public List<User> findALlUsers() throws ServiceException {
+        List<User> users;
+        try {
+            users = userDao.findAll();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return users;
     }
 }

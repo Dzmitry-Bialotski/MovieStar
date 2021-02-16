@@ -9,25 +9,33 @@ public class Review extends BaseEntity implements Serializable {
     private String userLogin;
     private String userAvatarPath;
     private String text;
+    private String movieTitle;
+    private int userId;
+    private int movieId;
     private int likesNumber;
 
     public Review(String userLogin, String userAvatarPath, String text,
-                  int likesNumber, Status status) {
+                  int likesNumber, Status status, int userId, int movieId) {
         this.userLogin = userLogin;
         this.userAvatarPath = userAvatarPath;
         this.text = text;
         this.likesNumber = likesNumber;
         this.setStatus(status);
+        this.userId = userId;
+        this.movieId = movieId;
     }
 
     public Review(int id, String userLogin, String userAvatarPath, String text,
-                  int likesNumber, Status status) {
+                  int likesNumber, Status status, String movieTitle, int userId, int movieId) {
         super(id);
         this.userLogin = userLogin;
         this.userAvatarPath = userAvatarPath;
         this.text = text;
         this.likesNumber = likesNumber;
+        this.movieTitle = movieTitle;
         this.setStatus(status);
+        this.userId = userId;
+        this.movieId = movieId;
     }
 
     public String getUserLogin() {
@@ -62,6 +70,14 @@ public class Review extends BaseEntity implements Serializable {
         this.likesNumber = likesNumber;
     }
 
+    public String getMovieTitle() {
+        return movieTitle;
+    }
+
+    public void setMovieTitle(String movieTitle) {
+        this.movieTitle = movieTitle;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -92,5 +108,21 @@ public class Review extends BaseEntity implements Serializable {
         sb.append(", likesNumber=").append(likesNumber);
         sb.append('}');
         return sb.toString();
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(int movieId) {
+        this.movieId = movieId;
     }
 }

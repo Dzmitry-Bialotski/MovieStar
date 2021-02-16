@@ -1,9 +1,9 @@
-package by.belotskiy.movie_star.service;
+package by.belotskiy.movie_star.model.service;
 
 import by.belotskiy.movie_star.model.entity.User;
 import by.belotskiy.movie_star.exception.ServiceException;
 
-import java.util.Map;
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
@@ -13,4 +13,5 @@ public interface UserService {
     Optional<User> findUserWithCookies(String login, String userHash) throws ServiceException;
     boolean updateUser(User user) throws ServiceException;
     Optional<User> confirmEmail(int userId, String token) throws ServiceException;
+    List<User> findALlUsers() throws ServiceException;
 }

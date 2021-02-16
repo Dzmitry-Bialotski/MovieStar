@@ -18,6 +18,12 @@ public class UrlPath {
     public static final String ADMIN_USERS = "/admin/users";
     public static final String MOVIE_ADD = "/admin/movie/add";
     public static final String MOVIE_EDIT = "/admin/movie/edit";
+    public static final String ADMIN_DO = "/admin.do";
+    public static final String ADMIN_USERS_DO = "/admin_users.do";
+    public static final String ADMIN_MOVIES_DO = "/admin_movies.do";
+    public static final String ADMIN_REVIEWS_DO = "/admin_reviews.do";
+
+
 
 
 

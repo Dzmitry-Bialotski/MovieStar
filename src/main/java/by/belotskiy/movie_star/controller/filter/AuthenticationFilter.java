@@ -5,8 +5,9 @@ import by.belotskiy.movie_star.controller.attribute.SessionAttributeName;
 import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.exception.ServiceException;
 import by.belotskiy.movie_star.model.entity.User;
-import by.belotskiy.movie_star.service.UserService;
-import by.belotskiy.movie_star.service.impl.UserServiceImpl;
+import by.belotskiy.movie_star.model.service.UserService;
+import by.belotskiy.movie_star.model.service.factory.ServiceFactory;
+import by.belotskiy.movie_star.model.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,7 +23,7 @@ import java.util.Optional;
 public class AuthenticationFilter implements Filter {
 
     private static final Logger LOGGER = LogManager.getLogger(AuthenticationFilter.class);
-    private final UserService userService = UserServiceImpl.getInstance();
+    private final UserService userService = ServiceFactory.getInstance().getUserService();
 
     @Override
     public void init(FilterConfig filterConfig) {

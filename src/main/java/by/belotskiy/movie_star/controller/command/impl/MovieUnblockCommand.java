@@ -7,25 +7,36 @@ import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.exception.CommandException;
 import by.belotskiy.movie_star.exception.ServiceException;
 import by.belotskiy.movie_star.model.entity.Movie;
+import by.belotskiy.movie_star.model.entity.enums.Status;
 import by.belotskiy.movie_star.model.service.MovieService;
 import by.belotskiy.movie_star.model.service.factory.ServiceFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
+import java.util.Optional;
 
-public class AdminMoviesCommand implements ActionCommand {
+public class MovieUnblockCommand implements ActionCommand {
 
     private final MovieService movieService = ServiceFactory.getInstance().getMovieService();
+
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
-        List<Movie> movies;
-        try {
-            movies = movieService.findALlMovies();
-        } catch (ServiceException e) {
-            throw new CommandException(e);
+        int movieId = Integer.parseInt(request.getParameter(RequestParameterName.MOVIE_ID));
+        Optional<Movie> optionalMovie;
+        try{
+            optionalMovie = movieService.findMovie(movieId);
+        }catch (ServiceException e) {
+            throw new CommandException("could n`t find movie with such id", e);
         }
-        request.setAttribute(RequestParameterName.MOVIES, movies);
-        return new CommandResult(UrlPath.ADMIN_MOVIES, CommandResult.Type.FORWARD);
+        if (optionalMovie.isPresent()) {
+            Movie movie = optionalMovie.get();
+            movie.setStatus(Status.ACTIVE);
+            try{
+                movieService.updateMovie(movie);
+            }catch (ServiceException e) {
+                throw new CommandException("could n`t update movie", e);
+            }
+        }
+        return new CommandResult(UrlPath.ADMIN_MOVIES_DO, CommandResult.Type.REDIRECT);
     }
 }
