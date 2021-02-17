@@ -39,6 +39,6 @@ public class ReviewBlockCommand implements ActionCommand {
                 throw new CommandException("could n`t update review", e);
             }
         }
-        return new CommandResult(UrlPath.ADMIN_MOVIES_DO, CommandResult.Type.REDIRECT);
+        return new CommandResult(UrlPath.ADMIN_REVIEWS_DO, CommandResult.Type.REDIRECT);
     }
 }

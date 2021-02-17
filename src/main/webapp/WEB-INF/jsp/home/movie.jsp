@@ -22,29 +22,43 @@
             </div>
             <div class="movie-description my-1">
                 <h1 align="center">Описание</h1>
-                <h5>${movie.description}</h5>
+                <h5 align="justify">${movie.description}</h5>
             </div>
             <h1 align="center">*Здесь будет звездночный рейтинг*</h1>
+
+            <h2 align="center">*Reviews*</h2>
             <div class="review-section">
                 <c:forEach var="review" items="${requestScope.movie.reviews}">
-                    <div class="review-container">
+                    <div class="review-container my-2 p-2">
                         <div class="review-user-info row">
-                            <div class="review-user-img-container col-sm-2 m-1">
+                            <div class="review-user-img-container col-sm-2 my-1 ml-3">
                                 <c:if test="${not empty review.userAvatarPath }">
-                                    <img class="avatar-small avatar-round mr-1"
+                                    <img class="avatar-medium avatar-round mr-1"
                                          src="${pageContext.request.contextPath}${review.userAvatarPath}" >
                                 </c:if>
                                 <c:if test="${empty review.userAvatarPath}">
-                                    <img class="avatar-small avatar-round mr-1"
+                                    <img class="avatar-medium avatar-round mr-1"
                                          src="${pageContext.request.contextPath}${sessionScope.defaultAvatarPath}" >
                                 </c:if>
                             </div>
-                            <div class="review-user-login col-sm-2 m-1">
+                            <div class="review-user-login col-sm-6 m-1">
                                 <h2> ${review.userLogin}</h2>
                             </div>
+                            <div class="review-user-like col-sm-1 mt-3">
+                                <button class="btn btn-success like-btn">
+                                    <i class="far fa-thumbs-up like"></i>
+                                    <div class="likes-num"> 0 </div>
+                                </button>
+                            </div>
+                            <div class="review-user-like col-sm-1 mt-3 dislike">
+                                <button class="btn btn-danger like-btn">
+                                    <i class="far fa-thumbs-down like"></i>
+                                    <div class="likes-num"> 0 </div>
+                                </button>
+                            </div>
                         </div>
-                        <div class="review-text">
-                            <h1> ${review.text}</h1>
+                        <div class="review-text my-2">
+                            <p><h4> ${review.text}</h4></p>
                         </div>
                     </div>
                 </c:forEach>

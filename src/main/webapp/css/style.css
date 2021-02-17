@@ -9,7 +9,6 @@
 
 .login_body{
     background-size: cover;
-    /*background-repeat: no-repeat;*/
     height: 81%;
     font-family: 'Numans', sans-serif;
     background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("https://wallpaperaccess.com/full/329583.jpg") fixed;

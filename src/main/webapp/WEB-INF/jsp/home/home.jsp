@@ -7,7 +7,7 @@
 <tags:general title="home">
     <div class="section text-light m-1 p-2">
         <h1 align="center">Welcome to MovieStar</h1>
-        <h4>
+        <h4 align="justify">
             <p>Here is some rules you have to know about that site.
             If you are here at the first time, and you haven`t already registered/login,
             you are <span class="yellow">GUEST</span>. That means that you can only watch information about different movies.

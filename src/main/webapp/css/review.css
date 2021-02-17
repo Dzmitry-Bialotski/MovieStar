@@ -1,0 +1,30 @@
+.review-container {
+    width: 700px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: rgba(0,0,0,0.6) !important;
+    border-radius: 5px; /* Радиус скругления */
+    border: 1px solid white; /* Параметры рамки */
+    box-shadow: 0 0 7px #666; /* Параметры тени */
+}
+.avatar-medium{
+    width: 80px;
+    height: auto;
+    margin: auto;
+}
+.like{
+    font-size: 30px;
+    float: left;
+    margin-right: 10px;
+    margin-top: 3px;
+}
+.likes-num{
+    font-size: 30px;
+}
+.like-btn{
+    width: 80px;
+    height: 50px;
+}
+.dislike{
+    margin-left: 33px;
+}
