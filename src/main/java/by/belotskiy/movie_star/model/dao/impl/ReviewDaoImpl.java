@@ -17,7 +17,7 @@ import java.util.*;
 public class ReviewDaoImpl implements ReviewDao {
 
     private static final String REVIEW_ID = "review_id";
-
+    private static final String MOVIE_ID = "movie_id";
     @Override
     public List<Review> findALl() throws DaoException {
         return findAllByCriteria(new HashMap<>());
@@ -59,7 +59,7 @@ public class ReviewDaoImpl implements ReviewDao {
     public Optional<Review> findById(int reviewId) throws DaoException {
         Optional<Review> optionalReview = Optional.empty();
         Map<String, String> criteria = new HashMap<>();
-        criteria.put(REVIEW_ID, Long.toString(reviewId));
+        criteria.put(REVIEW_ID, Integer.toString(reviewId));
         List<Review> reviews = findAllByCriteria(criteria);
         if (reviews.size() > 0) {
             optionalReview = Optional.of(reviews.get(0));
@@ -106,5 +106,39 @@ public class ReviewDaoImpl implements ReviewDao {
             DaoUtil.releaseResources(connection, statement);
         }
         return true;
+    }
+
+    @Override
+    public List<Review> findAllByMovieId(int movieId) throws DaoException {
+        List<Review> reviews = new ArrayList<>();
+        PreparedStatement statement = null;
+        Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        ResultSet resultSet = null;
+        String query = "";
+        try{
+            connection = DynamicConnectionPool.getInstance().provideConnection();
+            query = ReviewQuery.FIND_BY_MOVIE_ID;
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, movieId);
+            resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                int reviewId = resultSet.getInt(1);
+                String text = resultSet.getString(2);
+                String userLogin = resultSet.getString(3);
+                String movieTitle = resultSet.getString(4);
+                Status status = Status.valueOf(resultSet.getString(5));
+                int userId = resultSet.getInt(6);
+                movieId = resultSet.getInt(7);
+                String avatar_path = resultSet.getString(8);
+                Review review = new Review(reviewId, userLogin, avatar_path,text,
+                        0, status, movieTitle,userId,movieId);
+                reviews.add(review);
+            }
+        }catch (SQLException  e) {
+            throw new DaoException("Error executing query " + query, e);
+        } finally {
+            DaoUtil.releaseResources(connection, statement);
+        }
+        return reviews;
     }
 }

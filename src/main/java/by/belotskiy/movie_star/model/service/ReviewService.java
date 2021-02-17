@@ -10,7 +10,11 @@ public interface ReviewService {
 
     List<Review> findReviewsForAdmin() throws ServiceException;
 
+    List<Review> findAllReviewsByMovieId(int movieId) throws ServiceException;
+
     Optional<Review> findReview(int reviewId) throws ServiceException;
 
     boolean updateReview(Review review) throws ServiceException;
+
+    boolean addReview(Review review) throws ServiceException;
 }

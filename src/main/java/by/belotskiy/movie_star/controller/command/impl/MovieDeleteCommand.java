@@ -19,12 +19,12 @@ public class MovieDeleteCommand implements ActionCommand {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
-        int movieId = (int) request.getAttribute(RequestParameterName.MOVIE_ID);
+        int movieId = Integer.parseInt(request.getParameter(RequestParameterName.MOVIE_ID));
         try {
             movieService.deleteMovie(movieId);
         } catch (ServiceException e) {
             throw new CommandException(e);
         }
-        return new CommandResult(UrlPath.ADMIN_MOVIES_DO, CommandResult.Type.FORWARD);
+        return new CommandResult(UrlPath.ADMIN_MOVIES_DO, CommandResult.Type.REDIRECT);
     }
 }

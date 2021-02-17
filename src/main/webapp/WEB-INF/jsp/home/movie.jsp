@@ -25,6 +25,30 @@
                 <h5>${movie.description}</h5>
             </div>
             <h1 align="center">*Здесь будет звездночный рейтинг*</h1>
+            <div class="review-section">
+                <c:forEach var="review" items="${requestScope.movie.reviews}">
+                    <div class="review-container">
+                        <div class="review-user-info row">
+                            <div class="review-user-img-container col-sm-2 m-1">
+                                <c:if test="${not empty review.userAvatarPath }">
+                                    <img class="avatar-small avatar-round mr-1"
+                                         src="${pageContext.request.contextPath}${review.userAvatarPath}" >
+                                </c:if>
+                                <c:if test="${empty review.userAvatarPath}">
+                                    <img class="avatar-small avatar-round mr-1"
+                                         src="${pageContext.request.contextPath}${sessionScope.defaultAvatarPath}" >
+                                </c:if>
+                            </div>
+                            <div class="review-user-login col-sm-2 m-1">
+                                <h2> ${review.userLogin}</h2>
+                            </div>
+                        </div>
+                        <div class="review-text">
+                            <h1> ${review.text}</h1>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
         </div>
     </div>
 

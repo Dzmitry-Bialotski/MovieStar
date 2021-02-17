@@ -5,6 +5,8 @@ import by.belotskiy.movie_star.model.entity.enums.MovieType;
 import by.belotskiy.movie_star.model.entity.enums.Status;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Movie extends BaseEntity implements Serializable {
@@ -17,6 +19,16 @@ public class Movie extends BaseEntity implements Serializable {
     private String description;
     private String youtubeTrailer;
     private String imagePath;
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    private List<Review> reviews = new ArrayList<>();
 
     public Movie(String title, String country, int year, Genre genre, MovieType movieType, int ageCategory,
                  String description, String youtubeTrailer, Status status, String imagePath) {

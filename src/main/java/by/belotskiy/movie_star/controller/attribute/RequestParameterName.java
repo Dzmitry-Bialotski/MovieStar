@@ -34,4 +34,5 @@ public final class RequestParameterName {
     public static final String MOVIE_ID = "movieId";
     public static final String REVIEW_ID = "reviewId";
     public static final String MOVIE = "movie";
+    public static final String TEXT = "text";
 }

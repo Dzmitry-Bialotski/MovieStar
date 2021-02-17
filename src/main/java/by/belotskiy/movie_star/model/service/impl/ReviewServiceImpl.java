@@ -27,6 +27,17 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    public List<Review> findAllReviewsByMovieId(int movieId) throws ServiceException {
+        List<Review> reviews;
+        try {
+            reviews = reviewDao.findAllByMovieId(movieId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return reviews;
+    }
+
+    @Override
     public Optional<Review> findReview(int reviewId) throws ServiceException {
         Optional<Review> optionalReview;
         try {
@@ -42,6 +53,17 @@ public class ReviewServiceImpl implements ReviewService {
         boolean result;
         try{
             result = reviewDao.update(review);
+        }catch (DaoException e){
+            throw new ServiceException(e);
+        }
+        return result;
+    }
+
+    @Override
+    public boolean addReview(Review review) throws ServiceException {
+        boolean result;
+        try{
+            result = reviewDao.save(review);
         }catch (DaoException e){
             throw new ServiceException(e);
         }
