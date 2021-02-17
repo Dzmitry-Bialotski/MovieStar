@@ -9,9 +9,9 @@ import by.belotskiy.movie_star.exception.ServiceException;
 import by.belotskiy.movie_star.model.entity.Movie;
 import by.belotskiy.movie_star.model.entity.enums.Genre;
 import by.belotskiy.movie_star.model.entity.enums.MovieType;
-import by.belotskiy.movie_star.model.entity.enums.Status;
 import by.belotskiy.movie_star.model.service.MovieService;
 import by.belotskiy.movie_star.model.service.factory.ServiceFactory;
+import by.belotskiy.movie_star.model.validator.MovieValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,10 +49,13 @@ public class MovieEditCommand implements ActionCommand {
                 movie.setDescription(request.getParameter(RequestParameterName.DESCRIPTION));
                 movie.setYoutubeTrailer(request.getParameter(RequestParameterName.YOUTUBE_TRAILER));
                 movie.setImagePath(request.getParameter(RequestParameterName.IMAGE_PATH));
-                try {
-                    movieService.updateMovie(movie);
-                } catch (ServiceException e) {
-                    throw new CommandException(e);
+                boolean isValid = MovieValidator.validateMovie(movie);
+                if(isValid){
+                    try {
+                        movieService.updateMovie(movie);
+                    } catch (ServiceException e) {
+                        throw new CommandException(e);
+                    }
                 }
                 return new CommandResult(UrlPath.ADMIN_MOVIES_DO, CommandResult.Type.REDIRECT);
             }

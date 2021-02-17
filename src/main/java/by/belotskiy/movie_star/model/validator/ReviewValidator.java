@@ -6,7 +6,10 @@ public class ReviewValidator {
 
     private ReviewValidator(){}
 
-    public static boolean validateReview(Review review){
-        return false;
+    public static boolean validateReview(Review review) {
+        if (review.getText().length() > 3000) {
+            return false;
+        }
+        return true;
     }
 }

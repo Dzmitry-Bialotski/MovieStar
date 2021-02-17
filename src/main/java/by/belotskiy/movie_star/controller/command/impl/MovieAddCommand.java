@@ -12,6 +12,7 @@ import by.belotskiy.movie_star.model.entity.enums.MovieType;
 import by.belotskiy.movie_star.model.entity.enums.Status;
 import by.belotskiy.movie_star.model.service.MovieService;
 import by.belotskiy.movie_star.model.service.factory.ServiceFactory;
+import by.belotskiy.movie_star.model.validator.MovieValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,10 +32,15 @@ public class MovieAddCommand implements ActionCommand {
         String imagePath = request.getParameter(RequestParameterName.IMAGE_PATH);
         Movie movie = new Movie(title, country, year, genre, movieType, ageCategory,
                 description, youtubeTrailer, Status.ACTIVE, imagePath);
-        try {
-            movieService.addMovie(movie);
-        } catch (ServiceException e) {
-            throw new CommandException(e);
+
+        boolean isValid = MovieValidator.validateMovie(movie);
+        if(isValid){
+            try {
+                movieService.addMovie(movie);
+            } catch (ServiceException e) {
+                throw new CommandException(e);
+            }
+            return new CommandResult(UrlPath.ADMIN_MOVIES_DO, CommandResult.Type.REDIRECT);
         }
         return new CommandResult(UrlPath.ADMIN_MOVIES_DO, CommandResult.Type.REDIRECT);
     }
