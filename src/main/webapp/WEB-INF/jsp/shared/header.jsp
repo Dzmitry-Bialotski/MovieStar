@@ -26,11 +26,11 @@
                         <i class="fa fa-globe" aria-hidden="true"></i> <fmt:message key="language" />
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdown07">
-                        <a class="dropdown-item" href="change_locale_command.do?currentLocale=ru&returnUrl=${pageContext.request.requestURL}">
+                        <a class="dropdown-item" href="change_locale_command.do?currentLocale=ru">
                             <img class="flag_img" src="${pageContext.request.contextPath}/img/flag/ru.png">
                             <fmt:message key="ru" />
                         </a>
-                        <a class="dropdown-item" href="change_locale_command.do?currentLocale=en&returnUrl=${pageContext.request.requestURL}">
+                        <a class="dropdown-item" href="change_locale_command.do?currentLocale=en">
                             <img class="flag_img" src="${pageContext.request.contextPath}/img/flag/en.png" >
                             <fmt:message key="en" />
                         </a>

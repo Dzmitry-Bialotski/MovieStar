@@ -63,12 +63,7 @@ public class LoginCommand implements ActionCommand {
                 response.addCookie(hashCookie);
                 response.addCookie(loginCookie);
             }
-            String returnUrl = (String)session.getAttribute(SessionAttributeName.RETURN_URL);
-            if(returnUrl != null && !returnUrl.isEmpty()){
-                return new CommandResult(returnUrl, CommandResult.Type.RETURN_URL);
-            }else{
-                return new CommandResult(UrlPath.HOME, CommandResult.Type.REDIRECT);
-            }
+            return new CommandResult(UrlPath.HOME, CommandResult.Type.RETURN_URL);
         }else {
             session.setAttribute(SessionAttributeName.ERROR_MESSAGE, "Incorrect login or password");
             return new CommandResult(UrlPath.LOGIN, CommandResult.Type.REDIRECT);

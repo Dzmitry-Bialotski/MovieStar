@@ -55,39 +55,45 @@
         <form action="movie_add.do" method="post">
             <!-- onsubmit= "return movieValidate(this.login.value, this.password.value);" -->
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="title">
+                <input type="text" name="title" class="form-control" placeholder="title">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="country">
+                <input type="text" name="country" class="form-control" placeholder="country">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="year">
+                <input type="text" name="year" class="form-control" placeholder="year">
             </div>
             <div class="form-group ">
-                <select class="form-control">
-                    <option selected>COMEDY</option>
-                    <option>FANTASTIC</option>
+                <select class="form-control" name="genre">
+                    <option value="DETECTIVE">detective</option>
+                    <option value="DRAMA">drama</option>
+                    <option value="MUSICAL">musical</option>
+                    <option value="ADVENTURE">adventure</option>
+                    <option value="FANTASTIC">fantastic</option>
+                    <option value="HORROR">horror</option>
+                    <option value="COMEDY" selected>comedy</option>
                 </select>
             </div>
             <div class="form-group ">
-                <select  class="form-control">
-                    <option selected>FILM</option>
-                    <option>CARTOON</option>
+                <select  class="form-control" name="movie_type">
+                    <option value="FILM" selected>film</option>
+                    <option value="SERIES" selected>series</option>
+                    <option value="ANIME" selected>anime</option>
+                    <option value="CARTOON" selected>cartoon</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="age category">
+                <input type="text" name="age_category" class="form-control" placeholder="age category">
             </div>
             <div class="form-group">
-                <textarea class="form-control mb-2" placeholder="description"></textarea>
-                <input type="text" class="form-control" placeholder="youtube trailer hash">
+                <textarea class="form-control" name="description" placeholder="description"></textarea>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="image path (https)">
+                <input type="text" class="form-control" name="youtube_trailer" placeholder="youtube trailer hash">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Title">
+                <input type="text" class="form-control" name="image_path" placeholder="image path (https)">
             </div>
             <button type="submit" class="btn btn-primary">Add Movie</button>
         </form>

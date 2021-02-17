@@ -9,9 +9,9 @@
         <div class="movie-list text-light p-2 row">
             <c:forEach var="movie" items="${requestScope.movies}">
                 <div class="movie-item m-1 p-1 col-sm">
-                    <div class="movie-item__image-container">
+                    <div class="movie-image-container">
                         <a href="${pageContext.request.contextPath}/movie.do?movieId=${movie.id}">
-                            <img class="movie-item__image" src="${movie.imagePath}">
+                            <img class="movie-item__image" src="${movie.imagePath}" alt="Image">
                         </a>
                     </div>
                     <div class="movie-item__info">

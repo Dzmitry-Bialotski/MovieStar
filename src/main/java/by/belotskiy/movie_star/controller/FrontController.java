@@ -41,21 +41,34 @@ public class FrontController extends HttpServlet {
                 commandResult =  new CommandResult(CommandResult.DEFAULT_PATH);
             }
             String urlPath = commandResult.providePathOrDefault();
+            HttpSession session = request.getSession();
+            String redirectUrl = makeFullUrlString(request);
             switch (commandResult.getType()){
                 case FORWARD:
+                    session.setAttribute(SessionAttributeName.RETURN_URL, redirectUrl);
                     request.getRequestDispatcher(urlPath).forward(request, response);
                     break;
                 case REDIRECT:
+                    session.setAttribute(SessionAttributeName.RETURN_URL, redirectUrl);
                     response.sendRedirect(request.getContextPath() + urlPath);
                     break;
                 case RETURN_URL:
-                    HttpSession session = request.getSession();
                     String returnUrl = (String)session.getAttribute(SessionAttributeName.RETURN_URL);
+                    session.setAttribute(SessionAttributeName.RETURN_URL, request.getContextPath() + urlPath);
                     response.sendRedirect(returnUrl);
                     break;
             }
         } catch (CommandException e) {
             throw new ServletException(e);
         }
+    }
+
+    private String makeFullUrlString(HttpServletRequest request){
+        StringBuffer url = request.getRequestURL();
+        String parameters = request.getQueryString();
+        if(parameters != null && !parameters.isEmpty()){
+            url.append("?").append(parameters);
+        }
+        return url.toString();
     }
 }

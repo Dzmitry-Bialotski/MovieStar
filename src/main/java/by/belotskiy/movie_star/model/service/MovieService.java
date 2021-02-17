@@ -7,7 +7,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MovieService {
+
     List<Movie> findALlMovies() throws ServiceException;
+
     Optional<Movie> findMovie(int movieID) throws ServiceException;
+
     boolean updateMovie(Movie movie) throws ServiceException;
+
+    boolean addMovie(Movie movie) throws ServiceException;
+
+    boolean deleteMovie(int movieId) throws ServiceException;
+
 }

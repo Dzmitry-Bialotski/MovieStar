@@ -46,4 +46,26 @@ public class MovieServiceImpl implements MovieService {
         }
         return result;
     }
+
+    @Override
+    public boolean addMovie(Movie movie) throws ServiceException {
+        boolean result;
+        try{
+            result = movieDao.save(movie);
+        }catch (DaoException e){
+            throw new ServiceException(e);
+        }
+        return result;
+    }
+
+    @Override
+    public boolean deleteMovie(int movieId) throws ServiceException {
+        boolean result;
+        try{
+            result = movieDao.delete(movieId);
+        }catch (DaoException e){
+            throw new ServiceException(e);
+        }
+        return result;
+    }
 }

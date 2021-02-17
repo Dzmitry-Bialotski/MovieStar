@@ -118,10 +118,9 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean save(BaseEntity entity) throws DaoException {
         User user = (User)entity;
-        Connection connection = null;
+        Connection connection = DynamicConnectionPool.getInstance().provideConnection();
         PreparedStatement statement = null;
         try {
-            connection = DynamicConnectionPool.getInstance().provideConnection();
             statement = connection.prepareStatement(UserQuery.INSERT_USER_QUERY);
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getEmail());
@@ -171,11 +170,9 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean delete(int id) throws DaoException {
-        Connection connection = null;
         PreparedStatement statement = null;
+        Connection connection = DynamicConnectionPool.getInstance().provideConnection();
         try {
-            connection = DynamicConnectionPool.getInstance().provideConnection();
-            connection.setAutoCommit(false);
             statement = connection.prepareStatement(UserQuery.DELETE_USER_QUERY);
             statement.setInt(1, id);
             statement.execute();
@@ -189,12 +186,12 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public int findCount() throws DaoException {
-        Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         String query = "";
+        Connection connection = DynamicConnectionPool.getInstance().provideConnection();
         try {
-            connection = DynamicConnectionPool.getInstance().provideConnection();
+
             statement = connection.prepareStatement(UserQuery.FIND_COUNT_OF_USERS_QUERY);
             resultSet = statement.executeQuery();
             resultSet.next();

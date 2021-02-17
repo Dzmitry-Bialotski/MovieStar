@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ReviewService {
+
     List<Review> findReviewsForAdmin() throws ServiceException;
+
     Optional<Review> findReview(int reviewId) throws ServiceException;
+
     boolean updateReview(Review review) throws ServiceException;
 }

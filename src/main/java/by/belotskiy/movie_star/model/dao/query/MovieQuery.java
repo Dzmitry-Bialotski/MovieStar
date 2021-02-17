@@ -33,9 +33,9 @@ public class MovieQuery {
                     " WHERE movie_id = ?;";
 
     public static final String INSERT_MOVIE = "INSERT INTO " + MOVIES_TABLE +
-            " (movie_id, title, country, year, genre, movie_type, " +
+            " (title, country, year, genre, movie_type, " +
             "age_category, description, youtubeTrailer,image_path, status) VALUES " +
-            "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     public static final String UPDATE_MOVIE = "UPDATE " + MOVIES_TABLE +
             " SET movie_id = ?, title = ?, country = ?, year = ?, genre = ?, movie_type = ?," +

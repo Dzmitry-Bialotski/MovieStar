@@ -7,7 +7,7 @@
 <tags:general title="home">
     <div class="section text-light m-1 p-2">
         <h1 align="center">Welcome to MovieStar</h1>
-        <h3>
+        <h4>
             <p>Here is some rules you have to know about that site.
             If you are here at the first time, and you haven`t already registered/login,
             you are <span class="yellow">GUEST</span>. That means that you can only watch information about different movies.
@@ -17,15 +17,7 @@
             you have to write on your own to the owner of that web site. Keep in mind
             that <span class="yellow">ADMINISTRATOR</span> can block any user or any review, if the last is not appropriate.
             Be polite and respect the rules of propriety!</p>
-        </h3>
-
-    </div>
-    <div class="youtube-trailer" style="width : 560px; margin-left: auto; margin-right: auto;">
-        <iframe class="m-2" width="560" height="315" frameborder="0"
-                src="https://www.youtube.com/embed/-El5Sb_EaIc"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-        </iframe>
+        </h4>
     </div>
 
 

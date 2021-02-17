@@ -14,4 +14,5 @@ public interface MovieDao {
     Optional<Movie> findById(int movieId) throws DaoException;
     boolean update(Movie movie) throws  DaoException;
     boolean save(Movie movie) throws  DaoException;
+    boolean delete(int movieId) throws DaoException;
 }

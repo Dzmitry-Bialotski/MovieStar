@@ -12,6 +12,11 @@
     text-decoration: none
 }
 
+.movie-image-container{
+    width: 234px;
+    height: 360px;
+}
+
 .youtube-trailer{
     width: 560px;
     height: 315px;

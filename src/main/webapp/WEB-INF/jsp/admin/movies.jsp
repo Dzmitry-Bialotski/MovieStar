@@ -93,7 +93,7 @@
                         <td>${movie.status} </td>
                         <td>
                             <a href="${pageContext.request.contextPath}/movie_unblock.do?movieId=${movie.id}" class="btn btn-success text-light"><span>unblock</span></a>
-                            <a href="${pageContext.request.contextPath}/admin/movie/edit?movieId=${movie.id}" class="btn btn-primary text-light"><span>edit</span></a>
+                            <a href="${pageContext.request.contextPath}/movie_edit.do?movieId=${movie.id}" class="btn btn-primary text-light"><span>edit</span></a>
                             <a href="${pageContext.request.contextPath}/movie_block.do?movieId=${movie.id}" class="btn btn-danger text-light"> <span>block</span></a>
                         </td>
                     </tr>
