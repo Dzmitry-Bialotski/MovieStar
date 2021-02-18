@@ -25,7 +25,21 @@
                 <h5 align="justify">${movie.description}</h5>
             </div>
             <h1 align="center">*Здесь будет звездночный рейтинг*</h1>
+            <div class="simple-rating">
+                <div class="simple-rating__items">
+                    <input id="simple-rating__5" type="radio" class="simple-rating__item" checked name="simple-rating" value="5">
+                    <label for="simple-rating__5" class="simple-rating__label"></label>
+                    <input id="simple-rating__4" type="radio" class="simple-rating__item" name="simple-rating" value="4">
+                    <label for="simple-rating__4" class="simple-rating__label"></label>
+                    <input id="simple-rating__3" type="radio" class="simple-rating__item" name="simple-rating" value="3">
+                    <label for="simple-rating__3" class="simple-rating__label"></label>
+                    <input id="simple-rating__2" type="radio" class="simple-rating__item" name="simple-rating" value="2">
+                    <label for="simple-rating__2" class="simple-rating__label"></label>
+                    <input id="simple-rating__1" type="radio" class="simple-rating__item" name="simple-rating" value="1">
+                    <label for="simple-rating__1" class="simple-rating__label"></label>
 
+                </div>
+            </div>
             <h2 align="center">*Reviews*</h2>
             <div class="review-section">
                 <c:forEach var="review" items="${requestScope.movie.reviews}">

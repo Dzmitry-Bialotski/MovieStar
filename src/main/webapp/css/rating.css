@@ -1,0 +1,46 @@
+.simple-rating{
+    position: relative;
+    font-size: 80px;
+    display: inline-block;
+}
+.simple-rating::before{
+    content: "\2605\2605\2605\2605\2605";
+    display: block;
+}
+.simple-rating__items{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.simple-rating__item{
+    position: absolute;
+    width: 0%;
+    height: 0%;
+    opacity: 0;
+    visibility: hidden;
+    top: 0;
+    left: 0;
+}
+.simple-rating__label{
+    flex: 0 0 20%;
+    height: 100%;
+    cursor: pointer;
+    color: #fff;
+}
+.simple-rating__label::before{
+    content: "\2605";
+}
+.simple-rating__item:checked,
+.simple-rating__item:checked ~ .simple-rating__label{
+    color: yellow;
+}
+
+.simple-rating__label:hover,
+.simple-rating__label:hover ~ .simple-rating__label,
+.simple-rating__label:checked ~ .simple-rating__label:hover{
+    color: #ffef9f;
+}

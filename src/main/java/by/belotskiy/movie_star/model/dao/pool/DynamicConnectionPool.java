@@ -11,15 +11,21 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class DynamicConnectionPool {
     private static final Logger LOGGER = LogManager.getLogger(DynamicConnectionPool.class);
     private static final int MIN_POOL_SIZE = 8;
     private static final int MAX_POOL_SIZE = 32;
-    private static int currentPoolSize = 8;
+    private final AtomicInteger currentPoolSize = new AtomicInteger(MIN_POOL_SIZE);
+
     private static final DynamicConnectionPool instance = new DynamicConnectionPool();
     private final BlockingQueue<ProxyConnection> freeConnections;
     private final Queue<ProxyConnection> givenAwayConnections;
+
+    private static final Lock locker = new ReentrantLock();
 
     private DynamicConnectionPool() {
         try {
@@ -51,20 +57,24 @@ public class DynamicConnectionPool {
         try {
             connection = freeConnections.take();
             givenAwayConnections.offer(connection);
-            if(givenAwayConnections.size() == currentPoolSize){
-                if(currentPoolSize < MAX_POOL_SIZE){
-                    for(int i = 0; i < currentPoolSize; i++){
-                        Connection newConnection;
-                        try {
-                            newConnection = ConnectionCreator.createConnection();
-                        } catch (SQLException e) {
-                            LOGGER.fatal("Error while getting connection from driver manager", e);
-                            throw new RuntimeException("Error while getting connection from driver manager", e);
+            if(givenAwayConnections.size() == currentPoolSize.get()){
+                if(currentPoolSize.get() < MAX_POOL_SIZE){
+                    locker.lock();
+                    if(currentPoolSize.get() < MAX_POOL_SIZE){
+                        for(int i = 0; i < currentPoolSize.get(); i++){
+                            Connection newConnection;
+                            try {
+                                newConnection = ConnectionCreator.createConnection();
+                            } catch (SQLException e) {
+                                LOGGER.fatal("Error while getting connection from driver manager", e);
+                                throw new RuntimeException("Error while getting connection from driver manager", e);
+                            }
+                            ProxyConnection proxyConnection = new ProxyConnection(newConnection);
+                            freeConnections.offer(proxyConnection);
                         }
-                        ProxyConnection proxyConnection = new ProxyConnection(newConnection);
-                        freeConnections.offer(proxyConnection);
+                        currentPoolSize.set(currentPoolSize.get() * 2);
                     }
-                    currentPoolSize *= 2;
+                    locker.unlock();
                 }
             }
         } catch (InterruptedException e) {
@@ -78,16 +88,20 @@ public class DynamicConnectionPool {
         if (connection instanceof ProxyConnection) {
             givenAwayConnections.remove(connection);
             freeConnections.offer((ProxyConnection) connection);
-            if(givenAwayConnections.size() < currentPoolSize / 4){
-                if(currentPoolSize > MIN_POOL_SIZE){
-                    currentPoolSize /= 2;
-                    for(int i = 0; i < currentPoolSize; i++){
-                        try {
-                            freeConnections.take().close();
-                        } catch (InterruptedException e) {
-                            LOGGER.warn("Can't take connection from queue", e);
+            if(givenAwayConnections.size() < currentPoolSize.get() / 4){
+                if(currentPoolSize.get() > MIN_POOL_SIZE){
+                    locker.lock();
+                    if(currentPoolSize.get() > MIN_POOL_SIZE){
+                        currentPoolSize.set(currentPoolSize.get() / 2);
+                        for(int i = 0; i < currentPoolSize.get(); i++){
+                            try {
+                                freeConnections.take().close();
+                            } catch (InterruptedException e) {
+                                LOGGER.warn("Can't take connection from queue", e);
+                            }
                         }
                     }
+                    locker.unlock();
                 }
             }
         } else {
@@ -96,7 +110,7 @@ public class DynamicConnectionPool {
     }
 
     public void destroyPool() {
-        for (int i = 0; i < currentPoolSize; i++) {
+        for (int i = 0; i < currentPoolSize.get(); i++) {
             try {
                 freeConnections.take().close();
             } catch (InterruptedException e) {
