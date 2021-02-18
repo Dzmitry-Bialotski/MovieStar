@@ -48,7 +48,7 @@
                             <div class="review-user-img-container col-sm-2 my-1 ml-3">
                                 <c:if test="${not empty review.userAvatarPath }">
                                     <img class="avatar-medium avatar-round mr-1"
-                                         src="${pageContext.request.contextPath}${review.userAvatarPath}" >
+                                         src="${pageContext.request.contextPath}/provide_image.do?file_name=${review.userAvatarPath}">
                                 </c:if>
                                 <c:if test="${empty review.userAvatarPath}">
                                     <img class="avatar-medium avatar-round mr-1"

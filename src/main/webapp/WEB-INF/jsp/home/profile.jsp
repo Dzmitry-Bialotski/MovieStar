@@ -9,9 +9,7 @@
         <div class="col-sm-4">
             <c:if test="${not empty sessionScope.user.avatar_path }">
                 <img class="avatar-big avatar-round m-2"
-                     src="${pageContext.request.contextPath}${sessionScope.user.avatar_path}" >
-                <img class="avatar-big avatar-round m-2"
-                     src="https://thumbs.dfs.ivi.ru/storage9/contents/b/1/7e80a5aee097c3879d7cb2c9c46e13.jpg/234x360/" >
+                     src="${pageContext.request.contextPath}/provide_image.do?file_name=${sessionScope.user.avatar_path}" >
             </c:if>
 
             <c:if test="${empty sessionScope.user.avatar_path}">

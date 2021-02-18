@@ -12,6 +12,8 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.UUID;
 
 @WebServlet(name = "FileUploadServlet", urlPatterns = {UrlPath.UPLOAD_CONTROLLER})
@@ -25,8 +27,6 @@ public class FileUploadServlet extends HttpServlet {
             .append(File.separator).append("src").append(File.separator).append("main").append(File.separator)
             .append("webapp").append(File.separator).append("img").append(File.separator).append("avatar").toString();
 
-    private final String RELATIVE_AVATAR_PATH = File.separator + "img" + File.separator + "avatar";
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -35,9 +35,10 @@ public class FileUploadServlet extends HttpServlet {
             String filename = part.getSubmittedFileName();
             boolean isValid = ImageValidator.validateExtension(filename);
             if(isValid){
-                String realFilename = UUID.randomUUID()+ filename;
-                String upload_path = AVATAR_UPLOAD_DIRECTORY + File.separator + realFilename;
-                String relative_path = RELATIVE_AVATAR_PATH + File.separator + realFilename;
+                String upload_path = AVATAR_UPLOAD_DIRECTORY + File.separator + filename;
+                if (Files.exists(Path.of(upload_path))) {
+                    Files.delete(Path.of(upload_path));
+                }
                 boolean isSuccess;
                 try(InputStream inputStream = part.getInputStream()){
                     isSuccess = uploadFile(inputStream, upload_path);
@@ -45,7 +46,7 @@ public class FileUploadServlet extends HttpServlet {
                 if(isSuccess){
                     HttpSession session = request.getSession();
                     User user = (User)session.getAttribute(SessionAttributeName.USER);
-                    user.setAvatar_path(relative_path);
+                    user.setAvatar_path(filename);
                     try{
                         ServiceFactory.getInstance().getUserService().updateUser(user);
                     }catch (Exception e){

@@ -3,7 +3,7 @@ package by.belotskiy.movie_star.model.dao.impl;
 
 
 import by.belotskiy.movie_star.exception.DaoException;
-import by.belotskiy.movie_star.model.dao.pool.DynamicConnectionPool;
+import by.belotskiy.movie_star.model.pool.DynamicConnectionPool;
 import by.belotskiy.movie_star.model.dao.UserDao;
 import by.belotskiy.movie_star.model.dao.util.DaoUtil;
 import by.belotskiy.movie_star.model.dao.query.UserQuery;

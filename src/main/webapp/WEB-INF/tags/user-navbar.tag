@@ -12,7 +12,7 @@
             <div class="navbar-avatar">
                 <c:if test="${not empty sessionScope.user.avatar_path }">
                     <img class="avatar-small avatar-round mr-1"
-                         src="${pageContext.request.contextPath}${sessionScope.user.avatar_path}" >
+                         src="${pageContext.request.contextPath}/provide_image.do?file_name=${sessionScope.user.avatar_path}" >
                 </c:if>
                 <c:if test="${empty sessionScope.user.avatar_path}">
                     <img class="avatar-small avatar-round mr-1"
@@ -29,7 +29,7 @@
             <div class="navbar-avatar">
                 <c:if test="${not empty sessionScope.user.avatar_path }">
                     <img class="avatar-small avatar-round mr-1"
-                         src="${pageContext.request.contextPath}${sessionScope.user.avatar_path}" >
+                         src="${pageContext.request.contextPath}/provide_image.do?file_name=${sessionScope.user.avatar_path}" >
                 </c:if>
                 <c:if test="${empty sessionScope.user.avatar_path}">
                     <img class="avatar-small avatar-round mr-1"

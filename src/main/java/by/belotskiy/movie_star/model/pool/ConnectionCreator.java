@@ -1,4 +1,4 @@
-package by.belotskiy.movie_star.model.dao.pool;
+package by.belotskiy.movie_star.model.pool;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;

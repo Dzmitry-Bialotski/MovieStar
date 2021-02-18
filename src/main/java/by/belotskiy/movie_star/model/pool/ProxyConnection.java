@@ -1,4 +1,4 @@
-package by.belotskiy.movie_star.model.dao.pool;
+package by.belotskiy.movie_star.model.pool;
 
 import java.sql.*;
 import java.util.Map;
