@@ -1,5 +1,4 @@
 package by.belotskiy.movie_star.model.dao.query;
-
 public class ReviewQuery {
 
     public static final String MOVIES_TABLE = "movie_star_db.movies";

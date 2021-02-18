@@ -37,7 +37,7 @@ public class AuthenticationFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse)servletResponse;
         HttpSession session = request.getSession();
 
-        if(request.getCookies() == null || session.getAttribute(SessionAttributeName.USER_ID) != null){
+        if(request.getCookies() == null || session.getAttribute(SessionAttributeName.USER) != null){
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }

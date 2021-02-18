@@ -36,5 +36,5 @@ public final class RequestParameterName {
     public static final String MOVIE = "movie";
     public static final String TEXT = "text";
     public static final String FILE_NAME = "file_name";
-
+    public static final String ACTION = "action";
 }

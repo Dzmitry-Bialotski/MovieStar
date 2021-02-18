@@ -21,7 +21,7 @@ public class AdminMoviesCommand implements ActionCommand {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         List<Movie> movies;
         try {
-            movies = movieService.findALlMovies();
+            movies = movieService.findALlMoviesForAdmin();
         } catch (ServiceException e) {
             throw new CommandException(e);
         }

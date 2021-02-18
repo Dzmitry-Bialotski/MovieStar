@@ -1,11 +1,7 @@
 package by.belotskiy.movie_star.model.dao.factory;
 
-import by.belotskiy.movie_star.model.dao.MovieDao;
-import by.belotskiy.movie_star.model.dao.ReviewDao;
-import by.belotskiy.movie_star.model.dao.UserDao;
-import by.belotskiy.movie_star.model.dao.impl.MovieDaoImpl;
-import by.belotskiy.movie_star.model.dao.impl.ReviewDaoImpl;
-import by.belotskiy.movie_star.model.dao.impl.UserDaoImpl;
+import by.belotskiy.movie_star.model.dao.*;
+import by.belotskiy.movie_star.model.dao.impl.*;
 
 public class DaoFactory {
 
@@ -16,6 +12,10 @@ public class DaoFactory {
     private final MovieDao movieDao = new MovieDaoImpl();
 
     private final ReviewDao reviewDao = new ReviewDaoImpl();
+
+    private final RatingDao ratingDao = new RatingDaoImpl();
+
+    private final LikeDao likeDao = new LikeDaoImpl();
 
     private DaoFactory() { }
 
@@ -40,5 +40,13 @@ public class DaoFactory {
 
     public ReviewDao getReviewDao() {
         return reviewDao;
+    }
+
+    public RatingDao getRatingDao() {
+        return ratingDao;
+    }
+
+    public LikeDao getLikeDao() {
+        return likeDao;
     }
 }

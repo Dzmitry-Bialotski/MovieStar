@@ -18,4 +18,6 @@ public interface MovieService {
 
     boolean deleteMovie(int movieId) throws ServiceException;
 
+    List<Movie> findALlMoviesForAdmin() throws ServiceException;
+
 }

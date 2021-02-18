@@ -25,20 +25,23 @@
                 <h5 align="justify">${movie.description}</h5>
             </div>
             <h1 align="center">*Здесь будет звездночный рейтинг*</h1>
-            <div class="simple-rating">
-                <div class="simple-rating__items">
-                    <input id="simple-rating__5" type="radio" class="simple-rating__item" checked name="simple-rating" value="5">
-                    <label for="simple-rating__5" class="simple-rating__label"></label>
-                    <input id="simple-rating__4" type="radio" class="simple-rating__item" name="simple-rating" value="4">
-                    <label for="simple-rating__4" class="simple-rating__label"></label>
-                    <input id="simple-rating__3" type="radio" class="simple-rating__item" name="simple-rating" value="3">
-                    <label for="simple-rating__3" class="simple-rating__label"></label>
-                    <input id="simple-rating__2" type="radio" class="simple-rating__item" name="simple-rating" value="2">
-                    <label for="simple-rating__2" class="simple-rating__label"></label>
-                    <input id="simple-rating__1" type="radio" class="simple-rating__item" name="simple-rating" value="1">
-                    <label for="simple-rating__1" class="simple-rating__label"></label>
-
+            <div class="rating rating_set">
+                <div class="rating__body">
+                    <div class="rating__active"></div>
+                    <div class="rating__items">
+                        <input type="radio" class="rating__item" value="1" name="rating">
+                        <input type="radio" class="rating__item" value="2" name="rating">
+                        <input type="radio" class="rating__item" value="3" name="rating">
+                        <input type="radio" class="rating__item" value="4" name="rating">
+                        <input type="radio" class="rating__item" value="5" name="rating">
+                        <input type="radio" class="rating__item" value="6" name="rating">
+                        <input type="radio" class="rating__item" value="7" name="rating">
+                        <input type="radio" class="rating__item" value="8" name="rating">
+                        <input type="radio" class="rating__item" value="9" name="rating">
+                        <input type="radio" class="rating__item" value="10" name="rating">
+                    </div>
                 </div>
+                <div class="rating__value">6.4</div>
             </div>
             <h2 align="center">*Reviews*</h2>
             <div class="review-section">
@@ -79,10 +82,5 @@
             </div>
         </div>
     </div>
-
 </tags:general>
-
-
-
-
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/rating.js"></script>

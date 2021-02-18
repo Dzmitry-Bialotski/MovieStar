@@ -1,46 +1,52 @@
-.simple-rating{
-    position: relative;
+.rating{
+    display: flex;
+    align-items: flex-end;
     font-size: 80px;
-    display: inline-block;
+    line-height: 0.75;
 }
-.simple-rating::before{
-    content: "\2605\2605\2605\2605\2605";
+.rating.rating_set .rating__active,
+.rating.rating_set .rating__item{
+    cursor: pointer;
+}
+.rating__body{
+    position: relative;
+}
+.rating__body::before{
+    content: "\2605\2605\2605\2605\2605\2605\2605\2605\2605\2605";
     display: block;
 }
-.simple-rating__items{
+.rating__active{
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+.rating__active::before{
+    content: "\2605\2605\2605\2605\2605\2605\2605\2605\2605\2605";
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    display: flex;
-    flex-direction: row-reverse;
+    color: yellow;
 }
-.simple-rating__item{
+.rating__items{
+    display: flex;
     position: absolute;
-    width: 0%;
-    height: 0%;
-    opacity: 0;
-    visibility: hidden;
+    width: 100%;
+    height: 100%;
     top: 0;
     left: 0;
 }
-.simple-rating__label{
-    flex: 0 0 20%;
+.rating__item{
+    flex: 0 0 10%;
     height: 100%;
-    cursor: pointer;
-    color: #fff;
+    opacity: 0;
 }
-.simple-rating__label::before{
-    content: "\2605";
-}
-.simple-rating__item:checked,
-.simple-rating__item:checked ~ .simple-rating__label{
-    color: yellow;
-}
-
-.simple-rating__label:hover,
-.simple-rating__label:hover ~ .simple-rating__label,
-.simple-rating__label:checked ~ .simple-rating__label:hover{
-    color: #ffef9f;
+.rating__value{
+    font-size: 50%;
+    line-height: 1;
+    padding: 0px 0px 0px 10px;
 }

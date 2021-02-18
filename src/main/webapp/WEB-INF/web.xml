@@ -186,7 +186,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminReviews</servlet-name>
-        <url-pattern>/admin/reviews</url-pattern>
+        <url-pattern>/admin/reviews_pyjrnwkdpvjdnskdnsjdowebrmvkhsndkcdhd</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -195,7 +195,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminUsers</servlet-name>
-        <url-pattern>/admin/users</url-pattern>
+        <url-pattern>/admin/users_pyjrnwkdpvjdnskdnsjdowebrmvkhsndkcdhd</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -204,7 +204,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminMovies</servlet-name>
-        <url-pattern>/admin/movies</url-pattern>
+        <url-pattern>/admin/movies_pyjrnwkdpvjdnskdnsjdowebrmvkhsndkcdhd</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -213,7 +213,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>MovieAdd</servlet-name>
-        <url-pattern>/admin/movie/add</url-pattern>
+        <url-pattern>/admin/movie/add_pyjrnwkdpvjdnskdnsjdowebrmvkhsndkcdhd</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -222,7 +222,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>MovieEdit</servlet-name>
-        <url-pattern>/admin/movie/edit</url-pattern>
+        <url-pattern>/admin/movie/edit_pyjrnwkdpvjdnskdnsjdowebrmvkhsndkcdhd</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -240,7 +240,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Admin</servlet-name>
-        <url-pattern>/admin</url-pattern>
+        <url-pattern>/admin_tadsajdasdasfnaakgjadlaffsdfslfsjdfsdfsdfsldfslfdsdfspdf</url-pattern>
     </servlet-mapping>
 
     <session-config>

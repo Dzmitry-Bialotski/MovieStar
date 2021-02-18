@@ -9,6 +9,7 @@ import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.exception.CommandException;
 import by.belotskiy.movie_star.exception.ServiceException;
 import by.belotskiy.movie_star.model.entity.User;
+import by.belotskiy.movie_star.model.entity.enums.Status;
 import by.belotskiy.movie_star.model.service.factory.ServiceFactory;
 import by.belotskiy.movie_star.model.validator.UserValidator;
 import by.belotskiy.movie_star.model.service.UserService;
@@ -54,6 +55,10 @@ public class LoginCommand implements ActionCommand {
         if(optionalUser.isPresent()){
             LOGGER.log(Level.INFO, "user logged in");
             User user = optionalUser.get();
+            if(user.getStatus() == Status.BLOCKED){
+                session.setAttribute(SessionAttributeName.ERROR_MESSAGE, "user is blocked");
+                return new CommandResult(UrlPath.LOGIN, CommandResult.Type.REDIRECT);
+            }
             session.setAttribute(SessionAttributeName.USER, user);
             if(rememberMe){
                 Cookie hashCookie = new Cookie(CookieName.USER_HASH, user.getUserHash());
