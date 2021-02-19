@@ -73,4 +73,15 @@ public class ReviewServiceImpl implements ReviewService {
         }
         return result;
     }
+
+    @Override
+    public boolean deleteReview(int reviewId) throws ServiceException {
+        boolean result;
+        try{
+            result = reviewDao.delete(reviewId);
+        }catch (DaoException e){
+            throw new ServiceException(e);
+        }
+        return result;
+    }
 }

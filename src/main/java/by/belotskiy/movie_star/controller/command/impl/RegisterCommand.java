@@ -1,9 +1,11 @@
 package by.belotskiy.movie_star.controller.command.impl;
 
+import by.belotskiy.movie_star.controller.attribute.RequestMethod;
 import by.belotskiy.movie_star.controller.attribute.RequestParameterName;
 import by.belotskiy.movie_star.controller.attribute.SessionAttributeName;
 import by.belotskiy.movie_star.controller.command.ActionCommand;
 import by.belotskiy.movie_star.controller.command.CommandResult;
+import by.belotskiy.movie_star.controller.path.PagePath;
 import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.exception.CommandException;
 import by.belotskiy.movie_star.exception.ServiceException;
@@ -26,6 +28,9 @@ public class RegisterCommand implements ActionCommand {
     private final String LOGIN_IS_TAKEN = "User with this login is already registered";
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
+        if(request.getMethod().equals(RequestMethod.GET)){
+            return new CommandResult(PagePath.REGISTER, CommandResult.Type.FORWARD);
+        }
         String login = request.getParameter(RequestParameterName.LOGIN);
         String password = request.getParameter(RequestParameterName.PASSWORD);
         String passwordConfirm = request.getParameter(RequestParameterName.PASSWORD_CONFIRM);
@@ -34,7 +39,7 @@ public class RegisterCommand implements ActionCommand {
         String errorMessage = UserValidator.validateUserForRegister(login,password, passwordConfirm);
         if(errorMessage != null && !errorMessage.isEmpty()){
             session.setAttribute(SessionAttributeName.ERROR_MESSAGE, errorMessage);
-            return new CommandResult(UrlPath.REGISTER, CommandResult.Type.REDIRECT);
+            return new CommandResult(UrlPath.REGISTER_DO, CommandResult.Type.REDIRECT);
         }
 
         boolean isRegisterComplete;
@@ -45,10 +50,10 @@ public class RegisterCommand implements ActionCommand {
         }
         if(isRegisterComplete){
             LOGGER.log(Level.INFO, "User with login " + login + "registered");
-            return new CommandResult(UrlPath.LOGIN, CommandResult.Type.REDIRECT);
+            return new CommandResult(UrlPath.LOGIN_DO, CommandResult.Type.REDIRECT);
         }else{
             session.setAttribute(SessionAttributeName.ERROR_MESSAGE, LOGIN_IS_TAKEN);
-            return new CommandResult(UrlPath.REGISTER, CommandResult.Type.REDIRECT);
+            return new CommandResult(UrlPath.REGISTER_DO, CommandResult.Type.REDIRECT);
         }
     }
 }

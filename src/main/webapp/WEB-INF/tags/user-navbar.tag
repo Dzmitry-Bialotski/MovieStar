@@ -46,10 +46,10 @@
     </a>
 </c:if>
 <c:if test="${sessionScope.user == null}">
-    <a href="${pageContext.request.contextPath}/login" class="nav-link mr-3">
+    <a href="${pageContext.request.contextPath}/login.do" class="nav-link mr-3">
         <i class="fas fa-sign-in-alt mr-1"></i><fmt:message key="login"/>
     </a>
-    <a href="${pageContext.request.contextPath}/register" class="nav-link mr-1">
+    <a href="${pageContext.request.contextPath}/register.do" class="nav-link mr-1">
         <i class="fas fa-user-plus mr-1"></i><fmt:message key="register"/>
     </a>
 </c:if>

@@ -10,6 +10,11 @@
     </welcome-file-list>
     <!--
     <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/jsp/error/error.jsp</location>
+    </error-page>
+    -->
+    <error-page>
         <error-code>403</error-code>
         <location>/WEB-INF/jsp/error/error403.jsp</location>
     </error-page>
@@ -22,12 +27,6 @@
     <error-page>
         <error-code>500</error-code>
         <location>/WEB-INF/jsp/error/error500.jsp</location>
-    </error-page>
-    -->
-
-    <error-page>
-        <error-code>404</error-code>
-        <location>/WEB-INF/jsp/error/error.jsp</location>
     </error-page>
     <!--   FILTERS   -->
     <filter>
@@ -61,7 +60,6 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-
     <filter>
         <filter-name>ErrorMessageFilter</filter-name>
         <filter-class>by.belotskiy.movie_star.controller.filter.ErrorMessageFilter</filter-class>
@@ -92,41 +90,6 @@
     <listener>
         <listener-class>by.belotskiy.movie_star.controller.listener.SessionListener</listener-class>
     </listener>
-    <!--   JSP   -->
-    <servlet>
-        <servlet-name>Login</servlet-name>
-        <jsp-file>/WEB-INF/jsp/auth/login.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Login</servlet-name>
-        <url-pattern>/login</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>Register</servlet-name>
-        <jsp-file>/WEB-INF/jsp/auth/register.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Register</servlet-name>
-        <url-pattern>/register</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>Home</servlet-name>
-        <jsp-file>/WEB-INF/jsp/home/home.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Home</servlet-name>
-        <url-pattern>/home</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>ProfileEdit</servlet-name>
-        <jsp-file>/WEB-INF/jsp/home/edit_profile.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ProfileEdit</servlet-name>
-        <url-pattern>/profileEdit</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>Error403</servlet-name>
@@ -135,112 +98,6 @@
     <servlet-mapping>
         <servlet-name>Error403</servlet-name>
         <url-pattern>/no-permissions</url-pattern>
-    </servlet-mapping>
-
-    <!-- shared pages -->
-    <servlet>
-        <servlet-name>Header</servlet-name>
-        <jsp-file>/WEB-INF/jsp/shared/header.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Header</servlet-name>
-        <url-pattern>/navigation</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>Style</servlet-name>
-        <jsp-file>/WEB-INF/jsp/shared/style_import.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Style</servlet-name>
-        <url-pattern>/import_css</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>Script</servlet-name>
-        <jsp-file>/WEB-INF/jsp/shared/scripts_import.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Script</servlet-name>
-        <url-pattern>/import_js</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>Profile</servlet-name>
-        <jsp-file>/WEB-INF/jsp/home/profile.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Profile</servlet-name>
-        <url-pattern>/profile</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>Movies</servlet-name>
-        <jsp-file>/WEB-INF/jsp/home/movies.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Movies</servlet-name>
-        <url-pattern>/movies</url-pattern>
-    </servlet-mapping>
-
-    <!-- admin pages -->
-    <servlet>
-        <servlet-name>AdminReviews</servlet-name>
-        <jsp-file>/WEB-INF/jsp/admin/reviews.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AdminReviews</servlet-name>
-        <url-pattern>/admin/reviews_pyjrnwkdpvjdnskdnsjdowebrmvkhsndkcdhd</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>AdminUsers</servlet-name>
-        <jsp-file>/WEB-INF/jsp/admin/users.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AdminUsers</servlet-name>
-        <url-pattern>/admin/users_pyjrnwkdpvjdnskdnsjdowebrmvkhsndkcdhd</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>AdminMovies</servlet-name>
-        <jsp-file>/WEB-INF/jsp/admin/movies.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AdminMovies</servlet-name>
-        <url-pattern>/admin/movies_pyjrnwkdpvjdnskdnsjdowebrmvkhsndkcdhd</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>MovieAdd</servlet-name>
-        <jsp-file>/WEB-INF/jsp/admin/movie_add.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>MovieAdd</servlet-name>
-        <url-pattern>/admin/movie/add_pyjrnwkdpvjdnskdnsjdowebrmvkhsndkcdhd</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>MovieEdit</servlet-name>
-        <jsp-file>/WEB-INF/jsp/admin/movie_edit.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>MovieEdit</servlet-name>
-        <url-pattern>/admin/movie/edit_pyjrnwkdpvjdnskdnsjdowebrmvkhsndkcdhd</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>Movie</servlet-name>
-        <jsp-file>/WEB-INF/jsp/home/movie.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Movie</servlet-name>
-        <url-pattern>/movie</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>Admin</servlet-name>
-        <jsp-file>/WEB-INF/jsp/admin/index.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Admin</servlet-name>
-        <url-pattern>/admin_tadsajdasdasfnaakgjadlaffsdfslfsjdfsdfsdfsldfslfdsdfspdf</url-pattern>
     </servlet-mapping>
 
     <jsp-config>

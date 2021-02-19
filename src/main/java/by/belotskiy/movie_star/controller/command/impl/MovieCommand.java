@@ -4,6 +4,7 @@ import by.belotskiy.movie_star.controller.attribute.RequestParameterName;
 import by.belotskiy.movie_star.controller.attribute.SessionAttributeName;
 import by.belotskiy.movie_star.controller.command.ActionCommand;
 import by.belotskiy.movie_star.controller.command.CommandResult;
+import by.belotskiy.movie_star.controller.path.PagePath;
 import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.exception.CommandException;
 import by.belotskiy.movie_star.exception.ServiceException;
@@ -39,6 +40,6 @@ public class MovieCommand implements ActionCommand {
             request.setAttribute(RequestParameterName.MOVIE, movie);
         }
 
-        return new CommandResult(UrlPath.MOVIE, CommandResult.Type.FORWARD);
+        return new CommandResult(PagePath.MOVIE, CommandResult.Type.FORWARD);
     }
 }

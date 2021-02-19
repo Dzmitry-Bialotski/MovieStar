@@ -4,7 +4,7 @@ import by.belotskiy.movie_star.controller.path.UrlPath;
 
 public class CommandResult {
 
-    public static final String DEFAULT_PATH = UrlPath.HOME;
+    public static final String DEFAULT_PATH = UrlPath.HOME_DO;
 
     private String path;
     private Type type;

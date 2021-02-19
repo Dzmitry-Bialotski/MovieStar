@@ -28,6 +28,6 @@ public class ReviewAddCommand implements ActionCommand {
             throw new CommandException(e);
         }
 
-        return new CommandResult(UrlPath.ADMIN_MOVIES_DO, CommandResult.Type.RETURN_URL);
+        return new CommandResult(UrlPath.HOME_DO, CommandResult.Type.RETURN_URL);
     }
 }

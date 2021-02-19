@@ -39,7 +39,8 @@ public class ReviewQuery {
                     .append(".movie_id = ").append(REVIEWS_TABLE).append(".movie_id").append(" WHERE ")
                     .append(REVIEWS_TABLE).append(".movie_id ").append(" = ?").toString();
 
-
+    public static final String DELETE_REVIEW_BY_ID = "DELETE FROM " + REVIEWS_TABLE +
+            " WHERE (review_id = ?)";
     private ReviewQuery() {}
 
 }

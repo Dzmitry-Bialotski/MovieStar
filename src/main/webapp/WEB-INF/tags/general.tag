@@ -10,13 +10,13 @@
 <html>
 <head>
     <title><fmt:message key="${title}" /> - MovieStar</title>
-    <jsp:include page="import_css"/>
+    <jsp:include page="/WEB-INF/jsp/shared/style_import.jsp"/>
 </head>
 <body class="login_body">
-<jsp:include page="navigation"/>
+<jsp:include page="/WEB-INF/jsp/shared/header.jsp"/>
 <div class="container">
     <jsp:doBody/>
 </div>
-<jsp:include page="import_js"/>
+<jsp:include page="/WEB-INF/jsp/shared/scripts_import.jsp"/>
 </body>
 </html>

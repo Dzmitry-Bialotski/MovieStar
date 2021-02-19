@@ -17,4 +17,6 @@ public interface ReviewService {
     boolean updateReview(Review review) throws ServiceException;
 
     boolean addReview(Review review) throws ServiceException;
+
+    boolean deleteReview(int reviewId) throws ServiceException;
 }

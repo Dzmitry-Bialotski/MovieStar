@@ -92,7 +92,8 @@ public class PermissionFilter implements Filter {
         List<CommandType> commands = permissions.get(userRole);
         CommandType commandType = CommandProvider.defineCommandType(request).get();
         if (commands == null || !commands.contains(commandType)) {
-            response.sendRedirect(request.getContextPath() + UrlPath.NO_PERMISSIONS);
+            response.sendError(403);
+            //response.sendRedirect(request.getContextPath() + UrlPath.NO_PERMISSIONS);
         }else{
             filterChain.doFilter(servletRequest, servletResponse);
         }

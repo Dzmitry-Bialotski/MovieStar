@@ -19,6 +19,6 @@ public class ChangeLocaleCommand implements ActionCommand {
         if(locale != null && !locale.isEmpty()){
             session.setAttribute(SessionAttributeName.CURRENT_LOCALE, locale);
         }
-        return new CommandResult(UrlPath.HOME, CommandResult.Type.RETURN_URL);
+        return new CommandResult(UrlPath.HOME_DO, CommandResult.Type.RETURN_URL);
     }
 }

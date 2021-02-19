@@ -4,6 +4,7 @@ import by.belotskiy.movie_star.controller.attribute.RequestParameterName;
 import by.belotskiy.movie_star.controller.attribute.SessionAttributeName;
 import by.belotskiy.movie_star.controller.command.ActionCommand;
 import by.belotskiy.movie_star.controller.command.CommandResult;
+import by.belotskiy.movie_star.controller.path.PagePath;
 import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.exception.CommandException;
 import by.belotskiy.movie_star.exception.ServiceException;
@@ -34,9 +35,9 @@ public class ProfileEditCommand implements ActionCommand {
             throw new CommandException(e);
         }
         if(isSuccessful){
-            return new CommandResult(UrlPath.PROFILE, CommandResult.Type.REDIRECT);
+            return new CommandResult(UrlPath.PROFILE_DO, CommandResult.Type.REDIRECT);
         }
         session.setAttribute(SessionAttributeName.ERROR_MESSAGE, "User changes were not saved");
-        return new CommandResult(UrlPath.PROFILE_EDIT, CommandResult.Type.REDIRECT);
+        return new CommandResult(PagePath.EDIT_PROFILE, CommandResult.Type.FORWARD);
     }
 }

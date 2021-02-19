@@ -5,6 +5,7 @@ import by.belotskiy.movie_star.controller.attribute.RequestParameterName;
 import by.belotskiy.movie_star.controller.attribute.SessionAttributeName;
 import by.belotskiy.movie_star.controller.command.ActionCommand;
 import by.belotskiy.movie_star.controller.command.CommandResult;
+import by.belotskiy.movie_star.controller.path.PagePath;
 import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.exception.CommandException;
 import by.belotskiy.movie_star.exception.ConnectionPoolException;
@@ -36,6 +37,6 @@ public class LogoutCommand implements ActionCommand {
         cookie = new Cookie(CookieName.USER_LOGIN, "");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
-        return new CommandResult(UrlPath.LOGIN, CommandResult.Type.REDIRECT);
+        return new CommandResult(UrlPath.LOGIN_DO, CommandResult.Type.REDIRECT);
     }
 }

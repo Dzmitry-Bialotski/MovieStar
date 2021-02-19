@@ -3,6 +3,7 @@ package by.belotskiy.movie_star.controller.command.impl;
 import by.belotskiy.movie_star.controller.attribute.RequestParameterName;
 import by.belotskiy.movie_star.controller.command.ActionCommand;
 import by.belotskiy.movie_star.controller.command.CommandResult;
+import by.belotskiy.movie_star.controller.path.PagePath;
 import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.exception.CommandException;
 import by.belotskiy.movie_star.exception.ServiceException;
@@ -26,6 +27,6 @@ public class AdminMoviesCommand implements ActionCommand {
             throw new CommandException(e);
         }
         request.setAttribute(RequestParameterName.MOVIES, movies);
-        return new CommandResult(UrlPath.ADMIN_MOVIES, CommandResult.Type.FORWARD);
+        return new CommandResult(PagePath.ADMIN_MOVIES, CommandResult.Type.FORWARD);
     }
 }

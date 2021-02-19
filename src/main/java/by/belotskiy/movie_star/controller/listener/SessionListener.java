@@ -16,7 +16,7 @@ public class SessionListener implements HttpSessionListener {
         HttpSession session = se.getSession();
         session.setAttribute(SessionAttributeName.CURRENT_LOCALE, LocaleValue.EN.getLocale());
         session.setAttribute(SessionAttributeName.DEFAULT_AVATAR_PATH, ImagePathProvider.getDefaultAvatar());
-        session.setAttribute(SessionAttributeName.RETURN_URL, UrlPath.HOME);
+        session.setAttribute(SessionAttributeName.RETURN_URL, UrlPath.HOME_DO);
     }
 
     @Override

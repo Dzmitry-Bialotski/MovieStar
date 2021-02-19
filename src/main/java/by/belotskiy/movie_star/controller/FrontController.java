@@ -56,6 +56,7 @@ public class FrontController extends HttpServlet {
                     String returnUrl = (String)session.getAttribute(SessionAttributeName.RETURN_URL);
                     session.setAttribute(SessionAttributeName.RETURN_URL, request.getContextPath() + urlPath);
                     response.sendRedirect(returnUrl);
+                    //response.sendRedirect(request.getHeader("referer")); that also works arr!! :(
                     break;
             }
         } catch (CommandException e) {

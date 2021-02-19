@@ -1,10 +1,12 @@
 package by.belotskiy.movie_star.controller.command.impl;
 
 import by.belotskiy.movie_star.controller.attribute.CookieName;
+import by.belotskiy.movie_star.controller.attribute.RequestMethod;
 import by.belotskiy.movie_star.controller.command.ActionCommand;
 import by.belotskiy.movie_star.controller.attribute.RequestParameterName;
 import by.belotskiy.movie_star.controller.attribute.SessionAttributeName;
 import by.belotskiy.movie_star.controller.command.CommandResult;
+import by.belotskiy.movie_star.controller.path.PagePath;
 import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.exception.CommandException;
 import by.belotskiy.movie_star.exception.ServiceException;
@@ -34,6 +36,9 @@ public class LoginCommand implements ActionCommand {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
+        if(request.getMethod().equals(RequestMethod.GET)){
+            return new CommandResult(PagePath.LOGIN, CommandResult.Type.FORWARD);
+        }
         String login = request.getParameter(RequestParameterName.LOGIN);
         String password = request.getParameter(RequestParameterName.PASSWORD);
         String[] checkBoxValues = request.getParameterValues(RequestParameterName.REMEMBER_ME);
@@ -43,7 +48,7 @@ public class LoginCommand implements ActionCommand {
         String errorMessage = UserValidator.validateUserForLogin(login,password);
         if(errorMessage != null && !errorMessage.isEmpty()){
             session.setAttribute(SessionAttributeName.ERROR_MESSAGE, errorMessage);
-            return new CommandResult(UrlPath.REGISTER, CommandResult.Type.REDIRECT);
+            return new CommandResult(UrlPath.REGISTER_DO, CommandResult.Type.REDIRECT);
         }
         Optional<User> optionalUser;
         try{
@@ -57,7 +62,7 @@ public class LoginCommand implements ActionCommand {
             User user = optionalUser.get();
             if(user.getStatus() == Status.BLOCKED){
                 session.setAttribute(SessionAttributeName.ERROR_MESSAGE, "user is blocked");
-                return new CommandResult(UrlPath.LOGIN, CommandResult.Type.REDIRECT);
+                return new CommandResult(UrlPath.LOGIN_DO, CommandResult.Type.REDIRECT);
             }
             session.setAttribute(SessionAttributeName.USER, user);
             if(rememberMe){
@@ -68,10 +73,10 @@ public class LoginCommand implements ActionCommand {
                 response.addCookie(hashCookie);
                 response.addCookie(loginCookie);
             }
-            return new CommandResult(UrlPath.HOME, CommandResult.Type.REDIRECT);
+            return new CommandResult(UrlPath.HOME_DO, CommandResult.Type.REDIRECT);
         }else {
             session.setAttribute(SessionAttributeName.ERROR_MESSAGE, "Incorrect login or password");
-            return new CommandResult(UrlPath.LOGIN, CommandResult.Type.REDIRECT);
+            return new CommandResult(PagePath.LOGIN, CommandResult.Type.FORWARD);
         }
     }
 }

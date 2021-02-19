@@ -61,7 +61,7 @@ public class AuthenticationFilter implements Filter {
                 }
             }catch (ServiceException e){
                 LOGGER.error("Error authorizing user via cookies", e);
-                String page = request.getContextPath() + UrlPath.LOGIN;
+                String page = request.getContextPath() + UrlPath.LOGIN_DO;
                 response.sendRedirect(page);
             }
         }

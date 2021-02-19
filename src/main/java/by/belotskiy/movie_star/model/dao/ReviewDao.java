@@ -14,5 +14,6 @@ public interface ReviewDao {
     boolean update(Review review) throws  DaoException;
     boolean save(Review review) throws  DaoException;
     List<Review> findAllByMovieId(int movieId) throws DaoException;
+    boolean delete(int reviewId) throws DaoException;
 
 }

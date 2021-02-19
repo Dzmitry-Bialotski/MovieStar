@@ -11,8 +11,9 @@
     background-size: cover;
     height: 81%;
     font-family: 'Numans', sans-serif;
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("https://wallpaperaccess.com/full/329583.jpg") fixed;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("https://hdoboi.kiev.ua/images/24.Jul.2019-vojna-beskonechnosti-mstiteli.jpg") fixed;
     font-family: 'Numans', sans-serif;
+    background-size: 100%;
 }
 /** Login */
 

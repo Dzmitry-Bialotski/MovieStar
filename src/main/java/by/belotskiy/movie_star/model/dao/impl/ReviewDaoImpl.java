@@ -141,4 +141,22 @@ public class ReviewDaoImpl implements ReviewDao {
         }
         return reviews;
     }
+
+    @Override
+    public boolean delete(int reviewId) throws DaoException {
+        PreparedStatement statement = null;
+        Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        String query = "";
+        try{
+            query = ReviewQuery.DELETE_REVIEW_BY_ID;
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, reviewId);
+            statement.executeUpdate();
+        }catch (SQLException  e) {
+            throw new DaoException("Error executing query " + query, e);
+        } finally {
+            DaoUtil.releaseResources(connection, statement);
+        }
+        return true;
+    }
 }
