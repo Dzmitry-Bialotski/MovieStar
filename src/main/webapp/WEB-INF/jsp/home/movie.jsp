@@ -49,12 +49,12 @@
             </form>
 
             <h2 align="center">*Reviews*</h2>
-            <ctg:accessControl accessRole="REVIEWER">
+            <ctg:accessRole accessRole="REVIEWER">
                 <form method="post" action="">
                     <textarea placeholder="write your review hear"></textarea>
                     <button type="submit"> Send review </button>
                 </form>
-            </ctg:accessControl>
+            </ctg:accessRole>
             <div class="review-section">
                 <c:forEach var="review" items="${requestScope.movie.reviews}">
                     <div class="review-container my-2 p-2">
@@ -88,6 +88,10 @@
                         <div class="review-text my-2">
                             <p><h4> ${review.text}</h4></p>
                         </div>
+                        <ctg:accessUser userId="${review.userId}">
+                            <a href="" type="button">EDIT</a>
+                            <a href="" type="button">DELETE</a>
+                        </ctg:accessUser>
                     </div>
                 </c:forEach>
             </div>

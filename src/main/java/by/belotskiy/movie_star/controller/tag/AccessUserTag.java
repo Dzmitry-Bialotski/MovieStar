@@ -1,0 +1,28 @@
+package by.belotskiy.movie_star.controller.tag;
+
+import by.belotskiy.movie_star.controller.attribute.SessionAttributeName;
+import by.belotskiy.movie_star.model.entity.User;
+
+import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.TagSupport;
+
+public class AccessUserTag extends TagSupport {
+    private int userId;
+
+    @Override
+    public int doStartTag() throws JspException {
+        HttpSession session = pageContext.getSession();
+        User user = (User)session.getAttribute(SessionAttributeName.USER);
+        if(user != null){
+            if(user.getId() == userId){
+                return EVAL_BODY_INCLUDE;
+            }
+        }
+        return SKIP_BODY;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+}

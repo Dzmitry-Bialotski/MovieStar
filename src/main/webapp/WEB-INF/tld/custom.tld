@@ -8,11 +8,21 @@
     <short-name>ctg</short-name>
     <uri>custom_tag</uri>
     <tag>
-        <name>accessControl</name>
+        <name>accessRole</name>
         <tag-class>by.belotskiy.movie_star.controller.tag.AccessRoleTag</tag-class>
         <body-content>scriptless</body-content>
         <attribute>
             <name>accessRole</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>accessUser</name>
+        <tag-class>by.belotskiy.movie_star.controller.tag.AccessUserTag</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>userId</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
