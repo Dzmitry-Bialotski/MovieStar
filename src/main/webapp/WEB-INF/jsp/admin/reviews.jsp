@@ -86,8 +86,14 @@
                         <td>${review.movieTitle} </td>
                         <td>${review.status} </td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/review_unblock.do?reviewId=${review.id}" class="btn btn-success  text-light"><span>unblock</span></a>
-                            <a href="${pageContext.request.contextPath}/review_block.do?reviewId=${review.id}" class="btn btn-danger  text-light"><span>block</span></a>
+                            <form method="post" action="review_unblock.do" class="m-1">
+                                <input type="hidden" name="reviewId" value="${review.id}">
+                                <button type="submit" class="btn btn-success text-light admin_btn"><span>unblock</span></button>
+                            </form>
+                            <form method="post" action="review_block.do" class="m-1">
+                                <input type="hidden" name="reviewId" value="${review.id}">
+                                <button type="submit" class="btn btn-danger text-light admin_btn"><span>block</span></button>
+                            </form>
                         </td>
                     </tr>
                 </c:forEach>

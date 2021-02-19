@@ -50,8 +50,10 @@
 
             <h2 align="center">*Reviews*</h2>
             <ctg:accessRole accessRole="REVIEWER">
-                <form method="post" action="">
-                    <textarea placeholder="write your review hear"></textarea>
+                <form method="post" action="review_add.do">
+                    <input type="hidden" name="userId" value="${sessionScope.user.id}">
+                    <input type="hidden" name="movieId" value="${movie.id}">
+                    <textarea name="text" placeholder="write your review hear"></textarea>
                     <button type="submit"> Send review </button>
                 </form>
             </ctg:accessRole>
@@ -89,8 +91,10 @@
                             <p><h4> ${review.text}</h4></p>
                         </div>
                         <ctg:accessUser userId="${review.userId}">
-                            <a href="" type="button">EDIT</a>
-                            <a href="" type="button">DELETE</a>
+                            <form method="post" action="review_delete.do">
+                                <input type="hidden" name="reviewId" value="${review.id}">
+                                <button type="submit">delete review</button>
+                            </form>
                         </ctg:accessUser>
                     </div>
                 </c:forEach>

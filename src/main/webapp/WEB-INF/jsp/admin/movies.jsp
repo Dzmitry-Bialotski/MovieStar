@@ -57,7 +57,7 @@
                         <h2>Manage <b>Movies</b></h2>
                     </div>
                     <div class="col-sm-6">
-                        <a href="${pageContext.request.contextPath}/admin/movie/add" class="btn btn-success  text-light">
+                        <a href="${pageContext.request.contextPath}/movie_add.do" class="btn btn-success  text-light">
                             <i class="material-icons">&#xE147;</i> <span>add new movie</span></a>
                     </div>
                 </div>
@@ -92,9 +92,15 @@
                         <td>${movie.ageCategory} </td>
                         <td>${movie.status} </td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/movie_unblock.do?movieId=${movie.id}" class="btn btn-success text-light"><span>unblock</span></a>
-                            <a href="${pageContext.request.contextPath}/movie_edit.do?movieId=${movie.id}" class="btn btn-primary text-light"><span>edit</span></a>
-                            <a href="${pageContext.request.contextPath}/movie_block.do?movieId=${movie.id}" class="btn btn-danger text-light"> <span>block</span></a>
+                            <form method="post" action="movie_unblock.do" class="m-1">
+                                <input type="hidden" name="movieId" value="${movie.id}">
+                                <button type="submit" class="btn btn-success text-light admin_btn"><span>unblock</span></button>
+                            </form>
+                            <a href="${pageContext.request.contextPath}/movie_edit.do?movieId=${movie.id}" class="btn btn-primary text-light ml-1 admin_btn"><span>edit</span></a>
+                            <form method="post" action="movie_block.do" class="m-1">
+                                <input type="hidden" name="movieId" value="${movie.id}">
+                                <button type="submit" class="btn btn-danger text-light admin_btn"><span>block</span></button>
+                            </form>
                         </td>
                     </tr>
                 </c:forEach>

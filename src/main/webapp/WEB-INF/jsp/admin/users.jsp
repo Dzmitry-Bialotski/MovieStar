@@ -91,8 +91,14 @@
                         <td>${user.role} </td>
                         <td>${user.status} </td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/user_unblock.do?userId=${user.id}" class="btn btn-success text-light" ><span>unblock</span></a>
-                            <a href="${pageContext.request.contextPath}/user_block.do?userId=${user.id}" class="btn btn-danger text-light"><span>block</span></a>
+                            <form method="post" action="user_unblock.do" class="m-1">
+                                <input type="hidden" name="userId" value="${user.id}">
+                                <button type="submit" class="btn btn-success text-light admin_btn"><span>unblock</span></button>
+                            </form>
+                            <form method="post" action="user_block.do" class="m-1">
+                                <input type="hidden" name="userId" value="${user.id}">
+                                <button type="submit" class="btn btn-danger text-light admin_btn"><span>block</span></button>
+                            </form>
                         </td>
                     </tr>
                 </c:forEach>

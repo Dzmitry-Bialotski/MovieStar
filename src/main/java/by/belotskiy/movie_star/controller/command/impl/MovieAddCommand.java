@@ -1,8 +1,10 @@
 package by.belotskiy.movie_star.controller.command.impl;
 
+import by.belotskiy.movie_star.controller.attribute.RequestMethod;
 import by.belotskiy.movie_star.controller.attribute.RequestParameterName;
 import by.belotskiy.movie_star.controller.command.ActionCommand;
 import by.belotskiy.movie_star.controller.command.CommandResult;
+import by.belotskiy.movie_star.controller.path.PagePath;
 import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.exception.CommandException;
 import by.belotskiy.movie_star.exception.ServiceException;
@@ -21,6 +23,9 @@ public class MovieAddCommand implements ActionCommand {
     private final MovieService movieService = ServiceFactory.getInstance().getMovieService();
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
+        if(request.getMethod().equals(RequestMethod.GET)){
+            return new CommandResult(PagePath.ADMIN_MOVIE_ADD, CommandResult.Type.FORWARD);
+        }
         String title = request.getParameter(RequestParameterName.TITLE);
         String country = request.getParameter(RequestParameterName.COUNTRY);
         int year = Integer.parseInt(request.getParameter(RequestParameterName.YEAR));
