@@ -17,7 +17,6 @@ import java.util.*;
 public class ReviewDaoImpl implements ReviewDao {
 
     private static final String REVIEW_ID = "review_id";
-    private static final String MOVIE_ID = "movie_id";
     @Override
     public List<Review> findALl() throws DaoException {
         return findAllByCriteria(new HashMap<>());
@@ -113,7 +112,7 @@ public class ReviewDaoImpl implements ReviewDao {
         List<Review> reviews = new ArrayList<>();
         PreparedStatement statement = null;
         Connection connection = DynamicConnectionPool.getInstance().provideConnection();
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         String query = "";
         try{
             connection = DynamicConnectionPool.getInstance().provideConnection();

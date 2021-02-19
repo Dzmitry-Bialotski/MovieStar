@@ -43,21 +43,22 @@ public class FrontController extends HttpServlet {
             String urlPath = commandResult.providePathOrDefault();
             HttpSession session = request.getSession();
             String redirectUrl = makeFullUrlString(request);
-            switch (commandResult.getType()){
-                case FORWARD:
+
+            switch (commandResult.getType()) {
+                case FORWARD -> {
                     session.setAttribute(SessionAttributeName.RETURN_URL, redirectUrl);
                     request.getRequestDispatcher(urlPath).forward(request, response);
-                    break;
-                case REDIRECT:
+                }
+                case REDIRECT -> {
                     session.setAttribute(SessionAttributeName.RETURN_URL, redirectUrl);
                     response.sendRedirect(request.getContextPath() + urlPath);
-                    break;
-                case RETURN_URL:
-                    String returnUrl = (String)session.getAttribute(SessionAttributeName.RETURN_URL);
+                }
+                case RETURN_URL -> {
+                    String returnUrl = (String) session.getAttribute(SessionAttributeName.RETURN_URL);
                     session.setAttribute(SessionAttributeName.RETURN_URL, request.getContextPath() + urlPath);
-                    response.sendRedirect(returnUrl);
                     //response.sendRedirect(request.getHeader("referer")); that also works arr!! :(
-                    break;
+                    response.sendRedirect(returnUrl);
+                }
             }
         } catch (CommandException e) {
             throw new ServletException(e);

@@ -66,7 +66,7 @@
                     </c:if>
                 </div>
             </div>
-            <a class="btn btn-primary edit-href m-1 l-1" href="${pageContext.request.contextPath}/profileEdit">
+            <a class="btn btn-primary edit-href m-1 l-1" href="${pageContext.request.contextPath}/profile_edit.do">
                 <fmt:message key="edit_profile"/>
             </a>
         </div>

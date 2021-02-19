@@ -43,7 +43,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> findAllByCriteria(Map<String, String> criteria) throws DaoException {
-        List<User> users = new ArrayList<>();
+        List<User> users;
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -53,22 +53,7 @@ public class UserDaoImpl implements UserDao {
             query = DaoUtil.createQueryWithCriteria(UserQuery.FIND_ALL_USER_QUERY, criteria);
             statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
-            while (resultSet.next()){
-                int userId = resultSet.getInt(1);
-                String login = resultSet.getString(2);
-                String email = resultSet.getString(3);
-                String password_hash = resultSet.getString(4);
-                Role role = Role.valueOf(resultSet.getString(5).toUpperCase());
-                String avatar_path = resultSet.getString(6);
-                boolean email_confirmed = resultSet.getBoolean(7);
-                String user_hash = resultSet.getString(8);
-                String first_name = resultSet.getString(9);
-                String second_name = resultSet.getString(10);
-                Status status = Status.valueOf(resultSet.getString(11).toUpperCase());
-                User user = new User(userId, login, email, password_hash, role, avatar_path,
-                        email_confirmed, first_name, second_name, user_hash, status);
-                users.add(user);
-            }
+            users = extractUsersFromQuery(resultSet);
         } catch (SQLException e) {
             throw new DaoException("Error executing query " + query, e);
         } finally {
@@ -79,7 +64,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> findWithLimits(int offset, int limit) throws DaoException {
-        List<User> users = new ArrayList<>();
+        List<User> users;
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -91,22 +76,7 @@ public class UserDaoImpl implements UserDao {
             statement.setInt(1, limit);
             statement.setInt(2, offset);
             resultSet = statement.executeQuery();
-            while (resultSet.next()){
-                int userId = resultSet.getInt(1);
-                String login = resultSet.getString(2);
-                String email = resultSet.getString(3);
-                String password_hash = resultSet.getString(4);
-                Role role = Role.valueOf(resultSet.getString(5).toUpperCase());
-                String avatar_path = resultSet.getString(6);
-                boolean email_confirmed = resultSet.getBoolean(7);
-                String user_hash = resultSet.getString(8);
-                String first_name = resultSet.getString(9);
-                String second_name = resultSet.getString(10);
-                Status status = Status.valueOf(resultSet.getString(11).toUpperCase());
-                User user = new User(userId, login, email, password_hash, role, avatar_path,
-                        email_confirmed, user_hash, first_name, second_name, status);
-                users.add(user);
-            }
+            users = extractUsersFromQuery(resultSet);
         } catch (SQLException e) {
             throw new DaoException("Error executing query " + query, e);
         } finally {
@@ -114,7 +84,6 @@ public class UserDaoImpl implements UserDao {
         }
         return users;
     }
-
     @Override
     public boolean save(BaseEntity entity) throws DaoException {
         User user = (User)entity;
@@ -122,16 +91,7 @@ public class UserDaoImpl implements UserDao {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(UserQuery.INSERT_USER_QUERY);
-            statement.setString(1, user.getLogin());
-            statement.setString(2, user.getEmail());
-            statement.setString(3, user.getPasswordHash());
-            statement.setString(4, user.getRole().toString());
-            statement.setString(5, user.getAvatar_path());
-            statement.setBoolean(6, user.isEmailConfirmed());
-            statement.setString(7, user.getUserHash());
-            statement.setString(8, user.getFirstName());
-            statement.setString(9, user.getSecondName());
-            statement.setString(10, user.getStatus().toString());
+            fillStatement(statement, user);
             statement.executeUpdate();
         } catch (SQLException  e) {
             throw new DaoException("Error executing query ", e);
@@ -148,16 +108,7 @@ public class UserDaoImpl implements UserDao {
         Connection connection = DynamicConnectionPool.getInstance().provideConnection();
         try {
             statement = connection.prepareStatement(UserQuery.UPDATE_USER_QUERY);
-            statement.setString(1, user.getLogin());
-            statement.setString(2, user.getEmail());
-            statement.setString(3, user.getPasswordHash());
-            statement.setString(4, user.getRole().toString());
-            statement.setString(5, user.getAvatar_path());
-            statement.setBoolean(6, user.isEmailConfirmed());
-            statement.setString(7, user.getUserHash());
-            statement.setString(8, user.getFirstName());
-            statement.setString(9, user.getSecondName());
-            statement.setString(10, user.getStatus().toString());
+            fillStatement(statement, user);
             statement.setInt(11, user.getId());
             statement.executeUpdate();
         } catch (SQLException  e) {
@@ -226,5 +177,39 @@ public class UserDaoImpl implements UserDao {
             optionalUser = Optional.of(users.get(0));
         }
         return optionalUser;
+    }
+
+    private List<User> extractUsersFromQuery(ResultSet resultSet) throws SQLException {
+        List<User> users = new ArrayList<>();
+        while (resultSet.next()) {
+            int userId = resultSet.getInt(1);
+            String login = resultSet.getString(2);
+            String email = resultSet.getString(3);
+            String password_hash = resultSet.getString(4);
+            Role role = Role.valueOf(resultSet.getString(5).toUpperCase());
+            String avatar_path = resultSet.getString(6);
+            boolean email_confirmed = resultSet.getBoolean(7);
+            String user_hash = resultSet.getString(8);
+            String first_name = resultSet.getString(9);
+            String second_name = resultSet.getString(10);
+            Status status = Status.valueOf(resultSet.getString(11).toUpperCase());
+            User user = new User(userId, login, email, password_hash, role, avatar_path,
+                    email_confirmed, first_name, second_name, user_hash, status);
+            users.add(user);
+        }
+        return users;
+    }
+
+    private void fillStatement(PreparedStatement statement, User user) throws SQLException {
+        statement.setString(1, user.getLogin());
+        statement.setString(2, user.getEmail());
+        statement.setString(3, user.getPasswordHash());
+        statement.setString(4, user.getRole().toString());
+        statement.setString(5, user.getAvatar_path());
+        statement.setBoolean(6, user.isEmailConfirmed());
+        statement.setString(7, user.getUserHash());
+        statement.setString(8, user.getFirstName());
+        statement.setString(9, user.getSecondName());
+        statement.setString(10, user.getStatus().toString());
     }
 }
