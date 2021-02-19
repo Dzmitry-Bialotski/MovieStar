@@ -243,6 +243,13 @@
         <url-pattern>/admin_tadsajdasdasfnaakgjadlaffsdfslfsjdfsdfsdfsldfslfdsdfspdf</url-pattern>
     </servlet-mapping>
 
+    <jsp-config>
+        <taglib>
+            <taglib-uri>custom_tags</taglib-uri>
+            <taglib-location>/WEB-INF/tld/custom.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+
     <session-config>
         <session-timeout>180</session-timeout>
     </session-config>

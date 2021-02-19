@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<%@ taglib uri="custom_tags" prefix="ctg" %>
 <fmt:setLocale value="${sessionScope.currentLocale}"/>
 <fmt:setBundle basename="language"/>
 <tags:general title="home">
@@ -25,25 +26,35 @@
                 <h5 align="justify">${movie.description}</h5>
             </div>
             <h1 align="center">*Здесь будет звездночный рейтинг*</h1>
-            <div class="rating rating_set">
-                <div class="rating__body">
-                    <div class="rating__active"></div>
-                    <div class="rating__items">
-                        <input type="radio" class="rating__item" value="1" name="rating">
-                        <input type="radio" class="rating__item" value="2" name="rating">
-                        <input type="radio" class="rating__item" value="3" name="rating">
-                        <input type="radio" class="rating__item" value="4" name="rating">
-                        <input type="radio" class="rating__item" value="5" name="rating">
-                        <input type="radio" class="rating__item" value="6" name="rating">
-                        <input type="radio" class="rating__item" value="7" name="rating">
-                        <input type="radio" class="rating__item" value="8" name="rating">
-                        <input type="radio" class="rating__item" value="9" name="rating">
-                        <input type="radio" class="rating__item" value="10" name="rating">
+            <form method="post">
+                <div class="rating rating_set">
+                    <div class="rating__body">
+                        <div class="rating__active"></div>
+                        <div class="rating__items">
+                            <input type="radio" class="rating__item" value="1" name="rating">
+                            <input type="radio" class="rating__item" value="2" name="rating">
+                            <input type="radio" class="rating__item" value="3" name="rating">
+                            <input type="radio" class="rating__item" value="4" name="rating">
+                            <input type="radio" class="rating__item" value="5" name="rating">
+                            <input type="radio" class="rating__item" value="6" name="rating">
+                            <input type="radio" class="rating__item" value="7" name="rating">
+                            <input type="radio" class="rating__item" value="8" name="rating">
+                            <input type="radio" class="rating__item" value="9" name="rating">
+                            <input type="radio" class="rating__item" value="10" name="rating">
+                        </div>
                     </div>
+                    <div class="rating__value">6.4</div>
                 </div>
-                <div class="rating__value">6.4</div>
-            </div>
+                <input id="send_rating_btn" type="button" value="Send rating">
+            </form>
+
             <h2 align="center">*Reviews*</h2>
+            <ctg:accessControl accessRole="REVIEWER">
+                <form method="post" action="">
+                    <textarea placeholder="write your review hear"></textarea>
+                    <button type="submit"> Send review </button>
+                </form>
+            </ctg:accessControl>
             <div class="review-section">
                 <c:forEach var="review" items="${requestScope.movie.reviews}">
                     <div class="review-container my-2 p-2">
