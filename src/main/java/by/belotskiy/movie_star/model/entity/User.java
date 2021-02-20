@@ -139,7 +139,7 @@ public class User extends BaseEntity implements Serializable {
 
         User user = (User) o;
 
-        if (getId() != user.getId()) return false;
+        if (!getId().equals(user.getId())) return false;
         if (login != null ? !login.equals(user.getLogin()) : user.getLogin() != null) return false;
         if (firstName != null ? !firstName.equals(user.getFirstName()) : user.getFirstName() != null) return false;
         if (secondName != null ? !secondName.equals(user.getSecondName()) : user.getSecondName() != null) return false;
@@ -152,7 +152,7 @@ public class User extends BaseEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = (int) (getId() ^ (getId() >>> 32));
+        int result = (getId() ^ (getId() >>> 32));
         result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (secondName != null ? secondName.hashCode() : 0);

@@ -1,9 +1,11 @@
 package by.belotskiy.movie_star.model.service.factory;
 
 import by.belotskiy.movie_star.model.service.MovieService;
+import by.belotskiy.movie_star.model.service.RatingService;
 import by.belotskiy.movie_star.model.service.ReviewService;
 import by.belotskiy.movie_star.model.service.UserService;
 import by.belotskiy.movie_star.model.service.impl.MovieServiceImpl;
+import by.belotskiy.movie_star.model.service.impl.RatingServiceImpl;
 import by.belotskiy.movie_star.model.service.impl.ReviewServiceImpl;
 import by.belotskiy.movie_star.model.service.impl.UserServiceImpl;
 
@@ -16,6 +18,8 @@ public class ServiceFactory {
     private final MovieService movieService = new MovieServiceImpl();
 
     private final ReviewService reviewService = new ReviewServiceImpl();
+
+    private final RatingService ratingService = new RatingServiceImpl();
 
     private ServiceFactory() { }
 
@@ -40,5 +44,9 @@ public class ServiceFactory {
 
     public ReviewService getReviewService() {
         return reviewService;
+    }
+
+    public RatingService getRatingService(){
+        return  ratingService;
     }
 }

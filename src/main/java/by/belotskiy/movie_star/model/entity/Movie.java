@@ -146,7 +146,7 @@ public class Movie extends BaseEntity implements Serializable {
         int result = (int) (getId() ^ (getId() >>> 32));
         result = 31 * result + (getTitle() != null ? getTitle().hashCode() : 0);
         result = 31 * result + (getCountry() != null ? getCountry().hashCode() : 0);
-        result = 31 * result + getYear() ^ (getYear() >>> 32);
+        result = 31 * result + getYear() ^ (getYear() >>> 0);
         result = 31 * result + (getGenre() != null ? getGenre().hashCode() : 0);
         result = 31 * result  + getAgeCategory() ^ (getAgeCategory() >>> 32);
         result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);

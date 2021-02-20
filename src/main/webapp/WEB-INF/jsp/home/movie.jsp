@@ -25,8 +25,8 @@
                 <h1 align="center">Описание</h1>
                 <h5 align="justify">${movie.description}</h5>
             </div>
-            <h1 align="center">*Здесь будет звездночный рейтинг*</h1>
-            <form method="post">
+            <form method="post" action="rating.do">
+                <input type="hidden" name="movieId" value="${movie.id}">
                 <div class="rating rating_set">
                     <div class="rating__body">
                         <div class="rating__active"></div>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="rating__value">6.4</div>
                 </div>
-                <input id="send_rating_btn" type="button" value="Send rating">
+                <button type="submit send-rating-btn btn btn-secondary m-1">Send rating</button>
             </form>
 
             <h2 align="center">*Reviews*</h2>
@@ -93,7 +93,7 @@
                         <ctg:accessUser userId="${review.userId}">
                             <form method="post" action="review_delete.do">
                                 <input type="hidden" name="reviewId" value="${review.id}">
-                                <button type="submit">delete review</button>
+                                <button type="submit" class="delete_btn btn btn-danger text-light">delete review</button>
                             </form>
                         </ctg:accessUser>
                     </div>
