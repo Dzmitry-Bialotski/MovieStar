@@ -14,7 +14,7 @@
                     <div class="movie-image-container movie-holder">
 
                             <div class="movie-block">
-                                <h4 align="center"> Rating - ${requestScope.movie.rating} <span style="color: yellow">&#9733;</span></h4>
+                                <h4 align="center"> Rating - ${movie.rating} <span style="color: yellow">&#9733;</span></h4>
                             </div>
                             <div class="movie-image-cover"></div>
                             <img class="movie-item__image" src="${movie.imagePath}" alt="Image">
@@ -28,6 +28,14 @@
                     </a>
                 </div>
             </c:forEach>
+        </div>
+    </div>
+    <div class="page-container">
+        <div class="prev-page-container mt-2 mb-4">
+            <a href="movies.do?page=${sessionScope.prevPage}" class="btn btn-primary">Previous Page</a>
+        </div>
+        <div class="next-page-container mt-2 mb-4">
+            <a href="movies.do?page=${sessionScope.nextPage}" class="btn btn-primary">Next Page</a>
         </div>
     </div>
 

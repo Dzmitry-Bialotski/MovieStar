@@ -17,11 +17,15 @@ public class MovieServiceImpl implements MovieService {
     private final MovieDao movieDao = DaoFactory.getInstance().getMovieDao();
 
     @Override
-    public List<Movie> findALlMovies() throws ServiceException {
+    public List<Movie> findALlMovies(int page, int count) throws ServiceException {
         List<Movie> movies;
         try {
             movies = movieDao.findAll();
-            movies = movies.stream().filter(movie -> movie.getStatus() == Status.ACTIVE).collect(Collectors.toList());
+            movies = movies.stream()
+                    .filter(movie -> movie.getStatus() == Status.ACTIVE)
+                    .skip((page - 1) * count).
+                    limit(count)
+                    .collect(Collectors.toList());
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

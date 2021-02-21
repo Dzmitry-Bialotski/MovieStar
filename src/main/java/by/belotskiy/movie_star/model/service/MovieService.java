@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface MovieService {
 
-    List<Movie> findALlMovies() throws ServiceException;
+    List<Movie> findALlMovies(int page, int count) throws ServiceException;
 
     Optional<Movie> findMovie(int movieID) throws ServiceException;
 

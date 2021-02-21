@@ -12,4 +12,7 @@ public class SessionAttributeName {
     public static final String ERROR_MESSAGE = "errorMessage";
     public static final String USER = "user";
     public static final String DEFAULT_AVATAR_PATH = "defaultAvatarPath";
+    public static final String PREVIOUS_PAGE = "prevPage";
+    public static final String CURRENT_PAGE = "currentPage";
+    public static final String NEXT_PAGE = "nextPage";
 }
