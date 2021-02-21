@@ -17,6 +17,7 @@ import java.util.*;
 public class ReviewDaoImpl implements ReviewDao {
 
     private static final String REVIEW_ID = "review_id";
+
     @Override
     public List<Review> findALl() throws DaoException {
         return findAllByCriteria(new HashMap<>());

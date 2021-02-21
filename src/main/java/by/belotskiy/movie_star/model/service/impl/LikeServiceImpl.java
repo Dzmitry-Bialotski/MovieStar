@@ -30,7 +30,7 @@ public class LikeServiceImpl implements LikeService {
     public MutablePair<Integer, Integer> calcLikesAndDislikes(int reviewId) throws ServiceException {
         MutablePair<Integer, Integer> result;
         try{
-            result = likeDao.getLikesAndDislikes();
+            result = likeDao.getLikesAndDislikes(reviewId);
         }catch (DaoException e){
             throw new ServiceException(e);
         }

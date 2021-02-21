@@ -3,12 +3,12 @@ package by.belotskiy.movie_star.model.entity;
 public class Like {
     private int userId;
     private int reviewId;
-    private boolean isLikeOrDislike;
+    private boolean isLike;
 
-    public Like(int userId, int reviewId, boolean isLikeOrDislike) {
+    public Like(int userId, int reviewId, boolean isLike) {
         this.userId = userId;
         this.reviewId = reviewId;
-        this.isLikeOrDislike = isLikeOrDislike;
+        this.isLike = isLike;
     }
 
     public int getUserId() {
@@ -27,12 +27,12 @@ public class Like {
         this.reviewId = reviewId;
     }
 
-    public boolean isLikeOrDislike() {
-        return isLikeOrDislike;
+    public boolean isLike() {
+        return isLike;
     }
 
-    public void setLikeOrDislike(boolean likeOrDislike) {
-        isLikeOrDislike = likeOrDislike;
+    public void setLike(boolean likeOrDislike) {
+        isLike = likeOrDislike;
     }
 
     @Override
@@ -42,12 +42,12 @@ public class Like {
         Like like = (Like) o;
         return getUserId() == like.getUserId()
                 && getReviewId() == like.getReviewId()
-                && isLikeOrDislike() == like.isLikeOrDislike();
+                && isLike() == like.isLike();
     }
 
     @Override
     public int hashCode() {
-        int result =  isLikeOrDislike() ? 1 : 0;
+        int result =  isLike() ? 1 : 0;
         result = 31 * result + getReviewId();
         result = 31 * result + getUserId();
         return result;
@@ -59,7 +59,7 @@ public class Like {
         final StringBuilder sb = new StringBuilder("Like{");
         sb.append("userId=").append(userId);
         sb.append(", reviewId=").append(reviewId);
-        sb.append(", isLikeOrDislike=").append(isLikeOrDislike);
+        sb.append(", isLikeOrDislike=").append(isLike);
         sb.append('}');
         return sb.toString();
     }

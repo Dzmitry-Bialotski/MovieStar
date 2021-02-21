@@ -2,27 +2,97 @@ package by.belotskiy.movie_star.model.dao.impl;
 
 import by.belotskiy.movie_star.exception.DaoException;
 import by.belotskiy.movie_star.model.dao.RatingDao;
+import by.belotskiy.movie_star.model.dao.query.RatingQuery;
+import by.belotskiy.movie_star.model.dao.util.DaoUtil;
 import by.belotskiy.movie_star.model.entity.Rating;
+import by.belotskiy.movie_star.model.pool.DynamicConnectionPool;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class RatingDaoImpl implements RatingDao {
     @Override
     public boolean isExists(Rating rating) throws DaoException {
-
-        return false;
+        boolean result;
+        PreparedStatement statement = null;
+        Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        ResultSet resultSet = null;
+        String query = "";
+        try{
+            query = RatingQuery.SELECT_RATING_BY_USER_ID_MOVIE_ID;
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, rating.getUserId());
+            statement.setInt(2, rating.getMovieId());
+            resultSet = statement.executeQuery();
+            result = resultSet.next();
+        }catch (SQLException  e) {
+            throw new DaoException("Error executing query " + query, e);
+        } finally {
+            DaoUtil.releaseResources(connection, statement, resultSet);
+        }
+        return result;
     }
 
     @Override
     public boolean update(Rating rating) throws DaoException {
-        return false;
+        PreparedStatement statement = null;
+        Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        String query = "";
+        try{
+            query = RatingQuery.UPDATE_RATING;
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, rating.getValue());
+            statement.setInt(2, rating.getMovieId());
+            statement.setInt(3, rating.getUserId());
+            statement.executeUpdate();
+        }catch (SQLException  e) {
+            throw new DaoException("Error executing query " + query, e);
+        } finally {
+            DaoUtil.releaseResources(connection, statement);
+        }
+        return true;
     }
 
     @Override
     public boolean save(Rating rating) throws DaoException {
-        return false;
+        PreparedStatement statement = null;
+        Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        String query = "";
+        try{
+            query = RatingQuery.INSERT_RATING;
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, rating.getUserId());
+            statement.setInt(2, rating.getMovieId());
+            statement.setInt(3, rating.getValue());
+            statement.executeUpdate();
+        }catch (SQLException e) {
+            throw new DaoException("Error executing query " + query, e);
+        } finally {
+            DaoUtil.releaseResources(connection, statement);
+        }
+        return true;
     }
 
     @Override
     public double calcAverageRating(int movieId) throws DaoException {
-        return 0;
+        double result;
+        PreparedStatement statement = null;
+        Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        ResultSet resultSet = null;
+        String query = "";
+        try{
+            query = RatingQuery.SELECT_AVG_RATING_BY_MOVIE_ID;
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, movieId);
+            resultSet = statement.executeQuery();
+            resultSet.next();
+            result = resultSet.getDouble(1);
+        }catch (SQLException  e) {
+            throw new DaoException("Error executing query " + query, e);
+        } finally {
+            DaoUtil.releaseResources(connection, statement, resultSet);
+        }
+        return result;
     }
 }
