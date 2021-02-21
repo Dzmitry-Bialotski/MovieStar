@@ -8,6 +8,8 @@ import by.belotskiy.movie_star.model.entity.Like;
 import by.belotskiy.movie_star.model.service.LikeService;
 import org.apache.commons.lang3.tuple.MutablePair;
 
+import java.util.Optional;
+
 public class LikeServiceImpl implements LikeService {
 
     private final LikeDao likeDao = DaoFactory.getInstance().getLikeDao();
@@ -35,5 +37,23 @@ public class LikeServiceImpl implements LikeService {
             throw new ServiceException(e);
         }
         return result;
+    }
+
+    @Override
+    public Optional<Like> findLike(int userId, int reviewId) throws ServiceException {
+        try {
+            return likeDao.findLike(userId, reviewId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public boolean deleteLike(int userId, int reviewId) throws ServiceException {
+        try {
+            return likeDao.deleteLike(userId, reviewId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
     }
 }

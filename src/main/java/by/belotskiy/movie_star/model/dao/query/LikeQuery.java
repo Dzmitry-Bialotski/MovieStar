@@ -20,4 +20,7 @@ public class LikeQuery {
     public static final String SELECT_LIKE_BY_USER_ID_REVIEW_ID = "SELECT user_id, review_id, is_like FROM " + LIKES_TABLE
             + " WHERE user_id = ? AND review_id = ?";
 
+    public static final String DELETE_LIKE = "DELETE FROM " + LIKES_TABLE +
+            " WHERE user_id = ? AND review_id = ?";
+
 }

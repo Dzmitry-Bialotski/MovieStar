@@ -6,4 +6,3 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/movie.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/review.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/rating.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">

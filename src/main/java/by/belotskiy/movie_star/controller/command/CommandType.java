@@ -61,6 +61,8 @@ public enum CommandType {
     PROVIDE_IMAGE(new ProvideImageCommand()),
 
     LIKE(new LikeCommand()),
+
+    DISLIKE(new DislikeCommand()),
     ;
 
     private final ActionCommand command;

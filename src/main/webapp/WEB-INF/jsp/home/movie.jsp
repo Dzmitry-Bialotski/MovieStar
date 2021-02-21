@@ -26,29 +26,30 @@
                 <h1 align="center">Описание</h1>
                 <h5 align="justify">${movie.description}</h5>
             </div>
-            <form method="post" action="rating.do">
-                <input type="hidden" name="movieId" value="${movie.id}">
-                <div class="rating rating_set">
-                    <div class="rating__body">
-                        <div class="rating__active"></div>
-                        <div class="rating__items">
-                            <input type="radio" class="rating__item" value="1" name="rating">
-                            <input type="radio" class="rating__item" value="2" name="rating">
-                            <input type="radio" class="rating__item" value="3" name="rating">
-                            <input type="radio" class="rating__item" value="4" name="rating">
-                            <input type="radio" class="rating__item" value="5" name="rating">
-                            <input type="radio" class="rating__item" value="6" name="rating">
-                            <input type="radio" class="rating__item" value="7" name="rating">
-                            <input type="radio" class="rating__item" value="8" name="rating">
-                            <input type="radio" class="rating__item" value="9" name="rating">
-                            <input type="radio" class="rating__item" value="10" name="rating">
+            <ctg:accessRole accessRole="SPECTATOR">
+                <form method="post" action="rating.do">
+                    <input type="hidden" name="movieId" value="${movie.id}">
+                    <div class="rating rating_set">
+                        <div class="rating__body">
+                            <div class="rating__active"></div>
+                            <div class="rating__items">
+                                <input type="radio" class="rating__item" value="1" name="rating">
+                                <input type="radio" class="rating__item" value="2" name="rating">
+                                <input type="radio" class="rating__item" value="3" name="rating">
+                                <input type="radio" class="rating__item" value="4" name="rating">
+                                <input type="radio" class="rating__item" value="5" name="rating">
+                                <input type="radio" class="rating__item" value="6" name="rating">
+                                <input type="radio" class="rating__item" value="7" name="rating">
+                                <input type="radio" class="rating__item" value="8" name="rating">
+                                <input type="radio" class="rating__item" value="9" name="rating">
+                                <input type="radio" class="rating__item" value="10" name="rating">
+                            </div>
                         </div>
+                        <div class="rating__value">${requestScope.movie.rating}</div>
                     </div>
-                    <div class="rating__value">${requestScope.movie.rating}</div>
-                </div>
-                <button type="submit" class="send-rating-btn btn btn-success m-1">Send rating</button>
-            </form>
-
+                    <button type="submit" class="send-rating-btn btn btn-success m-1">Send rating</button>
+                </form>
+            </ctg:accessRole>
             <h3 align="center">Reviews</h3>
             <div class="review-section">
                 <ctg:accessRole accessRole="REVIEWER">
@@ -56,7 +57,7 @@
                         <input type="hidden" name="userId" value="${sessionScope.user.id}">
                         <input type="hidden" name="movieId" value="${movie.id}">
                         <textarea name="text" placeholder="write your review hear" class="form-control mr-sm-2 review-textarea"></textarea>
-                        <button type="submit" class="btn btn-outline-success my-2 my-sm-0"> Send review </button>
+                        <button type="submit" class="btn btn-primary my-2 my-sm-0 send-review-btn"> Send review </button>
                     </form>
                 </ctg:accessRole>
                 <c:forEach var="review" items="${requestScope.movie.reviews}">
@@ -76,26 +77,27 @@
                                 <h2> ${review.userLogin}</h2>
                             </div>
                             <!-- likes -->
-                            <div class="review-user-like col-sm-1 mt-3">
-                                <form method="post" action="like.do">
-                                    <input type="hidden" name="reviewId" value="${review.id}" id="like-review-id">
-                                    <button class="btn btn-success like-btn" id="like-btn" type="submit">
-                                        <i class="far fa-thumbs-up like"></i>
-                                        <div class="likes-num" id="likes-num" > ${review.likes} </div>
-                                    </button>
-                                </form>
-                            </div>
-                            <!-- dislikes -->
-                            <div class="review-user-like col-sm-1 mt-3 dislike">
-                                <form method="post" action="dislike.do">
-                                    <input type="hidden" name="reviewId" value="${review.id}" id="dislike-review-id">
-                                    <button class="btn btn-danger like-btn" id="dislike-btn">
-                                        <i class="far fa-thumbs-down like"></i>
-                                        <div class="likes-num" id="dislikes-num"> ${review.dislikes} </div>
-                                    </button>
-                                </form>
-                            </div>
-
+                            <ctg:accessRole accessRole="SPECTATOR">
+                                <div class="review-user-like col-sm-1 mt-3">
+                                    <form method="post" action="like.do">
+                                        <input type="hidden" name="reviewId" value="${review.id}" id="like-review-id">
+                                        <button class="btn btn-success like-btn" id="like-btn" type="submit">
+                                            <i class="far fa-thumbs-up like"></i>
+                                            <div class="likes-num" id="likes-num" > ${review.likes} </div>
+                                        </button>
+                                    </form>
+                                </div>
+                                <!-- dislikes -->
+                                <div class="review-user-like col-sm-1 mt-3 dislike">
+                                    <form method="post" action="dislike.do">
+                                        <input type="hidden" name="reviewId" value="${review.id}" id="dislike-review-id">
+                                        <button class="btn btn-danger like-btn" id="dislike-btn">
+                                            <i class="far fa-thumbs-down like"></i>
+                                            <div class="likes-num" id="dislikes-num"> ${review.dislikes} </div>
+                                        </button>
+                                    </form>
+                                </div>
+                            </ctg:accessRole>
                         </div>
                         <div class="row">
                             <div class="review-text my-2 col-sm-9">
@@ -104,7 +106,7 @@
                             <ctg:accessUser userId="${review.userId}">
                                 <form method="post" action="review_delete.do" class="col-sm-3">
                                     <input type="hidden" name="reviewId" value="${review.id}">
-                                    <button type="submit" class="delete_btn btn btn-danger text-light mr-2">delete review</button>
+                                    <button type="submit" class="delete_btn btn btn-outline-danger text-light mr-2">delete review</button>
                                 </form>
                             </ctg:accessUser>
                         </div>

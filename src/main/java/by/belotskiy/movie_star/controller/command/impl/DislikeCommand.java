@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
-public class LikeCommand implements ActionCommand {
+public class DislikeCommand implements ActionCommand {
     LikeService likeService = ServiceFactory.getInstance().getLikeService();
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
@@ -32,14 +32,14 @@ public class LikeCommand implements ActionCommand {
                 Like like;
                 if(optionalLike.isPresent()){
                     like = optionalLike.get();
-                    if(like.isLike()){
+                    if(!like.isLike()){
                         likeService.deleteLike(userId,reviewId);
                     }else{
-                        like.setLike(true);
+                        like.setLike(false);
                         likeService.update(like);
                     }
                 }else{
-                    like = new Like(userId, reviewId, true);
+                    like = new Like(userId, reviewId, false);
                     likeService.update(like);
                 }
             } catch (ServiceException e) {

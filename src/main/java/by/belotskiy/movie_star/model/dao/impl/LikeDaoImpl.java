@@ -3,6 +3,7 @@ package by.belotskiy.movie_star.model.dao.impl;
 import by.belotskiy.movie_star.exception.DaoException;
 import by.belotskiy.movie_star.model.dao.LikeDao;
 import by.belotskiy.movie_star.model.dao.query.LikeQuery;
+import by.belotskiy.movie_star.model.dao.query.ReviewQuery;
 import by.belotskiy.movie_star.model.dao.util.DaoUtil;
 import by.belotskiy.movie_star.model.entity.Like;
 import by.belotskiy.movie_star.model.pool.DynamicConnectionPool;
@@ -12,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class LikeDaoImpl implements LikeDao {
 
@@ -102,6 +104,55 @@ public class LikeDaoImpl implements LikeDao {
             DaoUtil.releaseResources(connection, statement, resultSet);
         }
         return result;
+    }
+
+    @Override
+    public Optional<Like> findLike(int userId, int reviewId) throws DaoException {
+        Optional<Like> optionalLike;
+        PreparedStatement statement = null;
+        Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        ResultSet resultSet = null;
+        String query = "";
+        try{
+            query = LikeQuery.SELECT_LIKE_BY_USER_ID_REVIEW_ID;
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, userId);
+            statement.setInt(2, reviewId);
+            resultSet = statement.executeQuery();
+            if(resultSet.next()){
+                int user_id = resultSet.getInt(1);
+                int review_id = resultSet.getInt(2);
+                boolean isLike = resultSet.getBoolean(3);
+                Like like = new Like(user_id, review_id, isLike);
+                optionalLike = Optional.of(like);
+            }else {
+                optionalLike = Optional.empty();
+            }
+        }catch (SQLException  e) {
+            throw new DaoException("Error executing query " + query, e);
+        } finally {
+            DaoUtil.releaseResources(connection, statement, resultSet);
+        }
+        return optionalLike;
+    }
+
+    @Override
+    public boolean deleteLike(int userId, int reviewId) throws DaoException {
+        PreparedStatement statement = null;
+        Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        String query = "";
+        try{
+            query = LikeQuery.DELETE_LIKE;
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, userId);
+            statement.setInt(2, reviewId);
+            statement.executeUpdate();
+        }catch (SQLException  e) {
+            throw new DaoException("Error executing query " + query, e);
+        } finally {
+            DaoUtil.releaseResources(connection, statement);
+        }
+        return true;
     }
 
 }
