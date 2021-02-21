@@ -26,6 +26,7 @@ function initRating(rating) {
     }
 //change active line width
     function setRatingActiveWidth(index = ratingValue.innerHTML) {
+        index = parseFloat(index.replace(/,/, '.'));
         const ratingActiveWidth = index / 0.1;
         ratingActive.style.width = `${ratingActiveWidth}%`;
     }
@@ -59,7 +60,7 @@ function initRating(rating) {
             let response = await fetch('КУДА ОТПРАВЛЯЕМ',{
                 method: 'GET',
                 //
-                //Тело запроса
+                //
                 //
                 //
             });

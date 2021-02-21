@@ -59,6 +59,8 @@ public enum CommandType {
     REVIEW_DELETE(new ReviewDeleteCommand()),
 
     PROVIDE_IMAGE(new ProvideImageCommand()),
+
+    LIKE(new LikeCommand()),
     ;
 
     private final ActionCommand command;

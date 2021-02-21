@@ -7,6 +7,16 @@
     border: 1px solid white; /* Параметры рамки */
     box-shadow: 0 0 7px #666; /* Параметры тени */
 }
+.review-form {
+    width: 700px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.review-textarea{
+    width: 350px !important;
+    height: 50px;
+}
+
 .avatar-medium{
     width: 80px;
     height: auto;

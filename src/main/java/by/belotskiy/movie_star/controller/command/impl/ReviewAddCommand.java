@@ -19,6 +19,9 @@ public class ReviewAddCommand implements ActionCommand {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         String text = request.getParameter(RequestParameterName.TEXT);
+        if(text == null || text.isEmpty()){
+            return new CommandResult(UrlPath.HOME_DO, CommandResult.Type.RETURN_URL);
+        }
         int userId = Integer.parseInt(request.getParameter(RequestParameterName.USER_ID));
         int movieId = Integer.parseInt(request.getParameter(RequestParameterName.MOVIE_ID));
         Review review = new Review("", "", text, 0, Status.ACTIVE, userId, movieId);

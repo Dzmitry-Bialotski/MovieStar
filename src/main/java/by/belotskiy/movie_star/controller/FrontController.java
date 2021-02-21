@@ -36,6 +36,9 @@ public class FrontController extends HttpServlet {
             if(optionalCommand.isPresent()){
                 ActionCommand command = optionalCommand.get();
                 commandResult = command.execute(request,response);
+                if(commandResult == null){
+                    return;
+                }
             }
             else{
                 commandResult =  new CommandResult(CommandResult.DEFAULT_PATH);

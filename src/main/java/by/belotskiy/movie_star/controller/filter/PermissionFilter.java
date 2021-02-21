@@ -40,7 +40,8 @@ public class PermissionFilter implements Filter {
                 CommandType.PROFILE_EDIT,
                 CommandType.EMAIL_SEND,
                 CommandType.EMAIL_CONFIRM,
-                CommandType.RATING
+                CommandType.RATING,
+                CommandType.LIKE
         ));
         List<CommandType> reviewerCommands = new ArrayList<>(spectatorCommands);
         reviewerCommands.addAll(List.of(

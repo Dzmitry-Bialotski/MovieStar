@@ -8,7 +8,7 @@ public class LikeQuery {
 
     public static final String COUNT_LIKES__AND_DISLIKES =
             "(SELECT COUNT(*) FROM " + LIKES_TABLE + " WHERE review_id = ? AND is_like = 1) " +
-                    "UNION (SELECT COUNT(*) FROM " +  LIKES_TABLE + " WHERE review_id = ? " +
+                    "UNION ALL (SELECT COUNT(*) FROM " +  LIKES_TABLE + " WHERE review_id = ? " +
                     "AND is_like = 0)";
 
     public static final String UPDATE_LIKE = "UPDATE " + LIKES_TABLE +

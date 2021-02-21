@@ -91,15 +91,6 @@
         <listener-class>by.belotskiy.movie_star.controller.listener.SessionListener</listener-class>
     </listener>
 
-    <servlet>
-        <servlet-name>Error403</servlet-name>
-        <jsp-file>/WEB-INF/jsp/error/error403.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Error403</servlet-name>
-        <url-pattern>/no-permissions</url-pattern>
-    </servlet-mapping>
-
     <jsp-config>
         <taglib>
             <taglib-uri>custom_tags</taglib-uri>

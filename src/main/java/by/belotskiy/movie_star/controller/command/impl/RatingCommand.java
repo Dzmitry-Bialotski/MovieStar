@@ -23,14 +23,18 @@ public class RatingCommand implements ActionCommand {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
-        int rating_value = Integer.parseInt(request.getParameter(RequestParameterName.RATING));
+        String rating_string = request.getParameter(RequestParameterName.RATING);
+        if(rating_string == null || rating_string.isEmpty()){
+            return new CommandResult(UrlPath.HOME_DO, CommandResult.Type.RETURN_URL);
+        }
+        int rating_value = Integer.parseInt(rating_string);
         int movieId = Integer.parseInt(request.getParameter(RequestParameterName.MOVIE_ID));
         HttpSession session = request.getSession();
         User user = (User)session.getAttribute(SessionAttributeName.USER);
         int userId = user.getId();
         Rating rating = new Rating(rating_value, userId, movieId);
         try {
-            ratingService.updateRating(rating);
+            ratingService.update(rating);
         } catch (ServiceException e) {
             throw new CommandException(e);
         }

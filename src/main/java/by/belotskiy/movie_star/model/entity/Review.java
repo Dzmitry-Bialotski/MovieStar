@@ -14,6 +14,9 @@ public class Review extends BaseEntity implements Serializable {
     private int movieId;
     private int likesNumber;
 
+    private int likes;
+    private int dislikes;
+
     public Review(String userLogin, String userAvatarPath, String text,
                   int likesNumber, Status status, int userId, int movieId) {
         this.userLogin = userLogin;
@@ -124,5 +127,21 @@ public class Review extends BaseEntity implements Serializable {
 
     public void setMovieId(int movieId) {
         this.movieId = movieId;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public int getDislikes() {
+        return dislikes;
+    }
+
+    public void setDislikes(int dislikes) {
+        this.dislikes = dislikes;
     }
 }

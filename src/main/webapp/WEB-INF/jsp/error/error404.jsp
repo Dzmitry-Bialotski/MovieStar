@@ -5,7 +5,7 @@
 <fmt:setLocale value="${sessionScope.currentLocale}"/>
 <fmt:setBundle basename="language"/>
 <tags:general title="error_404.title">
-    <div class="col align-self-center text-center my-3 p-5">
+    <div class="col align-self-center text-center my-3 p-5 section">
         <p class="h1 text-danger" ><fmt:message key="error_404.title"/> </p>
         <p class="h2 text-danger"> <fmt:message key="error_404.general"/> </p>
         <p class="h2 text-danger"> <fmt:message key="error_404.hint"/> </p>

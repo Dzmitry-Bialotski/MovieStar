@@ -26,6 +26,7 @@ public class LikeDaoImpl implements LikeDao {
             query = LikeQuery.COUNT_LIKES__AND_DISLIKES;
             statement = connection.prepareStatement(query);
             statement.setInt(1, reviewId);
+            statement.setInt(2, reviewId);
             resultSet = statement.executeQuery();
             resultSet.next();
             int likes = resultSet.getInt(1);

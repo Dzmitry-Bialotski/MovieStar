@@ -13,6 +13,7 @@
                 <h6 align="center">
                         ${movie.country}, ${movie.ageCategory}+, ${movie.movieType.toString()}, ${movie.genre.toString()}
                 </h6>
+                <h4 align="center"> Rating - ${requestScope.movie.rating} <span style="color: yellow">&#9733;</span></h4>
             </div>
             <div class="youtube-trailer my-1">
                 <iframe width="560" height="315"
@@ -43,21 +44,21 @@
                             <input type="radio" class="rating__item" value="10" name="rating">
                         </div>
                     </div>
-                    <div class="rating__value">6.4</div>
+                    <div class="rating__value">${requestScope.movie.rating}</div>
                 </div>
-                <button type="submit send-rating-btn btn btn-secondary m-1">Send rating</button>
+                <button type="submit" class="send-rating-btn btn btn-success m-1">Send rating</button>
             </form>
 
-            <h2 align="center">*Reviews*</h2>
-            <ctg:accessRole accessRole="REVIEWER">
-                <form method="post" action="review_add.do">
-                    <input type="hidden" name="userId" value="${sessionScope.user.id}">
-                    <input type="hidden" name="movieId" value="${movie.id}">
-                    <textarea name="text" placeholder="write your review hear"></textarea>
-                    <button type="submit"> Send review </button>
-                </form>
-            </ctg:accessRole>
+            <h3 align="center">Reviews</h3>
             <div class="review-section">
+                <ctg:accessRole accessRole="REVIEWER">
+                    <form method="post" action="review_add.do" class="form-inline my-2 my-lg-0 review-form">
+                        <input type="hidden" name="userId" value="${sessionScope.user.id}">
+                        <input type="hidden" name="movieId" value="${movie.id}">
+                        <textarea name="text" placeholder="write your review hear" class="form-control mr-sm-2 review-textarea"></textarea>
+                        <button type="submit" class="btn btn-outline-success my-2 my-sm-0"> Send review </button>
+                    </form>
+                </ctg:accessRole>
                 <c:forEach var="review" items="${requestScope.movie.reviews}">
                     <div class="review-container my-2 p-2">
                         <div class="review-user-info row">
@@ -74,32 +75,47 @@
                             <div class="review-user-login col-sm-6 m-1">
                                 <h2> ${review.userLogin}</h2>
                             </div>
+                            <!-- likes -->
                             <div class="review-user-like col-sm-1 mt-3">
-                                <button class="btn btn-success like-btn">
-                                    <i class="far fa-thumbs-up like"></i>
-                                    <div class="likes-num"> 0 </div>
-                                </button>
+                                <form method="post" action="like.do">
+                                    <input type="hidden" name="reviewId" value="${review.id}" id="like-review-id">
+                                    <button class="btn btn-success like-btn" id="like-btn" type="submit">
+                                        <i class="far fa-thumbs-up like"></i>
+                                        <div class="likes-num" id="likes-num" > ${review.likes} </div>
+                                    </button>
+                                </form>
                             </div>
+                            <!-- dislikes -->
                             <div class="review-user-like col-sm-1 mt-3 dislike">
-                                <button class="btn btn-danger like-btn">
-                                    <i class="far fa-thumbs-down like"></i>
-                                    <div class="likes-num"> 0 </div>
-                                </button>
+                                <form method="post" action="dislike.do">
+                                    <input type="hidden" name="reviewId" value="${review.id}" id="dislike-review-id">
+                                    <button class="btn btn-danger like-btn" id="dislike-btn">
+                                        <i class="far fa-thumbs-down like"></i>
+                                        <div class="likes-num" id="dislikes-num"> ${review.dislikes} </div>
+                                    </button>
+                                </form>
                             </div>
+
                         </div>
-                        <div class="review-text my-2">
-                            <p><h4> ${review.text}</h4></p>
+                        <div class="row">
+                            <div class="review-text my-2 col-sm-9">
+                                <h4 align="justify"> ${review.text}</h4>
+                            </div>
+                            <ctg:accessUser userId="${review.userId}">
+                                <form method="post" action="review_delete.do" class="col-sm-3">
+                                    <input type="hidden" name="reviewId" value="${review.id}">
+                                    <button type="submit" class="delete_btn btn btn-danger text-light mr-2">delete review</button>
+                                </form>
+                            </ctg:accessUser>
                         </div>
-                        <ctg:accessUser userId="${review.userId}">
-                            <form method="post" action="review_delete.do">
-                                <input type="hidden" name="reviewId" value="${review.id}">
-                                <button type="submit" class="delete_btn btn btn-danger text-light">delete review</button>
-                            </form>
-                        </ctg:accessUser>
+
                     </div>
                 </c:forEach>
             </div>
         </div>
     </div>
 </tags:general>
+<!--
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/like.js"></script>
+-->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/rating.js"></script>

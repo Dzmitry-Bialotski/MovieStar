@@ -19,16 +19,8 @@ public class Movie extends BaseEntity implements Serializable {
     private String description;
     private String youtubeTrailer;
     private String imagePath;
-
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
-
     private List<Review> reviews = new ArrayList<>();
+    private String rating;
 
     public Movie(String title, String country, int year, Genre genre, MovieType movieType, int ageCategory,
                  String description, String youtubeTrailer, Status status, String imagePath) {
@@ -129,6 +121,22 @@ public class Movie extends BaseEntity implements Serializable {
         this.movieType = movieType;
     }
 
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -168,4 +176,5 @@ public class Movie extends BaseEntity implements Serializable {
                 .append(", imagePath='").append(imagePath).append('\'')
                 .append('}').toString();
     }
+
 }
