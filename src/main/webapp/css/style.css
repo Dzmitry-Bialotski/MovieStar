@@ -149,3 +149,10 @@ input:focus{
 .navbar-username{
     margin: auto;
 }
+
+.nav-item .search-input{
+    width: 180px;
+}
+.nav-item .search-btn{
+    height: 36px;
+}

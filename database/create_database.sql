@@ -1,6 +1,7 @@
 CREATE TABLE `likes` (
   `user_id` int NOT NULL AUTO_INCREMENT,
   `review_id` int NOT NULL,
+  `is_like`   tinyint NULL,
   PRIMARY KEY (`user_id`,`review_id`),
   KEY `like_review_id_fk_idx` (`review_id`),
   CONSTRAINT `like_review_id_fk` FOREIGN KEY (`review_id`) REFERENCES `reviews` (`review_id`) ON DELETE CASCADE ON UPDATE CASCADE,

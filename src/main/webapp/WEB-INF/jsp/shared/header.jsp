@@ -36,10 +36,10 @@
                         </a>
                     </div>
                 </li>
-                <li>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="width: 150px">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <li class="nav-item">
+                    <form class="form-inline m-2 my-lg-0">
+                        <input class="form-control mr-sm-2 search-input" type="search" placeholder="<fmt:message key="search" />">
+                        <button class="btn btn-outline-success my-2 my-sm-0 search-btn" type="submit"><i class="fa fa-search mr-1" aria-hidden="true"></i></button>
                     </form>
                 </li>
             </ul>

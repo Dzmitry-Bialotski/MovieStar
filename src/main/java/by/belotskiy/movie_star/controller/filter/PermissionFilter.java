@@ -29,7 +29,8 @@ public class PermissionFilter implements Filter {
                 CommandType.CHANGE_LOCALE_COMMAND,
                 CommandType.MOVIES,
                 CommandType.MOVIE,
-                CommandType.PROVIDE_IMAGE
+                CommandType.PROVIDE_IMAGE,
+                CommandType.SEARCH
         );
 
         List<CommandType> spectatorCommands = new ArrayList<>(guestCommands);

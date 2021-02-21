@@ -63,6 +63,8 @@ public enum CommandType {
     LIKE(new LikeCommand()),
 
     DISLIKE(new DislikeCommand()),
+
+    SEARCH(new SearchCommand()),
     ;
 
     private final ActionCommand command;

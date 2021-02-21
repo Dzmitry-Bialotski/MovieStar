@@ -17,4 +17,5 @@ public class PagePath {
     public static final String MOVIE = "/WEB-INF/jsp/home/movie.jsp";
     public static final String MOVIES = "/WEB-INF/jsp/home/movies.jsp";
     public static final String PROFILE = "/WEB-INF/jsp/home/profile.jsp";
+    public static final String SEARCH = "/WEB-INF/jsp/home/search.jsp";
 }

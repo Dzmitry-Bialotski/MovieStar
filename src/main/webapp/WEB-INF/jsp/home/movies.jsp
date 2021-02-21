@@ -5,6 +5,7 @@
 <fmt:setLocale value="${sessionScope.currentLocale}"/>
 <fmt:setBundle basename="language"/>
 <tags:general title="movie">
+    <jsp:include page="/WEB-INF/jsp/home/search.jsp"/>
     <div class="section pl-3 mt-2">
         <div class="movie-list text-light p-2 row">
             <c:forEach var="movie" items="${requestScope.movies}">
