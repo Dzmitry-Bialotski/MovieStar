@@ -5,3 +5,4 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/validation.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/select.js"></script>

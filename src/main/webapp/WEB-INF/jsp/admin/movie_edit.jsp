@@ -53,6 +53,9 @@
     <div class="movie-form">
         <h1 align="center"> Edit Movie</h1>
         <form action="movie_edit.do" method="post">
+            <input type="hidden" id="genre" value="${requestScope.movie.genre}">
+            <input type="hidden" id="movie_type" value="${requestScope.movie.movieType}">
+            <input type="hidden" id="description" value="${requestScope.movie.description}">
             <!-- onsubmit= "return movieValidate(this.login.value, this.password.value);" -->
             <input type="hidden" name="movieId" value="${requestScope.movie.id}">
             <div class="form-group">
@@ -68,22 +71,25 @@
                        value="${requestScope.movie.year}">
             </div>
             <div class="form-group ">
-                <select class="form-control" name="genre">
-                    <option value="DETECTIVE">detective</option>
-                    <option value="DRAMA">drama</option>
-                    <option value="MUSICAL">musical</option>
-                    <option value="ADVENTURE">adventure</option>
-                    <option value="FANTASTIC">fantastic</option>
-                    <option value="HORROR">horror</option>
-                    <option value="COMEDY" selected>comedy</option>
+                <select name ="genre" class="form-control" id="select-genre">
+                    <option value="" selected><fmt:message key="Genre" />...</option>
+                    <option value="ACTION"><fmt:message key="ACTION" /></option>
+                    <option value="DETECTIVE"><fmt:message key="DETECTIVE" /></option>
+                    <option value="DRAMA"><fmt:message key="DRAMA" /></option>
+                    <option value="MUSICAL"><fmt:message key="MUSICAL" /></option>
+                    <option value="ADVENTURE"><fmt:message key="ADVENTURE" /></option>
+                    <option value="FANTASTIC"><fmt:message key="FANTASTIC" /></option>
+                    <option value="HORROR"><fmt:message key="HORROR" /></option>
+                    <option value="COMEDY"><fmt:message key="COMEDY" /></option>
                 </select>
             </div>
             <div class="form-group ">
-                <select  class="form-control" name="movie_type">
-                    <option value="FILM" selected>film</option>
-                    <option value="SERIES" selected>series</option>
-                    <option value="ANIME" selected>anime</option>
-                    <option value="CARTOON" selected>cartoon</option>
+                <select name="movie_type" class="form-control" id="select-movie_type">
+                    <option value="" selected><fmt:message key="MovieType" />...</option>
+                    <option value="FILM"><fmt:message key="FILM" /></option>
+                    <option value="SERIES"><fmt:message key="SERIES" /></option>
+                    <option value="ANIME"><fmt:message key="ANIME" /></option>
+                    <option value="CARTOON"><fmt:message key="CARTOON" /></option>
                 </select>
             </div>
 
@@ -92,7 +98,7 @@
                        value="${requestScope.movie.ageCategory}">
             </div>
             <div class="form-group">
-                <textarea class="form-control" name="description" placeholder="description"
+                <textarea class="form-control" name="description" placeholder="description" id="aria-description"
                           value="${requestScope.movie.description}"></textarea>
             </div>
             <div class="form-group">
@@ -108,5 +114,22 @@
     </div>
 </div>
 </body>
+<script>
+    const genre = document.getElementById('genre').value;
+    const select_genre = document.querySelector('#select-genre').getElementsByTagName('option');
+    for (let i = 0; i < select_genre.length; i++) {
+        if (select_genre[i].value === genre) select_genre[i].selected = true;
+    }
+
+    const movie_type = document.getElementById('movie_type').value;
+    const select_movie_type = document.querySelector('#select-movie_type').getElementsByTagName('option');
+    for (let i = 0; i < select_movie_type.length; i++) {
+        if (select_movie_type[i].value === movie_type) select_movie_type[i].selected = true;
+    }
+
+    const description = document.getElementById('description').value;
+    const area = document.querySelector('#aria-description');
+    area.value = description;
+</script>
 </html>
 

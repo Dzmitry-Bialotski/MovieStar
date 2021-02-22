@@ -4,16 +4,14 @@ import by.belotskiy.movie_star.exception.DaoException;
 import by.belotskiy.movie_star.exception.ServiceException;
 import by.belotskiy.movie_star.model.dao.ReviewDao;
 import by.belotskiy.movie_star.model.dao.factory.DaoFactory;
-import by.belotskiy.movie_star.model.entity.Movie;
 import by.belotskiy.movie_star.model.entity.Review;
 import by.belotskiy.movie_star.model.entity.enums.Status;
 import by.belotskiy.movie_star.model.service.ReviewService;
-import by.belotskiy.movie_star.util.ReviewComparator;
+import by.belotskiy.movie_star.util.comparator.ReviewComparator;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ReviewServiceImpl implements ReviewService {
 

@@ -8,5 +8,7 @@ public enum SearchCriteria {
 
     AGE_CATEGORY,
 
-    SEARCH;
+    SEARCH,
+
+    SORT;
 }

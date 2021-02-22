@@ -48,7 +48,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public List<Movie> searchMovies(Map<SearchCriteria, String> searchMap) throws ServiceException {
+    public List<Movie> searchMovies(Map<SearchCriteria, String> searchMap, int page, int count) throws ServiceException {
         List<Movie> movies;
         try {
              movies = movieDao.findAll();
@@ -64,7 +64,10 @@ public class MovieServiceImpl implements MovieService {
                      case AGE_CATEGORY -> movieStream = movieStream.filter(movie -> movie.getAgeCategory() >= Integer.parseInt(value));
                  }
              }
-             movies = movieStream.collect(Collectors.toList());
+             movies = movieStream
+                     .skip((page - 1) * count)
+                     .limit(count)
+                     .collect(Collectors.toList());
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

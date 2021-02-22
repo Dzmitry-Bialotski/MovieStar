@@ -39,4 +39,8 @@ public final class RequestParameterName {
     public static final String ACTION = "action";
     public static final String RATING = "rating";
     public static final String SEARCH = "search";
+    public static final String SORT_BY = "sort_by";
+    public static final String NEXT_PAGE_HREF = "nextPageHref";
+    public static final String PREV_PAGE_HREF = "prevPageHref";
+
 }

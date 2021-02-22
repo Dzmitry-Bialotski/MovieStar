@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RatingDaoImpl implements RatingDao {
     @Override
@@ -88,6 +90,30 @@ public class RatingDaoImpl implements RatingDao {
             resultSet = statement.executeQuery();
             resultSet.next();
             result = resultSet.getDouble(1);
+        }catch (SQLException  e) {
+            throw new DaoException("Error executing query " + query, e);
+        } finally {
+            DaoUtil.releaseResources(connection, statement, resultSet);
+        }
+        return result;
+    }
+
+    @Override
+    public Map<Integer, Double> provideAllRatings() throws DaoException {
+        Map<Integer, Double> result = new HashMap<>();
+        PreparedStatement statement = null;
+        Connection connection = DynamicConnectionPool.getInstance().provideConnection();
+        ResultSet resultSet = null;
+        String query = "";
+        try{
+            query = RatingQuery.SELECT_ALL_RATINGS_GROUP_BY_MOVIE;
+            statement = connection.prepareStatement(query);
+            resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                int key = resultSet.getInt(1);
+                double value = resultSet.getDouble(2);
+                result.put(key, value);
+            }
         }catch (SQLException  e) {
             throw new DaoException("Error executing query " + query, e);
         } finally {

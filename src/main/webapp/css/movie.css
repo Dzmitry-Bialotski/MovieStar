@@ -53,7 +53,7 @@
     position: absolute;
     width: 234px;
     height: 70px;
-    top: 290px;
+    top: 295px;
     background: rgba(0, 0, 0, 0.7);
     padding:20px;
     display:none;
@@ -65,7 +65,7 @@
 .movie-image-cover{
     position: absolute;
     width: 234px;
-    height: 290px;
+    height: 295px;
     background: rgba(0, 0, 0, 0.3);
     display:none;
 }
@@ -86,4 +86,8 @@
 }
 .next-page-container{
     float: right;
+}
+.movie-item__image{
+    width: 234px;
+    height: 360px;
 }

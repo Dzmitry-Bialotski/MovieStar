@@ -31,10 +31,10 @@
     </div>
     <div class="page-container">
         <div class="prev-page-container mt-2 mb-4">
-            <a href="movies.do?page=${sessionScope.prevPage}" class="btn btn-primary"><fmt:message key="PrevPage"/></a>
+            <a href="${requestScope.prevPageHref}" class="btn btn-primary"><fmt:message key="PrevPage"/></a>
         </div>
         <div class="next-page-container mt-2 mb-4">
-            <a href="movies.do?page=${sessionScope.nextPage}" class="btn btn-primary"><fmt:message key="NextPage"/></a>
+            <a href="${requestScope.nextPageHref}" class="btn btn-primary"><fmt:message key="NextPage"/></a>
         </div>
     </div>
 

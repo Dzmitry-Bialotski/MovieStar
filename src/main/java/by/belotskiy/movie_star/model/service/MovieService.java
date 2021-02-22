@@ -23,6 +23,6 @@ public interface MovieService {
 
     List<Movie> findALlMoviesForAdmin() throws ServiceException;
 
-    List<Movie> searchMovies(Map<SearchCriteria, String> searchMap) throws ServiceException;
+    List<Movie> searchMovies(Map<SearchCriteria, String> searchMap, int page, int count) throws ServiceException;
 
 }

@@ -1,4 +1,4 @@
-package by.belotskiy.movie_star.util;
+package by.belotskiy.movie_star.util.comparator;
 
 import by.belotskiy.movie_star.model.entity.Review;
 
