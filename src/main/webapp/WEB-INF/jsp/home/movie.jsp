@@ -11,9 +11,9 @@
             <div class="movie-info my-1">
                 <h2 align="center">${movie.title} (${movie.year})</h2>
                 <h6 align="center">
-                        ${movie.country}, ${movie.ageCategory}+, ${movie.movieType.toString()}, ${movie.genre.toString()}
+                        ${movie.country}, ${movie.ageCategory}+, <fmt:message key="${movie.movieType.toString()}"/>, <fmt:message key="${movie.genre.toString()}"/>
                 </h6>
-                <h4 align="center"> Rating - ${requestScope.movie.rating} <span style="color: yellow">&#9733;</span></h4>
+                <h4 align="center"> <fmt:message key="Rating"/> - ${requestScope.movie.rating} <span style="color: yellow">&#9733;</span></h4>
             </div>
             <div class="youtube-trailer my-1">
                 <iframe width="560" height="315"
@@ -23,7 +23,7 @@
                 </iframe>
             </div>
             <div class="movie-description my-1">
-                <h1 align="center">Описание</h1>
+                <h1 align="center"><fmt:message key="Description"/></h1>
                 <h5 align="justify">${movie.description}</h5>
             </div>
             <ctg:accessRole accessRole="SPECTATOR">
@@ -47,17 +47,17 @@
                         </div>
                         <div class="rating__value">${requestScope.movie.rating}</div>
                     </div>
-                    <button type="submit" class="send-rating-btn btn btn-success m-1">Send rating</button>
+                    <button type="submit" class="send-rating-btn btn btn-success m-1"><fmt:message key="SendRating"/></button>
                 </form>
             </ctg:accessRole>
-            <h3 align="center">Reviews</h3>
+            <h3 align="center"><fmt:message key="Reviews"/></h3>
             <div class="review-section">
                 <ctg:accessRole accessRole="REVIEWER">
                     <form method="post" action="review_add.do" class="form-inline my-2 my-lg-0 review-form">
                         <input type="hidden" name="userId" value="${sessionScope.user.id}">
                         <input type="hidden" name="movieId" value="${movie.id}">
-                        <textarea name="text" placeholder="write your review hear" class="form-control mr-sm-2 review-textarea"></textarea>
-                        <button type="submit" class="btn btn-primary my-2 my-sm-0 send-review-btn"> Send review </button>
+                        <textarea name="text" placeholder="<fmt:message key="WriteReview"/>" class="form-control mr-sm-2 review-textarea"></textarea>
+                        <button type="submit" class="btn btn-primary my-2 my-sm-0 send-review-btn"> <fmt:message key="SendReview"/> </button>
                     </form>
                 </ctg:accessRole>
                 <c:forEach var="review" items="${requestScope.movie.reviews}">
@@ -106,7 +106,7 @@
                             <ctg:accessUser userId="${review.userId}">
                                 <form method="post" action="review_delete.do" class="col-sm-3">
                                     <input type="hidden" name="reviewId" value="${review.id}">
-                                    <button type="submit" class="delete_btn btn btn-outline-danger text-light mr-2">delete review</button>
+                                    <button type="submit" class="delete_btn btn btn-outline-danger text-light mr-2"><fmt:message key="DeleteReview"/></button>
                                 </form>
                             </ctg:accessUser>
                         </div>

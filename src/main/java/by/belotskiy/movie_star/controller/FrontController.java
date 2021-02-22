@@ -59,8 +59,8 @@ public class FrontController extends HttpServlet {
                 case RETURN_URL -> {
                     String returnUrl = (String) session.getAttribute(SessionAttributeName.RETURN_URL);
                     session.setAttribute(SessionAttributeName.RETURN_URL, request.getContextPath() + urlPath);
-                    //response.sendRedirect(request.getHeader("referer")); that also works arr!! :(
-                    response.sendRedirect(returnUrl);
+                    response.sendRedirect(request.getHeader("referer")); //that also works arr!! :(
+                    //response.sendRedirect(returnUrl);
                 }
             }
         } catch (CommandException e) {

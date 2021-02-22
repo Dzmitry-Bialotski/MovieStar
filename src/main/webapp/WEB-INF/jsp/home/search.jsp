@@ -5,34 +5,34 @@
 <fmt:setLocale value="${sessionScope.currentLocale}"/>
 <fmt:setBundle basename="language"/>
 <div class="section text-light m-1 py-2">
-    <form class="form-inline m-2 my-lg-0">
-        <input class="form-control mr-sm-2 search-input" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <form class="form-inline m-2 my-lg-0" action="search.do" method="post">
+        <input class="form-control mr-sm-2 search-input" name="search" type="search" placeholder="<fmt:message key="search" />" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><fmt:message key="search" /></button>
         <div class="dropdown dropdown-dark my-1 ml-2">
-            <select name="two" class="dropdown-select rounded">
-                <option value="">Select Genre...</option>
-                <option value="ACTION">ACTION</option>
-                <option value="DETECTIVE">DETECTIVE</option>
-                <option value="DRAMA">DRAMA</option>
-                <option value="MUSICAL">MUSICAL</option>
-                <option value="ADVENTURE">ADVENTURE</option>
-                <option value="FANTASTIC">FANTASTIC</option>
-                <option value="HORROR">HORROR</option>
-                <option value="COMEDY">COMEDY</option>
+            <select name ="genre" class="dropdown-select rounded">
+                <option value=""><fmt:message key="Genre" />...</option>
+                <option value="ACTION"><fmt:message key="ACTION" /></option>
+                <option value="DETECTIVE"><fmt:message key="DETECTIVE" /></option>
+                <option value="DRAMA"><fmt:message key="DRAMA" /></option>
+                <option value="MUSICAL"><fmt:message key="MUSICAL" /></option>
+                <option value="ADVENTURE"><fmt:message key="ADVENTURE" /></option>
+                <option value="FANTASTIC"><fmt:message key="FANTASTIC" /></option>
+                <option value="HORROR"><fmt:message key="HORROR" /></option>
+                <option value="COMEDY"><fmt:message key="COMEDY" /></option>
             </select>
         </div>
         <div class="dropdown dropdown-dark my-1 ml-2">
-            <select name="two" class="dropdown-select rounded">
-                <option value="">Select Movie Type...</option>
-                <option value="FILM">FILM</option>
-                <option value="SERIES">SERIES</option>
-                <option value="ANIME">ANIME</option>
-                <option value="CARTOON">CARTOON</option>
+            <select name="movie_type" class="dropdown-select rounded">
+                <option value=""><fmt:message key="MovieType" />...</option>
+                <option value="FILM"><fmt:message key="FILM" /></option>
+                <option value="SERIES"><fmt:message key="SERIES" /></option>
+                <option value="ANIME"><fmt:message key="ANIME" /></option>
+                <option value="CARTOON"><fmt:message key="CARTOON" /></option>
             </select>
         </div>
         <div class="dropdown dropdown-dark my-1 ml-2">
-            <select name="two" class="dropdown-select rounded">
-                <option value="">Select Age Category...</option>
+            <select name="age_category" class="dropdown-select rounded">
+                <option value=""><fmt:message key="AgeCategory" />...</option>
                 <option value="0">0+</option>
                 <option value="6">6+</option>
                 <option value="12">12+</option>

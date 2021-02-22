@@ -17,9 +17,9 @@
                      src="${pageContext.request.contextPath}${sessionScope.defaultAvatarPath}" >
             </c:if>
             <form action="avatar.upload" method="post" enctype="multipart/form-data">
-                <input type="file" name="file" />
+                <input type="file" name="file" class="form-control-file"/>
                 <input type="hidden" name="returnUrl" value="${pageContext.request.requestURL}" />
-                <input type="submit" value="upload" />
+                <input type="submit" class="btn btn-primary m-1" value="<fmt:message key="upload"/>" />
             </form>
         </div>
         <div class="col-sm-8">
@@ -51,12 +51,12 @@
                     <c:if test="${not empty sessionScope.user.secondName}">
                         <h3 class="user-info__value">${sessionScope.user.secondName}</h3>
                     </c:if>
-                    <h3 class="user-info__value">${sessionScope.user.role.toString()}</h3>
+                    <h3 class="user-info__value"><fmt:message key="${sessionScope.user.role.toString()}"/></h3>
                     <c:if test="${sessionScope.user.status.toString() == \"ACTIVE\"}">
-                        <h3 class="user-info__value green">${sessionScope.user.status.toString()}</h3>
+                        <h3 class="user-info__value green"><fmt:message key="${sessionScope.user.status.toString()}"/></h3>
                     </c:if>
                     <c:if test="${sessionScope.user.status.toString() != \"ACTIVE\"}">
-                        <h3 class="user-info__value red">${sessionScope.user.status.toString()}</h3>
+                        <h3 class="user-info__value red"><fmt:message key="${sessionScope.user.status.toString()}"/></h3>
                     </c:if>
                     <c:if test="${sessionScope.user.emailConfirmed}">
                         <h3 class="user-info__value green">${sessionScope.user.email}</h3>
@@ -74,9 +74,9 @@
     <form action="email_send.do" method="post" onsubmit=
             "return validateEmail(this.email.value);" class="section m-2 p-2 email-form row">
 
-        <input class="form-control mr-2 col-sm-7" type="email" name="email" placeholder="email">
+        <input class="form-control mr-2 col-sm-6" type="email" name="email" placeholder="<fmt:message key="email"/>">
 
-        <button type="submit" class="btn btn-primary col-sm">
+        <button type="submit" class="btn btn-primary col-sm ">
             <fmt:message key="confirm_email"/>
         </button>
     </form>

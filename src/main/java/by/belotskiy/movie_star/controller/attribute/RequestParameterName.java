@@ -38,4 +38,5 @@ public final class RequestParameterName {
     public static final String FILE_NAME = "file_name";
     public static final String ACTION = "action";
     public static final String RATING = "rating";
+    public static final String SEARCH = "search";
 }

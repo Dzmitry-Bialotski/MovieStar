@@ -13,7 +13,7 @@
     margin-left: auto;
 }
 .review-textarea{
-    width: 350px !important;
+    width: 500px !important;
     height: 50px;
 }
 
@@ -46,4 +46,5 @@
 }
 .send-review-btn{
     height: 46px;
+    width: 180px !important;
 }

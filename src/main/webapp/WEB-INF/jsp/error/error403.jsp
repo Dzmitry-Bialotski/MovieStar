@@ -7,7 +7,7 @@
 <tags:general title="error_403.title">
     <div class="col align-self-center text-center my-3 p-5 section">
         <p class="h1 text-danger" ><fmt:message key="error_403.title"/></p>
-        <p class="h2 text-danger">Try to upgrade your status!</p>
+        <p class="h2 text-danger">Try to upgrade your status!<fmt:message key="error_403.upgrade"/></p>
         <p class="h2 text-danger"> <fmt:message key="error_403.general"/> </p>
         <p class="h2 text-danger"> <fmt:message key="error_403.hint"/> </p>
     </div>

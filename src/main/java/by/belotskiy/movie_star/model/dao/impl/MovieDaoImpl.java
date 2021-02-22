@@ -4,7 +4,7 @@ import by.belotskiy.movie_star.exception.DaoException;
 import by.belotskiy.movie_star.model.dao.MovieDao;
 import by.belotskiy.movie_star.model.pool.DynamicConnectionPool;
 import by.belotskiy.movie_star.model.dao.query.MovieQuery;
-import by.belotskiy.movie_star.model.dao.util.DaoUtil;
+import by.belotskiy.movie_star.util.DaoUtil;
 import by.belotskiy.movie_star.model.entity.Movie;
 import by.belotskiy.movie_star.model.entity.enums.Genre;
 import by.belotskiy.movie_star.model.entity.enums.MovieType;

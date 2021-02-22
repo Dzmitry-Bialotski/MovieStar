@@ -1,4 +1,4 @@
-package by.belotskiy.movie_star.model.dao.util;
+package by.belotskiy.movie_star.util;
 
 import by.belotskiy.movie_star.model.pool.DynamicConnectionPool;
 import org.apache.logging.log4j.LogManager;

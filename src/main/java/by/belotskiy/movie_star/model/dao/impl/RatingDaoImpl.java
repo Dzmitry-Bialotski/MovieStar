@@ -3,7 +3,7 @@ package by.belotskiy.movie_star.model.dao.impl;
 import by.belotskiy.movie_star.exception.DaoException;
 import by.belotskiy.movie_star.model.dao.RatingDao;
 import by.belotskiy.movie_star.model.dao.query.RatingQuery;
-import by.belotskiy.movie_star.model.dao.util.DaoUtil;
+import by.belotskiy.movie_star.util.DaoUtil;
 import by.belotskiy.movie_star.model.entity.Rating;
 import by.belotskiy.movie_star.model.pool.DynamicConnectionPool;
 import java.sql.Connection;
