@@ -1,5 +1,10 @@
 package by.belotskiy.movie_star.model.entity.enums;
 
+/**
+ * Genre of movie.
+ *
+ * @author Dmitriy Belotskiy
+ */
 public enum Genre {
     ACTION("action"),
     DETECTIVE("detective"),

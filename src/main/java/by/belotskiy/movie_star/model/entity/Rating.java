@@ -2,6 +2,11 @@ package by.belotskiy.movie_star.model.entity;
 
 import java.io.Serializable;
 
+/**
+ * Entity of rating.
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class Rating implements Serializable {
     private int value;
     private int userId;

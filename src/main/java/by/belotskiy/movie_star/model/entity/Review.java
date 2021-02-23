@@ -4,7 +4,11 @@ import by.belotskiy.movie_star.model.entity.enums.Status;
 
 import java.io.Serializable;
 import java.util.Objects;
-
+/**
+ * Entity of review.
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class Review extends BaseEntity implements Serializable {
     private String userLogin;
     private String userAvatarPath;

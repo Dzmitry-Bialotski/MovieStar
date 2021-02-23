@@ -5,6 +5,11 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
+/**
+ * A proxy Connection object with an overridden close() method. Used in ConnectionPool.
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class ProxyConnection implements Connection {
     private final Connection connection;
 
@@ -55,10 +60,6 @@ public class ProxyConnection implements Connection {
     @Override
     public void close() {
         DynamicConnectionPool.getInstance().releaseConnection(this);
-    }
-
-    void reallyClose() throws SQLException {
-        connection.close();
     }
 
     @Override

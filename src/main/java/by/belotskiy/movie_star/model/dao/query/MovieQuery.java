@@ -1,5 +1,10 @@
 package by.belotskiy.movie_star.model.dao.query;
 
+/**
+ * Provides queries to work with Movie entity
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class MovieQuery {
 
     private MovieQuery() {}

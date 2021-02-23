@@ -1,5 +1,10 @@
 package by.belotskiy.movie_star.model.dao.query;
 
+/**
+ * Provides queries to work with Like entity
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class LikeQuery {
 
     private static final String LIKES_TABLE = "movie_star_db.likes";

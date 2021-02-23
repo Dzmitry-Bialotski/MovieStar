@@ -1,5 +1,10 @@
 package by.belotskiy.movie_star.model.entity.enums;
 
+/**
+ * Status od entity
+ *
+ * @author Dmitriy Belotskiy
+ */
 public enum Status {
 
     ACTIVE(0),

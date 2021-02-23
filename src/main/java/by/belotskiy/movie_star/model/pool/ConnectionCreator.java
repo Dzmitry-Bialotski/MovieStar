@@ -11,6 +11,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * Create connection object.
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class ConnectionCreator {
 
     private static final Logger LOGGER = LogManager.getLogger(ConnectionCreator.class);

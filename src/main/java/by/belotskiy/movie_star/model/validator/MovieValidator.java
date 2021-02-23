@@ -2,6 +2,11 @@ package by.belotskiy.movie_star.model.validator;
 
 import by.belotskiy.movie_star.model.entity.Movie;
 
+/**
+ * Validate movie
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class MovieValidator {
 
     private MovieValidator(){}

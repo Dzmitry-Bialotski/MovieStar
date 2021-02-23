@@ -5,7 +5,11 @@ import by.belotskiy.movie_star.model.entity.enums.Status;
 
 import java.io.Serializable;
 import java.util.Objects;
-
+/**
+ * Entity of user.
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class User extends BaseEntity implements Serializable {
 
     private String login;
@@ -152,7 +156,7 @@ public class User extends BaseEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = (getId() ^ (getId() >>> 32));
+        int result = getId();
         result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (secondName != null ? secondName.hashCode() : 0);

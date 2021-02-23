@@ -15,6 +15,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * Thread-Safe Singleton. Used to contain, provide and release connection objects. Has dynamic size from 8 to 32
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class DynamicConnectionPool {
     private static final Logger LOGGER = LogManager.getLogger(DynamicConnectionPool.class);
     private static final int MIN_POOL_SIZE = 8;
@@ -52,6 +57,11 @@ public class DynamicConnectionPool {
         return instance;
     }
 
+    /**
+     * Provides connection object from the pool.
+     *
+     * @return Connection object.
+     */
     public Connection provideConnection() {
         ProxyConnection connection;
         try {
@@ -83,7 +93,10 @@ public class DynamicConnectionPool {
         }
         return connection;
     }
-
+    /**
+     * Returns connection object from the pool.
+     *
+     */
     public void releaseConnection(Connection connection) {
         if (connection instanceof ProxyConnection) {
             givenAwayConnections.remove(connection);
@@ -108,7 +121,10 @@ public class DynamicConnectionPool {
             LOGGER.warn("Invalid connection object provided");
         }
     }
-
+    /**
+     * Destroys a connection pool. Should be called before finishing the program.
+     *
+     */
     public void destroyPool() {
         for (int i = 0; i < currentPoolSize.get(); i++) {
             try {

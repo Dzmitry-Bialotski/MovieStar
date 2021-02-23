@@ -8,6 +8,11 @@ import org.apache.logging.log4j.LogManager;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Validate user
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class UserValidator {
     private static final Logger LOGGER = LogManager.getLogger(UserValidator.class);
 

@@ -3,6 +3,11 @@ package by.belotskiy.movie_star.model.service.factory;
 import by.belotskiy.movie_star.model.service.*;
 import by.belotskiy.movie_star.model.service.impl.*;
 
+/**
+ * Factory pattern. Used to create all services with thread-safe singleton
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class ServiceFactory {
 
     private static volatile ServiceFactory instance;

@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Entity of movie.
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class Movie extends BaseEntity implements Serializable {
     private String title;
     private String country;

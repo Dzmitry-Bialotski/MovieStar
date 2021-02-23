@@ -1,5 +1,10 @@
 package by.belotskiy.movie_star.model.dao.query;
 
+/**
+ * Provides queries to work with Rating entity
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class RatingQuery {
     private RatingQuery(){}
 

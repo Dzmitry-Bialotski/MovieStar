@@ -1,4 +1,10 @@
 package by.belotskiy.movie_star.model.dao.query;
+
+/**
+ * Provides queries to work with Review entity
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class ReviewQuery {
 
     public static final String MOVIES_TABLE = "movie_star_db.movies";
@@ -24,7 +30,6 @@ public class ReviewQuery {
     public static final String INSERT_REVIEW = "INSERT INTO " + REVIEWS_TABLE + " (user_id, movie_id, text, status)" +
             " VALUES (?, ?, ?, ?);";
 
-    //!TODO join Likes count
     public static final String FIND_BY_ID  = "SELECT review_id, user_id, movie_id, text, status FROM " + REVIEWS_TABLE +
             " WHERE review_id = ?;";
 

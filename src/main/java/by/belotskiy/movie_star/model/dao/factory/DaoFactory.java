@@ -3,6 +3,11 @@ package by.belotskiy.movie_star.model.dao.factory;
 import by.belotskiy.movie_star.model.dao.*;
 import by.belotskiy.movie_star.model.dao.impl.*;
 
+/**
+ * Factory pattern. Used to create all services with thread-safe singleton
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class DaoFactory {
 
     private static volatile DaoFactory instance;

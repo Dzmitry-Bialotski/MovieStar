@@ -1,8 +1,11 @@
 package by.belotskiy.movie_star.model.dao.query;
 
+/**
+ * Provides queries to work with User entity
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class UserQuery {
-
-    private UserQuery(){}
 
     public static final String USERS_TABLE = "movie_star_db.users";
 
@@ -28,4 +31,6 @@ public class UserQuery {
                     " ORDER BY user_id DESC LIMIT ? OFFSET ?";
 
     public static final String FIND_COUNT_OF_USERS_QUERY = "SELECT count(*) FROM "+ USERS_TABLE;
+
+    private UserQuery(){}
 }

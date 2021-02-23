@@ -1,5 +1,10 @@
 package by.belotskiy.movie_star.model.entity;
 
+/**
+ * Entity of like.
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class Like {
     private int userId;
     private int reviewId;
