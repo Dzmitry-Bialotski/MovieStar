@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Action command changes locale
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class ChangeLocaleCommand implements ActionCommand {
 
     @Override

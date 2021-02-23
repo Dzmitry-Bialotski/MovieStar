@@ -18,6 +18,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
+/**
+ * Action command sends dislike
+ *
+ * @author Dmitriy Belotskiy
+ * @deprecated (“replaced with ajaxServlet”)
+ */
 public class DislikeCommand implements ActionCommand {
     LikeService likeService = ServiceFactory.getInstance().getLikeService();
     @Override

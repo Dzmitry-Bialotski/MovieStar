@@ -1,11 +1,9 @@
 package by.belotskiy.movie_star.controller.command.impl;
 
 import by.belotskiy.movie_star.controller.attribute.RequestParameterName;
-import by.belotskiy.movie_star.controller.attribute.SessionAttributeName;
 import by.belotskiy.movie_star.controller.command.ActionCommand;
 import by.belotskiy.movie_star.controller.command.CommandResult;
 import by.belotskiy.movie_star.controller.path.PagePath;
-import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.exception.CommandException;
 import by.belotskiy.movie_star.exception.ServiceException;
 import by.belotskiy.movie_star.model.entity.Movie;
@@ -19,11 +17,15 @@ import org.apache.commons.lang3.tuple.MutablePair;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Action command provides movie page
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class MovieCommand implements ActionCommand {
     private final MovieService movieService = ServiceFactory.getInstance().getMovieService();
     private final ReviewService reviewService = ServiceFactory.getInstance().getReviewService();

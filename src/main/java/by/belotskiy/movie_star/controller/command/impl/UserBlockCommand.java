@@ -15,6 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
+/**
+ * Action command blocks user
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class UserBlockCommand implements ActionCommand {
     private final UserService userService = ServiceFactory.getInstance().getUserService();
     @Override

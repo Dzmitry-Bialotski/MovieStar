@@ -8,11 +8,15 @@ import by.belotskiy.movie_star.exception.CommandException;
 import by.belotskiy.movie_star.exception.ServiceException;
 import by.belotskiy.movie_star.model.service.MovieService;
 import by.belotskiy.movie_star.model.service.factory.ServiceFactory;
-import by.belotskiy.movie_star.model.service.impl.MovieServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Action command deletes movie
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class MovieDeleteCommand implements ActionCommand {
 
     private final MovieService movieService = ServiceFactory.getInstance().getMovieService();

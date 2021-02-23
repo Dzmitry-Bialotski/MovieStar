@@ -1,5 +1,10 @@
 package by.belotskiy.movie_star.exception;
 
+/**
+ * An exception that provides information on errors occurred while processing a command.
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class CommandException extends Exception{
     public CommandException() {
         super();

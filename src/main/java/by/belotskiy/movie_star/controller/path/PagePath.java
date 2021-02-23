@@ -1,5 +1,10 @@
 package by.belotskiy.movie_star.controller.path;
 
+/**
+ * Contains real paths of jsp pages
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class PagePath {
     /* admin pages */
     public static final String ADMIN = "/WEB-INF/jsp/admin/index.jsp";

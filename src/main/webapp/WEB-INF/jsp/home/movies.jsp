@@ -39,3 +39,4 @@
     </div>
 
 </tags:general>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/select.js"></script>

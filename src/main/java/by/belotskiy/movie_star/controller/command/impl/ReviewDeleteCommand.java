@@ -12,6 +12,11 @@ import by.belotskiy.movie_star.model.service.factory.ServiceFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Action command deletes review
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class ReviewDeleteCommand implements ActionCommand {
     private final ReviewService reviewService = ServiceFactory.getInstance().getReviewService();
     @Override

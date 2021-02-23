@@ -7,7 +7,6 @@ import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.exception.CommandException;
 import by.belotskiy.movie_star.exception.ServiceException;
 import by.belotskiy.movie_star.model.entity.Movie;
-import by.belotskiy.movie_star.model.entity.User;
 import by.belotskiy.movie_star.model.entity.enums.Status;
 import by.belotskiy.movie_star.model.service.MovieService;
 import by.belotskiy.movie_star.model.service.factory.ServiceFactory;
@@ -16,7 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
-
+/**
+ * Action command blocks movie
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class MovieBlockCommand implements ActionCommand {
 
     private final MovieService movieService = ServiceFactory.getInstance().getMovieService();

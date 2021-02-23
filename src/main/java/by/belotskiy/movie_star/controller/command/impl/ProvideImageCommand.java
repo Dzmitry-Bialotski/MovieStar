@@ -16,6 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Action command provides image
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class ProvideImageCommand implements ActionCommand {
 
     private static final Logger LOGGER = LogManager.getLogger();
@@ -26,7 +31,7 @@ public class ProvideImageCommand implements ActionCommand {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         String fileName = request.getParameter(RequestParameterName.FILE_NAME);
         if (!fileName.isEmpty()) {
-            try (ServletOutputStream outputStream = response.getOutputStream();) {
+            try (ServletOutputStream outputStream = response.getOutputStream()) {
                 outputStream.write(fileService.readFile(fileName));
             } catch (IOException | ServiceException e) {
                 LOGGER.log(Level.ERROR, e);

@@ -6,7 +6,6 @@ import by.belotskiy.movie_star.controller.command.CommandResult;
 import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.exception.CommandException;
 import by.belotskiy.movie_star.exception.ServiceException;
-import by.belotskiy.movie_star.model.entity.Movie;
 import by.belotskiy.movie_star.model.entity.Review;
 import by.belotskiy.movie_star.model.entity.enums.Status;
 import by.belotskiy.movie_star.model.service.ReviewService;
@@ -16,6 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
+/**
+ * Action command blocks review
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class ReviewBlockCommand implements ActionCommand {
 
     private final ReviewService reviewService = ServiceFactory.getInstance().getReviewService();

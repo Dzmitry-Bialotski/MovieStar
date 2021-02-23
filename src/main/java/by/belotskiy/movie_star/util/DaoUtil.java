@@ -10,6 +10,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+/**
+ * Contains some helping methods used by dao objects
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class DaoUtil {
 
     private static final Logger log = LogManager.getLogger(DaoUtil.class);
@@ -20,6 +25,11 @@ public class DaoUtil {
 
     private DaoUtil(){}
 
+    /**
+     * Release all the resources used by dao
+     *
+     * @author Dmitriy Belotskiy
+     */
     public static void releaseResources(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet) {
         releaseResources(connection, preparedStatement);
         if (resultSet != null) {
@@ -30,7 +40,11 @@ public class DaoUtil {
             }
         }
     }
-
+    /**
+     * Release all the resources used by dao
+     *
+     * @author Dmitriy Belotskiy
+     */
     public static void releaseResources(Connection connection, PreparedStatement preparedStatement) {
         DynamicConnectionPool.getInstance().releaseConnection(connection);
         if (preparedStatement != null) {
@@ -41,13 +55,16 @@ public class DaoUtil {
             }
         }
     }
-
+    /**
+     * Adds "WHERE" conditions to the end of select statement
+     *
+     * @author Dmitriy Belotskiy
+     */
     public static String createQueryWithCriteria(String queryStart, Map<String, String> criteria) {
         List<String> conditions = new ArrayList<>();
         Set<String> keys = criteria.keySet();
         for (String key : keys) {
-            StringBuilder sb = new StringBuilder();
-            String condition = sb.append(key).append(EQUALS_STRING).append(QUOTE).append(criteria.get(key)).append(QUOTE).toString();
+            String condition = key + EQUALS_STRING + QUOTE + criteria.get(key) + QUOTE;
             conditions.add(condition);
         }
         StringJoiner query = new StringJoiner(AND_DELIMITER);

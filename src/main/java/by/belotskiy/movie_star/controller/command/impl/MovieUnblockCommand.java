@@ -15,6 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
+/**
+ * Action command unblocks movie
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class MovieUnblockCommand implements ActionCommand {
 
     private final MovieService movieService = ServiceFactory.getInstance().getMovieService();

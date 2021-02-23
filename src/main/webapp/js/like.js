@@ -1,20 +1,46 @@
 /** like ajax */
-$( document ).ready(function() {
-    $("#like-btn").click(function (){
-        const reviewId = $('#like-review-id').val();
+$(document).ready(function (){
+    $('.like-form').submit(function (e){
+        e.preventDefault();
+        const like_form = $(this);
+        const review_id = like_form.find('.like-input-id')[0].value;
+        const url = $(this).attr('action');
         $.ajax({
             type: 'POST',
-            data: {reviewId: reviewId},
-            url: 'like.do',
-            success: function (result){
-                let likes_num = parseInt($('#likes-num').innerHTML, 10);
-                likes_num++;
-                $('#likes-num').innerHTML = likes_num.toString(10);
-                $('#likes-num').innerHTML = result;
+            url: url,
+            data: {
+                'reviewId': review_id,
             },
-            error: function (){
-                alert("error");
+            success: function(result){
+                like_form.find('div')[0].innerText = result.likes;
+                $('#dislike-form-' + review_id).find('div')[0].innerText = result.dislikes;
+            },
+            error: function(data){
+                console.log('error', data);
             }
-        });
-    });
-});
+        })
+    })
+})
+/** dislike ajax */
+$(document).ready(function (){
+    $('.dislike-form').submit(function (e){
+        e.preventDefault();
+        const dislike_form = $(this);
+        const review_id = dislike_form.find('.dislike-input-id')[0].value;
+        const url = $(this).attr('action');
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                'reviewId': review_id,
+            },
+            success: function(result){
+                $('#like-form-' + review_id).find('div')[0].innerText = result.likes;
+                dislike_form.find('div')[0].innerText = result.dislikes;
+            },
+            error: function(data){
+                console.log('error', data);
+            }
+        })
+    })
+})

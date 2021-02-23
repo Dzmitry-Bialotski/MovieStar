@@ -15,7 +15,6 @@ import by.belotskiy.movie_star.model.entity.enums.Status;
 import by.belotskiy.movie_star.model.service.factory.ServiceFactory;
 import by.belotskiy.movie_star.model.validator.UserValidator;
 import by.belotskiy.movie_star.model.service.UserService;
-import by.belotskiy.movie_star.model.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,6 +27,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Action command provides log in user
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class LoginCommand implements ActionCommand {
 
     private static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);

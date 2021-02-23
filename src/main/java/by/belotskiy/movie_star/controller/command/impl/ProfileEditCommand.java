@@ -16,6 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Action command edits profile
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class ProfileEditCommand implements ActionCommand {
 
     private final UserService userService = ServiceFactory.getInstance().getUserService();

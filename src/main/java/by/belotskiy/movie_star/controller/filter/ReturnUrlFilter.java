@@ -8,9 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * Filter checks user role and defines if user has such permissions
+ *
+ * @author Dmitriy Belotskiy
+ * @deprecated (“it is not useful as request header contains previous url”)
+ */
 public class ReturnUrlFilter implements Filter {
+
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
 
     }
 

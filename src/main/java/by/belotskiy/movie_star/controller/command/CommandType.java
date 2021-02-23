@@ -2,6 +2,12 @@ package by.belotskiy.movie_star.controller.command;
 
 import by.belotskiy.movie_star.controller.command.impl.*;
 
+/**
+ * Enum contains all action commands
+ *
+ * @author Dmitriy Belotskiy
+ */
+
 public enum CommandType {
 
     HOME(new HomeCommand()),

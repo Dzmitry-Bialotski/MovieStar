@@ -4,7 +4,6 @@ import by.belotskiy.movie_star.controller.attribute.RequestParameterName;
 import by.belotskiy.movie_star.controller.command.ActionCommand;
 import by.belotskiy.movie_star.controller.command.CommandResult;
 import by.belotskiy.movie_star.controller.path.PagePath;
-import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.exception.CommandException;
 import by.belotskiy.movie_star.exception.ServiceException;
 import by.belotskiy.movie_star.model.entity.Movie;
@@ -15,6 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+/**
+ * Action command provides admin page to CRUD or block/unblock movies
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class AdminMoviesCommand implements ActionCommand {
 
     private final MovieService movieService = ServiceFactory.getInstance().getMovieService();

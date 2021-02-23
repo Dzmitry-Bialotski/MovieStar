@@ -9,6 +9,11 @@ import by.belotskiy.movie_star.exception.CommandException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Action command provides home page
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class HomeCommand implements ActionCommand {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {

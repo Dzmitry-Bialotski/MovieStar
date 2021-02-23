@@ -3,13 +3,17 @@ package by.belotskiy.movie_star.controller.filter;
 import javax.servlet.*;
 import java.io.IOException;
 
-
+/**
+ * Filter sets "UTF-8" encoding
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class EncodingFilter implements Filter {
 
     private static final String EncodingParameterName = "encoding";
     private String code;
 
-    public void init(FilterConfig fConfig) throws ServletException {
+    public void init(FilterConfig fConfig) {
         code = fConfig.getInitParameter(EncodingParameterName);
     }
 

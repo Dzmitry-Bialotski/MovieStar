@@ -5,6 +5,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
+/**
+ * Encrypts password
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class PasswordEncryptor {
     private static final Logger LOGGER = LogManager.getLogger(PasswordEncryptor.class);
 

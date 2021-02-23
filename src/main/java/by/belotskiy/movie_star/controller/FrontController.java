@@ -13,6 +13,11 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * Main Controller class processes all requests from users.
+ *
+ * @author Vladislav Drobot
+ */
 @WebServlet(urlPatterns = UrlPath.CONTROLLER, name = "controller")
 public class FrontController extends HttpServlet {
 
@@ -57,7 +62,7 @@ public class FrontController extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + urlPath);
                 }
                 case RETURN_URL -> {
-                    String returnUrl = (String) session.getAttribute(SessionAttributeName.RETURN_URL);
+                    //String returnUrl = (String) session.getAttribute(SessionAttributeName.RETURN_URL);
                     session.setAttribute(SessionAttributeName.RETURN_URL, request.getContextPath() + urlPath);
                     response.sendRedirect(request.getHeader("referer")); //that also works arr!! :(
                     //response.sendRedirect(returnUrl);

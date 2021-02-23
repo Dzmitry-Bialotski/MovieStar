@@ -1,5 +1,10 @@
 package by.belotskiy.movie_star.util;
 
+/**
+ * Enum contains search options
+ *
+ * @author Dmitriy Belotskiy
+ */
 public enum SearchCriteria {
 
     GENRE,
@@ -8,7 +13,5 @@ public enum SearchCriteria {
 
     AGE_CATEGORY,
 
-    SEARCH,
-
-    SORT;
+    SEARCH
 }

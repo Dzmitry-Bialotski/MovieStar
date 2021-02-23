@@ -1,5 +1,10 @@
 package by.belotskiy.movie_star.exception;
 
+/**
+ * An exception that provides information on errors thrown by Service objects.
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class ServiceException extends Exception{
 
     public ServiceException() {

@@ -1,5 +1,10 @@
 package by.belotskiy.movie_star.util;
 
+/**
+ * Checks file extension if it is image
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class ImageValidator {
     private static final String jpg = ".jpg";
     private static final String png = ".png";

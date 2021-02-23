@@ -15,6 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
+/**
+ * Action command unblocks user
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class UserUnblockCommand implements ActionCommand {
 
     private final UserService userService = ServiceFactory.getInstance().getUserService();

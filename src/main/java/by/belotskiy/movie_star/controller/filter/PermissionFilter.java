@@ -4,7 +4,6 @@ import by.belotskiy.movie_star.controller.attribute.SessionAttributeName;
 import by.belotskiy.movie_star.controller.command.ActionCommand;
 import by.belotskiy.movie_star.controller.command.CommandProvider;
 import by.belotskiy.movie_star.controller.command.CommandType;
-import by.belotskiy.movie_star.controller.path.UrlPath;
 import by.belotskiy.movie_star.model.entity.enums.Role;
 import by.belotskiy.movie_star.model.entity.User;
 
@@ -15,6 +14,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * Filter checks user role and defines if user has such permissions
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class PermissionFilter implements Filter {
 
     private static final Map<Role, List<CommandType>> permissions = new HashMap<>();
@@ -87,18 +91,19 @@ public class PermissionFilter implements Filter {
             userRole = user.getRole();
         }
         Optional<ActionCommand> optionalCommand = CommandProvider.defineCommand(request);
-        if(!optionalCommand.isPresent()){
+        if(optionalCommand.isEmpty()){
             filterChain.doFilter(request, response);
             return;
         }
         List<CommandType> commands = permissions.get(userRole);
-        CommandType commandType = CommandProvider.defineCommandType(request).get();
-        if (commands == null || !commands.contains(commandType)) {
-            response.sendError(403);
-            //response.sendRedirect(request.getContextPath() + UrlPath.NO_PERMISSIONS);
-        }else{
-            filterChain.doFilter(servletRequest, servletResponse);
+        Optional<CommandType> optionalCommandType = CommandProvider.defineCommandType(request);
+        if(optionalCommandType.isPresent()){
+            CommandType commandType = optionalCommandType.get();
+            if (commands == null || !commands.contains(commandType)) {
+                response.sendError(403);
+            }
         }
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override

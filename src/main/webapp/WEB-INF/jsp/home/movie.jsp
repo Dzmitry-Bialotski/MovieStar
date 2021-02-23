@@ -79,21 +79,21 @@
                             <!-- likes -->
                             <ctg:accessRole accessRole="SPECTATOR">
                                 <div class="review-user-like col-sm-1 mt-3">
-                                    <form method="post" action="like.do">
-                                        <input type="hidden" name="reviewId" value="${review.id}" id="like-review-id">
-                                        <button class="btn btn-success like-btn" id="like-btn" type="submit">
+                                    <form method="post" action="like.ajax" id="like-form-${review.id}" class="like-form">
+                                        <input type="hidden" name="reviewId" value="${review.id}" class="like-input-id">
+                                        <button class="btn btn-success like-btn" id="like-btn-${review.id}" type="submit">
                                             <i class="far fa-thumbs-up like"></i>
-                                            <div class="likes-num" id="likes-num" > ${review.likes} </div>
+                                            <div class="likes-num" id="likes-num-${review.id}" > ${review.likes} </div>
                                         </button>
                                     </form>
                                 </div>
                                 <!-- dislikes -->
-                                <div class="review-user-like col-sm-1 mt-3 dislike">
-                                    <form method="post" action="dislike.do">
-                                        <input type="hidden" name="reviewId" value="${review.id}" id="dislike-review-id">
-                                        <button class="btn btn-danger like-btn" id="dislike-btn">
+                                <div class="review-user-like col-sm-1 mt-3 dislike" >
+                                    <form method="post" action="dislike.ajax" id="dislike-form-${review.id}" class="dislike-form">
+                                        <input type="hidden" name="reviewId" value="${review.id}" class="dislike-input-id">
+                                        <button class="btn btn-danger like-btn" id="dislike-btn-${review.id}" type="submit">
                                             <i class="far fa-thumbs-down like"></i>
-                                            <div class="likes-num" id="dislikes-num"> ${review.dislikes} </div>
+                                            <div class="likes-num" id="dislikes-num-${review.id}"> ${review.dislikes} </div>
                                         </button>
                                     </form>
                                 </div>
@@ -117,7 +117,5 @@
         </div>
     </div>
 </tags:general>
-<!--
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/like.js"></script>
--->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/rating.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/like.js"></script>

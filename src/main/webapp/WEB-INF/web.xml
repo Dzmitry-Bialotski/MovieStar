@@ -8,12 +8,7 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-    <!--
-    <error-page>
-        <error-code>404</error-code>
-        <location>/WEB-INF/jsp/error/error.jsp</location>
-    </error-page>
-    -->
+
     <error-page>
         <error-code>403</error-code>
         <location>/WEB-INF/jsp/error/error403.jsp</location>
@@ -91,6 +86,9 @@
         <listener-class>by.belotskiy.movie_star.controller.listener.SessionListener</listener-class>
     </listener>
 
+    <listener>
+        <listener-class>by.belotskiy.movie_star.controller.listener.ConnectionPoolListener</listener-class>
+    </listener>
     <jsp-config>
         <taglib>
             <taglib-uri>custom_tags</taglib-uri>

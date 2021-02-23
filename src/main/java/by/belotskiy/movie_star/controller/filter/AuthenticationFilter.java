@@ -7,7 +7,6 @@ import by.belotskiy.movie_star.exception.ServiceException;
 import by.belotskiy.movie_star.model.entity.User;
 import by.belotskiy.movie_star.model.service.UserService;
 import by.belotskiy.movie_star.model.service.factory.ServiceFactory;
-import by.belotskiy.movie_star.model.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,6 +19,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Filter used to authorise users with cookies and save them in session
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class AuthenticationFilter implements Filter {
 
     private static final Logger LOGGER = LogManager.getLogger(AuthenticationFilter.class);

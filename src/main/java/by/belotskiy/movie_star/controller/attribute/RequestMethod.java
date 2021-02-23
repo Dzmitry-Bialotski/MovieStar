@@ -1,6 +1,11 @@
 package by.belotskiy.movie_star.controller.attribute;
 
-public class RequestMethod {
+/**
+ * Contains a set of constants for request method
+ *
+ * @author Dmitriy Belotskiy
+ */
+public final class RequestMethod {
 
     public static final String GET = "GET";
 

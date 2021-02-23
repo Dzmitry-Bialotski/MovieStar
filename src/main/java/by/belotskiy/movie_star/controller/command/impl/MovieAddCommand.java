@@ -19,6 +19,11 @@ import by.belotskiy.movie_star.model.validator.MovieValidator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Action command adds movie
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class MovieAddCommand implements ActionCommand {
     private final MovieService movieService = ServiceFactory.getInstance().getMovieService();
     @Override

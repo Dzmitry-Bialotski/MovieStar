@@ -2,6 +2,11 @@ package by.belotskiy.movie_star.controller.command;
 
 import by.belotskiy.movie_star.controller.path.UrlPath;
 
+/**
+ * Contains 3 types of command result, used by FrontController
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class CommandResult {
 
     public static final String DEFAULT_PATH = UrlPath.HOME_DO;

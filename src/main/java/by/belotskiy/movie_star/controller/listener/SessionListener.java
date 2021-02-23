@@ -9,6 +9,11 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
+/**
+ * Initialize session with starting attributes
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class SessionListener implements HttpSessionListener {
 
     @Override

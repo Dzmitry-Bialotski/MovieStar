@@ -9,7 +9,6 @@ import by.belotskiy.movie_star.exception.CommandException;
 import by.belotskiy.movie_star.exception.ServiceException;
 import by.belotskiy.movie_star.model.entity.Rating;
 import by.belotskiy.movie_star.model.entity.User;
-import by.belotskiy.movie_star.model.service.MovieService;
 import by.belotskiy.movie_star.model.service.RatingService;
 import by.belotskiy.movie_star.model.service.factory.ServiceFactory;
 
@@ -17,6 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Action command sends rating
+ *
+ * @author Dmitriy Belotskiy
+ */
 public class RatingCommand implements ActionCommand {
 
     private final RatingService ratingService = ServiceFactory.getInstance().getRatingService();
