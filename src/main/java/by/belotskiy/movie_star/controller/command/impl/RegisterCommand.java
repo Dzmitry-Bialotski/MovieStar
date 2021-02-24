@@ -54,6 +54,7 @@ public class RegisterCommand implements ActionCommand {
         }
         if(isRegisterComplete){
             LOGGER.log(Level.INFO, "User with login " + login + "registered");
+            session.setAttribute(SessionAttributeName.REGISTER_COMPLETED, "User registered successfully!");
             return new CommandResult(UrlPath.LOGIN_DO, CommandResult.Type.REDIRECT);
         }else{
             session.setAttribute(SessionAttributeName.ERROR_MESSAGE, LOGIN_IS_TAKEN);

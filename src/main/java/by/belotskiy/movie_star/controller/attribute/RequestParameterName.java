@@ -77,6 +77,8 @@ public final class RequestParameterName {
 
     public static final String PREV_PAGE_HREF = "prevPageHref";
 
+    public static final String SUCCESS_MESSAGE = "successMessage";
+
     private RequestParameterName(){}
 
 }

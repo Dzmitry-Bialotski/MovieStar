@@ -101,7 +101,11 @@ public class PermissionFilter implements Filter {
             CommandType commandType = optionalCommandType.get();
             if (commands == null || !commands.contains(commandType)) {
                 response.sendError(403);
+                return;
             }
+        }else{
+            response.sendError(403);
+            return;
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }

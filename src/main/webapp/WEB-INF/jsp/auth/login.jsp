@@ -49,6 +49,11 @@
                         ${errorMessage}
                     </c:if>
                 </div>
+                <div class="text-success success">
+                    <c:if test="${requestScope.successMessage != \"\"}">
+                        ${requestScope.successMessage}
+                    </c:if>
+                </div>
             </div>
             <div class="card-footer">
                 <div class="d-flex justify-content-center links">

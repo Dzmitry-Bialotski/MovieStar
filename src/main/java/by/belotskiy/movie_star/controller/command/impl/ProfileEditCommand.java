@@ -28,6 +28,7 @@ public class ProfileEditCommand implements ActionCommand {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         if(request.getMethod().equals(RequestMethod.GET)){
+
             return new CommandResult(PagePath.EDIT_PROFILE, CommandResult.Type.FORWARD);
         }
         String first_name = (String) request.getAttribute(RequestParameterName.FIRST_NAME);

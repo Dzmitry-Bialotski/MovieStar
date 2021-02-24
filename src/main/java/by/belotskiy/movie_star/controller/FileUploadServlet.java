@@ -58,9 +58,7 @@ public class FileUploadServlet extends HttpServlet {
                 }
             }
         }
-        HttpSession session = request.getSession();
-        String returnUrl = (String)session.getAttribute(SessionAttributeName.RETURN_URL);
-        response.sendRedirect(returnUrl);
+        response.sendRedirect(request.getHeader("referer"));
     }
 
     private boolean uploadFile(InputStream inputStream, String path) throws ServletException {

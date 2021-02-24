@@ -13,7 +13,7 @@ import java.io.IOException;
  *
  * @author Dmitriy Belotskiy
  */
-public class ErrorMessageFilter implements Filter {
+public class MessageFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) {
 
@@ -24,8 +24,12 @@ public class ErrorMessageFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest)servletRequest;
         HttpSession session = request.getSession();
         String errorMessage = (String)session.getAttribute(SessionAttributeName.ERROR_MESSAGE);
+        String successMessage = (String)session.getAttribute(SessionAttributeName.REGISTER_COMPLETED);
         if(errorMessage != null){
             request.setAttribute(RequestParameterName.ERROR_MESSAGE,errorMessage);
+        }
+        if(successMessage != null){
+            request.setAttribute(RequestParameterName.SUCCESS_MESSAGE, successMessage);
         }
         session.removeAttribute(SessionAttributeName.ERROR_MESSAGE);
         chain.doFilter(request, response);

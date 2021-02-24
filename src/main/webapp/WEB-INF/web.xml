@@ -66,7 +66,7 @@
 
     <filter>
         <filter-name>ErrorMessageFilter</filter-name>
-        <filter-class>by.belotskiy.movie_star.controller.filter.ErrorMessageFilter</filter-class>
+        <filter-class>by.belotskiy.movie_star.controller.filter.MessageFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>ErrorMessageFilter</filter-name>

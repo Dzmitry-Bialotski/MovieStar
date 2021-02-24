@@ -9,8 +9,10 @@
     <div class="text-light section m-1 p-1 email-form">
         <form action="profile_edit.do" method="post"onsubmit=
                 "return validateName(this.first_name.value, this.second_name.value);">
-            <input type="text" placeholder="<fmt:message key="FirstName" />" name="first_name" class="form-control m-1">
-            <input type="text" placeholder="<fmt:message key="SecondName" />" name="second_name" class="form-control m-1">
+            <input type="text" placeholder="<fmt:message key="FirstName" />" name="first_name" class="form-control m-1"
+                    value="${sessionScope.user.firstName}">
+            <input type="text" placeholder="<fmt:message key="SecondName" />" name="second_name" class="form-control m-1"
+                    value="${sessionScope.user.secondName}">
             <button type="submit" class="btn btn-primary m-1"> <fmt:message key="edit_profile" /></button>
         </form>
         <div class="text-danger error">
