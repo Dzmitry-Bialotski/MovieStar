@@ -28,7 +28,7 @@ public class EmailConfirmCommand implements ActionCommand {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         int userId = Integer.parseInt(request.getParameter(RequestParameterName.USER_ID));
-        String token = request.getParameter(RequestParameterName.TOKEN);
+        String token = (String)request.getAttribute(RequestParameterName.TOKEN);
         Optional<User> optionalUser;
         try{
             optionalUser = userService.confirmEmail(userId, token);

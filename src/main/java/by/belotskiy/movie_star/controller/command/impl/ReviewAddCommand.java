@@ -23,7 +23,7 @@ public class ReviewAddCommand implements ActionCommand {
     private final ReviewService reviewService = ServiceFactory.getInstance().getReviewService();
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
-        String text = request.getParameter(RequestParameterName.TEXT);
+        String text = (String)request.getAttribute(RequestParameterName.TEXT);
         if(text == null || text.isEmpty()){
             return new CommandResult(UrlPath.HOME_DO, CommandResult.Type.RETURN_URL);
         }

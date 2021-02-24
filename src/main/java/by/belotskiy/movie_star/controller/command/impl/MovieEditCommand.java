@@ -44,15 +44,15 @@ public class MovieEditCommand implements ActionCommand {
                 return new CommandResult(PagePath.ADMIN_MOVIE_EDIT, CommandResult.Type.FORWARD);
             }
             else if(request.getMethod().equals(RequestMethod.POST)){
-                movie.setTitle(request.getParameter(RequestParameterName.TITLE));
-                movie.setCountry(request.getParameter(RequestParameterName.COUNTRY));
+                movie.setTitle((String)request.getAttribute(RequestParameterName.TITLE));
+                movie.setCountry((String)request.getAttribute(RequestParameterName.COUNTRY));
                 movie.setYear(Integer.parseInt(request.getParameter(RequestParameterName.YEAR)));
                 movie.setGenre(Genre.valueOf(request.getParameter(RequestParameterName.GENRE)));
                 movie.setMovieType(MovieType.valueOf(request.getParameter(RequestParameterName.MOVIE_TYPE)));
                 movie.setAgeCategory(Integer.parseInt(request.getParameter(RequestParameterName.AGE_CATEGORY)));
-                movie.setDescription(request.getParameter(RequestParameterName.DESCRIPTION));
-                movie.setYoutubeTrailer(request.getParameter(RequestParameterName.YOUTUBE_TRAILER));
-                movie.setImagePath(request.getParameter(RequestParameterName.IMAGE_PATH));
+                movie.setDescription((String)request.getAttribute(RequestParameterName.DESCRIPTION));
+                movie.setYoutubeTrailer((String)request.getAttribute(RequestParameterName.YOUTUBE_TRAILER));
+                movie.setImagePath((String)request.getAttribute(RequestParameterName.IMAGE_PATH));
                 boolean isValid = MovieValidator.validateMovie(movie);
                 if(isValid){
                     try {

@@ -56,6 +56,15 @@
     </filter-mapping>
 
     <filter>
+        <filter-name>XssEscapeFilter</filter-name>
+        <filter-class>by.belotskiy.movie_star.controller.filter.XssEscapeFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>XssEscapeFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
         <filter-name>ErrorMessageFilter</filter-name>
         <filter-class>by.belotskiy.movie_star.controller.filter.ErrorMessageFilter</filter-class>
     </filter>

@@ -43,8 +43,8 @@ public class LoginCommand implements ActionCommand {
         if(request.getMethod().equals(RequestMethod.GET)){
             return new CommandResult(PagePath.LOGIN, CommandResult.Type.FORWARD);
         }
-        String login = request.getParameter(RequestParameterName.LOGIN);
-        String password = request.getParameter(RequestParameterName.PASSWORD);
+        String login = (String)request.getAttribute(RequestParameterName.LOGIN);
+        String password = (String)request.getAttribute(RequestParameterName.PASSWORD);
         String[] checkBoxValues = request.getParameterValues(RequestParameterName.REMEMBER_ME);
         List<String> checkboxes = checkBoxValues != null ? List.of(checkBoxValues) : new ArrayList<>();
         boolean rememberMe = checkboxes.contains(RequestParameterName.ON);

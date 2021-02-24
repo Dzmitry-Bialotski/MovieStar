@@ -29,7 +29,7 @@ public class EmailSendCommand implements ActionCommand {
     private final UserService userService = ServiceFactory.getInstance().getUserService();
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
-        String email = request.getParameter(RequestParameterName.EMAIL);
+        String email = (String)request.getAttribute(RequestParameterName.EMAIL);
         HttpSession session = request.getSession();
         User user = (User)session.getAttribute(SessionAttributeName.USER);
         try {

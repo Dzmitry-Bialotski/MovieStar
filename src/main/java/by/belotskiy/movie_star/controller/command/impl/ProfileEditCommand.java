@@ -30,8 +30,8 @@ public class ProfileEditCommand implements ActionCommand {
         if(request.getMethod().equals(RequestMethod.GET)){
             return new CommandResult(PagePath.EDIT_PROFILE, CommandResult.Type.FORWARD);
         }
-        String first_name = request.getParameter(RequestParameterName.FIRST_NAME);
-        String second_name = request.getParameter(RequestParameterName.SECOND_NAME);
+        String first_name = (String) request.getAttribute(RequestParameterName.FIRST_NAME);
+        String second_name = (String) request.getAttribute(RequestParameterName.SECOND_NAME);
         HttpSession session = request.getSession();
         User user = (User)session.getAttribute(SessionAttributeName.USER);
         user.setFirstName(first_name);

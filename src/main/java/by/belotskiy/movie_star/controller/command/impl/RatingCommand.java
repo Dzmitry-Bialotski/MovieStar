@@ -27,7 +27,7 @@ public class RatingCommand implements ActionCommand {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
-        String rating_string = request.getParameter(RequestParameterName.RATING);
+        String rating_string = (String)request.getAttribute(RequestParameterName.RATING);
         if(rating_string == null || rating_string.isEmpty()){
             return new CommandResult(UrlPath.HOME_DO, CommandResult.Type.RETURN_URL);
         }

@@ -31,15 +31,15 @@ public class MovieAddCommand implements ActionCommand {
         if(request.getMethod().equals(RequestMethod.GET)){
             return new CommandResult(PagePath.ADMIN_MOVIE_ADD, CommandResult.Type.FORWARD);
         }
-        String title = request.getParameter(RequestParameterName.TITLE);
-        String country = request.getParameter(RequestParameterName.COUNTRY);
+        String title = (String) request.getAttribute(RequestParameterName.TITLE);
+        String country =  (String)request.getAttribute(RequestParameterName.COUNTRY);
         int year = Integer.parseInt(request.getParameter(RequestParameterName.YEAR));
         Genre genre = Genre.valueOf(request.getParameter(RequestParameterName.GENRE));
         MovieType movieType = MovieType.valueOf(request.getParameter(RequestParameterName.MOVIE_TYPE));
         int ageCategory = Integer.parseInt(request.getParameter(RequestParameterName.AGE_CATEGORY));
-        String description = request.getParameter(RequestParameterName.DESCRIPTION);
-        String youtubeTrailer = request.getParameter(RequestParameterName.YOUTUBE_TRAILER);
-        String imagePath = request.getParameter(RequestParameterName.IMAGE_PATH);
+        String description =  (String)request.getAttribute(RequestParameterName.DESCRIPTION);
+        String youtubeTrailer =  (String)request.getAttribute(RequestParameterName.YOUTUBE_TRAILER);
+        String imagePath =  (String)request.getAttribute(RequestParameterName.IMAGE_PATH);
         Movie movie = new Movie(title, country, year, genre, movieType, ageCategory,
                 description, youtubeTrailer, Status.ACTIVE, imagePath);
 

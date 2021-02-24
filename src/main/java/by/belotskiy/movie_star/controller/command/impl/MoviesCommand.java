@@ -47,7 +47,7 @@ public class MoviesCommand implements ActionCommand {
         String genre = request.getParameter(RequestParameterName.GENRE);
         String movieType = request.getParameter(RequestParameterName.MOVIE_TYPE);
         String ageCategory = request.getParameter(RequestParameterName.AGE_CATEGORY);
-        String search = request.getParameter(RequestParameterName.SEARCH);
+        String search = (String) request.getAttribute(RequestParameterName.SEARCH);
         Map<SearchCriteria, String> searchMap = new HashMap<>();
         if(genre != null && !genre.isEmpty()){
             searchMap.put(SearchCriteria.GENRE, genre);

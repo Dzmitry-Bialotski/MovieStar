@@ -19,7 +19,7 @@ public class ChangeLocaleCommand implements ActionCommand {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        String locale = request.getParameter(RequestParameterName.CURRENT_LOCALE);
+        String locale = (String)request.getAttribute(RequestParameterName.CURRENT_LOCALE);
         HttpSession session = request.getSession();
         if(locale != null && !locale.isEmpty()){
             session.setAttribute(SessionAttributeName.CURRENT_LOCALE, locale);

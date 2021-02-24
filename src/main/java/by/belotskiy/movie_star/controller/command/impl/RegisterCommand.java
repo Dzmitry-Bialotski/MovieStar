@@ -35,9 +35,9 @@ public class RegisterCommand implements ActionCommand {
         if(request.getMethod().equals(RequestMethod.GET)){
             return new CommandResult(PagePath.REGISTER, CommandResult.Type.FORWARD);
         }
-        String login = request.getParameter(RequestParameterName.LOGIN);
-        String password = request.getParameter(RequestParameterName.PASSWORD);
-        String passwordConfirm = request.getParameter(RequestParameterName.PASSWORD_CONFIRM);
+        String login = (String) request.getAttribute(RequestParameterName.LOGIN);
+        String password = (String) request.getAttribute(RequestParameterName.PASSWORD);
+        String passwordConfirm = (String) request.getAttribute(RequestParameterName.PASSWORD_CONFIRM);
         HttpSession session = request.getSession();
 
         String errorMessage = UserValidator.validateUserForRegister(login,password, passwordConfirm);
