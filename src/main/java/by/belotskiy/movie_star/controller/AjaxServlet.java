@@ -24,7 +24,7 @@ import java.util.Optional;
 /**
  * Controller used for ajax actions
  *
- * @author Vladislav Drobot
+ * @author Dmitriy Belotskiy
  */
 @WebServlet(urlPatterns = UrlPath.AJAX, name = "AjaxServlet")
 public class AjaxServlet extends HttpServlet {

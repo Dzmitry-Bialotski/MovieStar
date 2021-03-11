@@ -61,6 +61,9 @@ public class ProxyConnection implements Connection {
     public void close() {
         DynamicConnectionPool.getInstance().releaseConnection(this);
     }
+    public void realClose() throws SQLException {
+        connection.close();
+    }
 
     @Override
     public boolean isClosed() throws SQLException {

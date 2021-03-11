@@ -1,14 +1,13 @@
 package by.belotskiy.movie_star.model.pool;
 
 import com.mysql.jdbc.Driver;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayDeque;
-import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -28,7 +27,7 @@ public class DynamicConnectionPool {
 
     private static final DynamicConnectionPool instance = new DynamicConnectionPool();
     private final BlockingQueue<ProxyConnection> freeConnections;
-    private final Queue<ProxyConnection> givenAwayConnections;
+    private final BlockingQueue<ProxyConnection> givenAwayConnections;
 
     private static final Lock locker = new ReentrantLock();
 
@@ -38,7 +37,7 @@ public class DynamicConnectionPool {
         } catch (SQLException e) {
             LOGGER.warn("Error while registering driver", e);
         }
-        freeConnections = new LinkedBlockingDeque<>(MIN_POOL_SIZE);
+        freeConnections = new LinkedBlockingDeque<>();
         for (int i = 0; i < MIN_POOL_SIZE; i++) {
             Connection connection;
             try {
@@ -50,7 +49,7 @@ public class DynamicConnectionPool {
             ProxyConnection proxyConnection = new ProxyConnection(connection);
             freeConnections.offer(proxyConnection);
         }
-        givenAwayConnections = new ArrayDeque<>();
+        givenAwayConnections = new LinkedBlockingDeque<>();
     }
 
     public static DynamicConnectionPool getInstance() {
@@ -67,9 +66,10 @@ public class DynamicConnectionPool {
         try {
             connection = freeConnections.take();
             givenAwayConnections.offer(connection);
+            locker.lock();
             if(givenAwayConnections.size() == currentPoolSize.get()){
                 if(currentPoolSize.get() < MAX_POOL_SIZE){
-                    locker.lock();
+
                     if(currentPoolSize.get() < MAX_POOL_SIZE){
                         for(int i = 0; i < currentPoolSize.get(); i++){
                             Connection newConnection;
@@ -84,9 +84,10 @@ public class DynamicConnectionPool {
                         }
                         currentPoolSize.set(currentPoolSize.get() * 2);
                     }
-                    locker.unlock();
+
                 }
             }
+            locker.unlock();
         } catch (InterruptedException e) {
             LOGGER.fatal("Can't get connection form connection queue", e);
             throw new RuntimeException("Error while getting connection from queue", e);
@@ -94,29 +95,34 @@ public class DynamicConnectionPool {
         return connection;
     }
     /**
-     * Returns connection object from the pool.
+     * Returns connection object to the pool.
      *
      */
     public void releaseConnection(Connection connection) {
         if (connection instanceof ProxyConnection) {
             givenAwayConnections.remove(connection);
             freeConnections.offer((ProxyConnection) connection);
+            locker.lock();
             if(givenAwayConnections.size() < currentPoolSize.get() / 4){
                 if(currentPoolSize.get() > MIN_POOL_SIZE){
-                    locker.lock();
                     if(currentPoolSize.get() > MIN_POOL_SIZE){
                         currentPoolSize.set(currentPoolSize.get() / 2);
                         for(int i = 0; i < currentPoolSize.get(); i++){
                             try {
-                                freeConnections.take().close();
+                                try {
+                                    freeConnections.take().realClose();
+                                } catch (SQLException e) {
+                                    LOGGER.log(Level.ERROR, e);
+                                }
                             } catch (InterruptedException e) {
                                 LOGGER.warn("Can't take connection from queue", e);
                             }
                         }
                     }
-                    locker.unlock();
                 }
+
             }
+            locker.unlock();
         } else {
             LOGGER.warn("Invalid connection object provided");
         }
@@ -128,7 +134,11 @@ public class DynamicConnectionPool {
     public void destroyPool() {
         for (int i = 0; i < currentPoolSize.get(); i++) {
             try {
-                freeConnections.take().close();
+                try {
+                    freeConnections.take().realClose();
+                } catch (SQLException e) {
+                    LOGGER.log(Level.ERROR, e);
+                }
             } catch (InterruptedException e) {
                 LOGGER.warn("Can't take connection from queue", e);
             }

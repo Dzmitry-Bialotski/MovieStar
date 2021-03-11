@@ -16,7 +16,7 @@ import java.util.Optional;
 /**
  * Main Controller class processes all requests from users.
  *
- * @author Vladislav Drobot
+ * @author Dmitriy Belotskiy
  */
 @WebServlet(urlPatterns = UrlPath.CONTROLLER, name = "controller")
 public class FrontController extends HttpServlet {

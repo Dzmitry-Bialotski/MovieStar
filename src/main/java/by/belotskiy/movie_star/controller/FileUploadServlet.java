@@ -17,7 +17,7 @@ import java.nio.file.Path;
 /**
  * Controller used for uploading files
  *
- * @author Vladislav Drobot
+ * @author Dmitriy Belotskiy
  */
 @WebServlet(name = "FileUploadServlet", urlPatterns = {UrlPath.UPLOAD_CONTROLLER})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024,
